@@ -1,0 +1,84 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model eventdata {
+  id          Int     @id @default(autoincrement())
+  title       String  @db.VarChar(200)
+  stime       String  @db.VarChar(45)
+  sdate       String  @db.VarChar(45)
+  ptime       String? @db.VarChar(45)
+  pdate       String? @db.VarChar(45)
+  description String? @db.Text
+}
+
+model joboppdata {
+  id          Int     @id @default(autoincrement())
+  title       String? @db.VarChar(200)
+  description String? @db.Text
+  ptime       String? @db.VarChar(45)
+  pdate       String? @db.VarChar(45)
+  link        String? @db.VarChar(250)
+  img         Bytes?  @db.Blob
+  status      String  @default("pending") @db.VarChar(30)
+}
+
+model newsdata {
+  id          Int    @id @default(autoincrement())
+  title       String @db.VarChar(200)
+  ptime       String @db.VarChar(45)
+  pdate       String @db.VarChar(45)
+  description String @db.Text
+  img         Bytes? @db.Blob
+}
+
+model registration {
+  id                      Int      @id @default(autoincrement())
+  lname                   String?  @db.VarChar(45)
+  fname                   String?  @db.VarChar(45)
+  mname                   String?  @db.VarChar(45)
+  phoneno                 String?  @db.VarChar(45)
+  gender                  String?  @db.VarChar(45)
+  address                 String?  @db.VarChar(100)
+  bday                    String?  @db.VarChar(45)
+  yeargrad                String?  @db.VarChar(45)
+  Image                   String?  @db.VarChar(255)
+  email                   String?  @db.VarChar(100)
+  password                String?  @db.VarChar(225)
+  employment_status       String?  @db.VarChar(100)
+  current_job             String?  @db.VarChar(100)
+  year_current_job        String?  @db.VarChar(45)
+  job_duration_after_grad String?  @db.VarChar(100)
+  position_current_job    String?  @db.VarChar(100)
+  employment_type         String?  @db.VarChar(45)
+  place_current_job       String?  @db.VarChar(100)
+  engage_studies          String?  @db.VarChar(100)
+  enroll_studies          String?  @db.VarChar(100)
+  eligibility             String?  @db.VarChar(100)
+  date_created            DateTime @default(now()) @db.Timestamp(0)
+  date_modified           DateTime @default(now()) @db.Timestamp(0)
+  token                   String?  @db.Text
+}
+
+model stories {
+  id    Int     @id @default(autoincrement())
+  title String  @db.VarChar(255)
+  img   Bytes   @db.Blob
+  desc  String? @db.Text
+}
+
+model activitylogs {
+  id              Int      @id @default(autoincrement())
+  registration_id Int
+  action          String   @db.VarChar(20)
+  before          String?  @db.Text
+  after           String?  @db.Text
+  description     String?  @db.VarChar(255)
+  date_created    DateTime @default(now()) @db.Timestamp(0)
+  date_modified   DateTime @default(now()) @db.Timestamp(0)
+}

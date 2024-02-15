@@ -6,15 +6,18 @@ import moment from "moment";
 import { VscChevronDown } from "react-icons/vsc";
 
 const Logs = () => {
-  const [logs, setLogs] = useState();
-  const [setSelectedAlumni] = useState(null);
+  const [logs, setLogs] = useState([]);
+  const [selectedAlumni, setSelectedAlumni] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [objectLogs, setObjectLogs] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredLogs, setFilteredLogs] = useState([]);
 
   const viewAlumni = (logs) => {
     setObjectLogs(logs);
     setIsOpen(true);
   };
+
   const closeAlumni = () => {
     setIsOpen(false);
   };
@@ -22,29 +25,35 @@ const Logs = () => {
   const openDetailsModal = (alumni) => {
     setSelectedAlumni(alumni);
   };
+
   const closeDetailsModal = () => {
     setSelectedAlumni(null);
   };
 
   const getLogs = async () => {
-    const logs = await api.get("/logs");
-    if (logs && logs.data && logs.data.data && logs.data.data.length) {
-      const parseData = [...logs.data.data].map((value) => {
-        if (value.before && typeof value.before === "string") {
-          value.before = JSON.parse(value.before);
-        }
+    try {
+      const logs = await api.get("/logs");
+      if (logs && logs.data && logs.data.data && logs.data.data.length) {
+        const parseData = logs.data.data.map((value) => {
+          if (value.before && typeof value.before === "string") {
+            value.before = JSON.parse(value.before);
+          }
 
-        if (value.after && typeof value.after === "string") {
-          value.after = JSON.parse(value.after);
-        }
+          if (value.after && typeof value.after === "string") {
+            value.after = JSON.parse(value.after);
+          }
 
-        value.date_created = moment(value.date_created).format("YYYY-MM-DD");
-        value.date_modified = moment(value.date_modified).format("hh:mm:ss A");
+          value.date_created = moment(value.date_created).format("YYYY-MM-DD");
+          value.date_modified = moment(value.date_modified).format("hh:mm A"); // Changed to display time in 11:24am/pm format
 
-        return value;
-      });
+          return value;
+        });
 
-      setLogs(parseData);
+        setLogs(parseData);
+        setFilteredLogs(parseData); // Set filtered logs initially
+      }
+    } catch (error) {
+      console.error("Error fetching logs:", error);
     }
   };
 
@@ -52,7 +61,34 @@ const Logs = () => {
     getLogs();
   }, []);
 
-  console.log(objectLogs);
+  const handleSearch = (searchTerm) => {
+    if (!logs) return; // Add a check to handle undefined logs
+    if (searchTerm.trim() === "") {
+      setFilteredLogs(logs);
+    } else {
+      const filtered = logs.filter((log) => {
+        const fullName = `${log.before.lname} ${log.before.fname} ${log.before.mname}`;
+        const initials = `${log.before.fname.charAt(0)}${
+          log.before.mname ? log.before.mname.charAt(0) : ""
+        }${log.before.lname.charAt(0)}`;
+        const year = log.date_created.split("-")[0];
+        const time = log.date_modified.toLowerCase();
+
+        return (
+          fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          initials.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          year.includes(searchTerm) ||
+          time.includes(searchTerm.toLowerCase()) // Filter based on time
+        );
+      });
+
+      setFilteredLogs(filtered.length > 0 ? filtered : ["NONE"]);
+    }
+  };
+
+  useEffect(() => {
+    handleSearch(searchTerm);
+  }, [logs, searchTerm]);
 
   return (
     <>
@@ -72,16 +108,9 @@ const Logs = () => {
                   type="text"
                   className="bg-zinc-100 h-10  outline-none pl-4 w-[70px] sm:w-64 rounded-full sm:rounded-[5px] placeholder:text-[14px] leading-[20px] font-normal ml-2"
                   placeholder="Search for..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
                 />
-                <div className="inline-block">
-                  <button className="py-2 px-2 bg-white rounded-lg focus:outline-none w-auto flex">
-                    <VscChevronDown size={25} className="pl-1" />
-                  </button>
-
-                  <ul className="  bg-zinc-100">
-                    <li className="cursor-pointer"></li>
-                  </ul>
-                </div>
               </div>
             </div>
 
@@ -100,42 +129,40 @@ const Logs = () => {
                     </th>
                     <th className="px-6 py-3 text-left font-medium">Action</th>
                   </tr>
-                  {/* 
-                {logs && logs.map} */}
-                  {logs &&
-                    logs.map((log) => (
-                      <tr
-                        key={log.id}
-                        className="border-b border-gray-200 hover:bg-gray-100"
-                      >
-                        <td className="px-6 py-4">{log.id}</td>
-                        <td className="px-6 py-4">
-                          {/* Display the image using an img tag */}
-                          {log.before && log.before.Image && (
-                            <img
-                              src={log.before.Image}
-                              alt={`Image of ${log.before.fname} ${log.before.lname}`}
-                              className="w-10 h-10 rounded-full"
-                            />
-                          )}
-                        </td>
-                        <td className="px-6 py-4">
-                          {log.before &&
-                            `${log.before.lname} ${log.before.fname} ${log.before.mname}`}
-                        </td>
-                        <td className="px-6 py-4">{log.date_created}</td>
-                        <td className="px-6 py-4">{log.date_modified}</td>
-                        <td className="px-6 py-4 cursor-pointer">
-                          <button
-                            className="text-blue-500 hover:underline"
-                            onClick={() => viewAlumni(log)}
-                          >
-                            View
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
                 </thead>
+                <tbody>
+                  {filteredLogs.map((log, index) => (
+                    <tr
+                      key={index}
+                      className="border-b border-gray-200 hover:bg-gray-100"
+                    >
+                      <td className="px-6 py-4">{index}</td>
+                      <td className="px-6 py-4">
+                        {log.before && log.before.Image && (
+                          <img
+                            src={log.before.Image}
+                            alt={`Image of ${log.before.fname} ${log.before.lname}`}
+                            className="w-10 h-10 rounded-full"
+                          />
+                        )}
+                      </td>
+                      <td className="px-6 py-4">
+                        {log.before &&
+                          `${log.before.lname} ${log.before.fname} ${log.before.mname}`}
+                      </td>
+                      <td className="px-6 py-4">{log.date_created}</td>
+                      <td className="px-6 py-4">{log.date_modified}</td>
+                      <td className="px-6 py-4 cursor-pointer">
+                        <button
+                          className="text-blue-500 hover:underline"
+                          onClick={() => viewAlumni(log)}
+                        >
+                          View
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
               </table>
             </div>
           </div>
@@ -186,7 +213,7 @@ const Modal = ({ objectLogs, closeAlumni }) => {
               AFTER
             </div>
             <div>
-              {log.after.lname} {log.before.fname} {log.after.mname}
+              {log.after.lname} {log.after.fname} {log.after.mname}
             </div>
             <div>{log.after.phoneno}</div>
             <div>{log.after.address}</div>

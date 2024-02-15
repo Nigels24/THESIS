@@ -15,7 +15,7 @@ import { MdWorkOff, MdWork } from "react-icons/md";
 import { BsBuildingCheck } from "react-icons/bs";
 import PieComponent from "./PieComponent";
 import { Progress } from "antd";
-import LineGraph from "./LineGraph"
+import LineGraph from "./LineGraph";
 import api from "../configs/axios-base-url";
 import Axios from "../configs/axios-base-url";
 import BarComponent from "./BarComponent";
@@ -91,6 +91,9 @@ const Main = () => {
     "2017-2018",
     "2018-2019",
     "2019-2020",
+    "2020-2021",
+    "2021-2022",
+    "2022-2023",
   ];
 
   const barWidth = 1200;

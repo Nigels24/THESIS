@@ -49,6 +49,7 @@ model registration {
   yeargrad                String?  @db.VarChar(45)
   Image                   String?  @db.VarChar(255)
   email                   String?  @db.VarChar(100)
+  role                    String?  @db.VarChar(20)
   password                String?  @db.VarChar(225)
   employment_status       String?  @db.VarChar(100)
   current_job             String?  @db.VarChar(100)

@@ -11,6 +11,7 @@ export const useHooks = () => {
   const [mobileNumber, setMobileNumber] = useState("");
   const MAX_MOBILE_DIGITS = 11;
   const [gender, setGender] = useState("");
+
   // Inside your useHooks function
   const [currentAddress, setCurrentAddress] = useState(""); // Ensure this line is present
 
@@ -108,7 +109,11 @@ export const useHooks = () => {
       setFurtherStudies(details.engage_studies);
       setEnrollFurtherStudies(details.enroll_studies);
       seteligibility(details.eligibility);
-      setImage(details.avatar);
+      if (details?.avatar) {
+        setImage(details.avatar);
+      } else {
+        setImage(details.Image);
+      }
     }
   }, [localStorage.getItem("token")]);
   const handleImageChange = (event) => {
@@ -172,7 +177,11 @@ export const useHooks = () => {
         setFurtherStudies(updatedDetails.engage_studies);
         setEnrollFurtherStudies(updatedDetails.enroll_studies);
         seteligibility(updatedDetails.eligibility);
-        setImage(updatedDetails.avatar);
+        if (updatedDetails?.avatar) {
+          setImage(updatedDetails.avatar);
+        } else {
+          setImage(updatedDetails.Image);
+        }
       }
       setUpdated(true);
       // window.location.reload();
@@ -181,42 +190,6 @@ export const useHooks = () => {
       console.error("Error updating profile:", error);
     }
   };
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const token = localStorage.getItem("token");
-  //       const userDetails = decodeToken(token);
-
-  //       // Fetch the updated user details
-  //       const response = await api.get(`/user/${userDetails.id}`);
-  //       const updatedDetails = response.data;
-
-  //       // Update the state with the fetched data
-  //       setMobileNumber(updatedDetails.phoneno);
-  //       setCurrentAddress(updatedDetails.address);
-  //       setemploymentstatus(updatedDetails.employment_status);
-  //       setcurrent_job(updatedDetails.current_job);
-  //       setyear_current_job(updatedDetails.year_current_job);
-  //       setposition_current_job(updatedDetails.position_current_job);
-  //       setemployment_type(updatedDetails.employment_type);
-  //       setplace_current_job(updatedDetails.place_current_job);
-  //       setFurtherStudies(updatedDetails.engage_studies);
-  //       setEnrollFurtherStudies(updatedDetails.enroll_studies);
-  //       seteligibility(updatedDetails.eligibility);
-  //       setImage(updatedDetails.Image);
-
-  //       // Reset the updated state
-  //       setUpdated(false);
-  //     } catch (error) {
-  //       console.error("Error fetching updated profile:", error);
-  //     }
-  //   };
-
-  //   if (updated) {
-  //     fetchData();
-  //   }
-  // }, [updated]);
 
   return {
     firstName,

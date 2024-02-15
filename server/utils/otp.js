@@ -9,41 +9,39 @@ function generateOTP(length) {
   let otp = "";
 
   for (let i = 0; i < length; i++) {
-      otp += buffer.readUInt8(i) % 10;
+    otp += buffer.readUInt8(i) % 10;
   }
 
   return otp;
 }
 
-
 const SECRET = process.env.OTP_SECRET;
-const PASSWORD = "vkmm pqmi rpuq yxgz"
-const EMAIL = "nigesipe@gmail.com"
-
+const PASSWORD = "vkmm pqmi rpuq yxgz";
+const EMAIL = "nigesipe@gmail.com";
 
 function setTransporter(email, password) {
-    const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-            user: email,
-            pass: password,
-        },
-    });
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: email,
+      pass: password,
+    },
+  });
 
-    return transporter;
+  return transporter;
 }
 
 function setMailOptions(title, generatedOTP, to_email, from_email, subject) {
-    const mailOptions = {
-        from: {
-            name: title,
-            address: from_email,
-        },
-        to: to_email,
-        subject: subject,
-        text: `OTP: ${generatedOTP}`,
-    };
-    return mailOptions;
+  const mailOptions = {
+    from: {
+      name: title,
+      address: from_email,
+    },
+    to: to_email,
+    subject: subject,
+    text: `Please don't share your OTP${generatedOTP}`,
+  };
+  return mailOptions;
 }
 
 module.exports = {
@@ -52,7 +50,5 @@ module.exports = {
   generateOTP,
   PASSWORD,
   setTransporter,
-  setMailOptions
-}
-
-
+  setMailOptions,
+};

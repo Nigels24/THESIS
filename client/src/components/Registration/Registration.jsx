@@ -1,10 +1,9 @@
 import logo from "../../assets/favicon.ico";
 import "../Registration/form.css";
-
 import { useHook } from "./hooks";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Link } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Registration = () => {
   const {
@@ -61,11 +60,11 @@ const Registration = () => {
     setyear_current_job,
     setcurrent_job,
     current_job,
-    setEligibilityAcquired,
-    setOtherEligibilityAcquired,
-    handleOTP,
     otp,
     setOtp,
+    handleOTP,
+    showPassword,
+    setshowPassword,
   } = useHook();
 
   return (
@@ -172,11 +171,12 @@ const Registration = () => {
                       <option value="2020-2021">2020-2021</option>
                       <option value="2021-2022">2021-2022</option>
                       <option value="2022-2023">2022-2023</option>
+                      <option value="2023-2024">2023-2024</option>
                     </select>
                   </div>
                   <div className="input-fields">
                     <label>Image</label>
-                    <input type="file" xonChange={handleImageChange} required />
+                    <input type="file" onChange={handleImageChange} required />
                   </div>
                 </div>
                 <div className="details personal">
@@ -199,7 +199,7 @@ const Registration = () => {
                         </span>
                       )}
                     </div>
-                    <div className="input-fields">
+                    {/* <div className="input-fields">
                       <label>Password</label>
                       <input
                         type="password"
@@ -216,19 +216,52 @@ const Registration = () => {
                           least 8 characters long.
                         </span>
                       )}
+                    </div> */}
+                    <div className="input-fields">
+                      <label>Password</label>
+                      <div className="flex items-center w-full">
+                        <input
+                          type={showPassword ? "text" : "password"}
+                          placeholder="Enter your password"
+                          value={password}
+                          onChange={handlePasswordChange}
+                          className={isPasswordValid ? "" : "border-red-500"}
+                          required // Add border color based on password validation
+                        />
+                      </div>
+                      {!isPasswordValid && (
+                        <span className="text-red-500">
+                          <br />
+                          Password must contain at least one uppercase letter,
+                          one lowercase letter, one special character, and be at
+                          least 8 characters long.
+                        </span>
+                      )}
                     </div>
                     <div className="input-fields">
                       <label>Confirm Password</label>
-                      <input
-                        type="password"
-                        placeholder="Confirm your password"
-                        value={confirmPassword}
-                        onChange={handleConfirmPasswordChange}
-                        className={
-                          password === confirmPassword ? "" : "border-red-500"
-                        }
-                        // Add border color if passwords don't match
-                      />
+                      <div className="relative flex items-center w-full">
+                        <input
+                          type={showPassword ? "text" : "password"}
+                          placeholder="Confirm your password"
+                          value={confirmPassword}
+                          onChange={handleConfirmPasswordChange}
+                          className={
+                            password === confirmPassword ? "" : "border-red-500"
+                          }
+                          // Add border color if passwords don't match
+                        />
+                        <span
+                          className="absolute right-10 top-4 cursor-pointer"
+                          onClick={() => setshowPassword(!showPassword)}
+                        >
+                          {showPassword ? (
+                            <FaEye size={20} />
+                          ) : (
+                            <FaEyeSlash size={20} />
+                          )}
+                        </span>
+                      </div>
                       {password !== confirmPassword && (
                         <span className="text-red-500">
                           Passwords do not match.
@@ -284,26 +317,7 @@ const Registration = () => {
                           required
                         />
                       </div>
-                      {/* <div className="input-fields">
-                        <label>
-                          How long did you land a job after graduation?
-                        </label>
-                        <select
-                          value={jobDuration}
-                          onChange={(e) => setJobDuration(e.target.value)}
-                          required
-                        >
-                          <option value="">Select Duration</option>
-                          <option value="0-6 months">0-6 months</option>
-                          <option value="6 months - 1 year">
-                            6 months - 1 year
-                          </option>
-                          <option value="1 year - 2 years">
-                            1 year - 2 years
-                          </option>
-                          <option value="2 years above">2 years above</option>
-                        </select>
-                      </div> */}
+
                       <div className="input-fields">
                         <label>Position in Current Job</label>
                         <input
@@ -327,7 +341,7 @@ const Registration = () => {
                           <option value="Casual">Casual</option>
                           <option value="Project">Project</option>
                           <option value="Seasonal">Seasonal</option>
-                          <option value="Fixed">Fixed-term</option>
+                          <option value="Fixed-Term">Fixed-term</option>
                           <option value="Probationary">Probationary</option>
                         </select>
                       </div>
@@ -463,7 +477,7 @@ const Registration = () => {
                     </>
                   )}
 
-{employment_status === "Unemployed" && (
+                  {employment_status === "Unemployed" && (
                     <>
                       <div className="input-fields">
                         <label>Engage in further Studies?</label>
@@ -543,12 +557,10 @@ const Registration = () => {
                             Barangay Health Workers Eligibility
                           </option>
                           <option value="Career Service Professional and Sub-Professional Eligibility">
-                            Career Service Professional
-                            Eligibility
+                            Career Service Professional Eligibility
                           </option>
                           <option value="Career Service Professional and Sub-Professional Eligibility">
-                            Career Service Sub-Professional
-                            Eligibility
+                            Career Service Sub-Professional Eligibility
                           </option>
                           <option value="Honor Graduate Eligibility">
                             Honor Graduate Eligibility
@@ -591,7 +603,13 @@ const Registration = () => {
                     <span className="btnText">Back</span>
                   </div>
 
-                  <button className="nextBtn" onClick={handleOTP}>
+                  <button
+                    className="nextBtn"
+                    onClick={(e) => {
+                      handleOTP(e);
+                      toast("Please Check Your Email for OTP");
+                    }}
+                  >
                     <span className="btnText">Proceed</span>
                   </button>
                 </div>
@@ -618,23 +636,10 @@ const Registration = () => {
                 </div>
 
                 <div className="buttons">
-                  <button className="nextBtn" onClick={handleRegister}
-                  >
+                  <button className="nextBtn" onClick={handleRegister}>
                     <span className="btnText">Register</span>
                   </button>
                 </div>
-                <Link to="/Login">
-                  <p
-                    className="proceed-text"
-                    style={{
-                      fontSize: "14px", // Adjust the font size as needed
-                      textDecoration: "underline",
-                      cursor: "pointer",
-                    }}
-                  >
-                    Proceed to login?
-                  </p>
-                </Link>
               </div>
             </div>
           )}

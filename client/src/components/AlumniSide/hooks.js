@@ -22,7 +22,11 @@ export const useHooks = () => {
       setfname(details.fname);
       setlname(details.lname);
       setmname(details.mname);
-      setImage(details.avatar);
+      if (details?.avatar) {
+        setImage(details.avatar);
+      } else {
+        setImage(details.Image);
+      }
     }
   }, [token]);
 

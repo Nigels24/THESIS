@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import bscslogs from "../assets/bscslogs.png";
 import api from "../configs/axios-base-url";
 import useAuthStore from "../store/auth.store";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -10,6 +11,8 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const { setUser } = useAuthStore();
+
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleLOGIN = async (e) => {
     e.preventDefault();
@@ -81,12 +84,21 @@ const Login = () => {
               <label htmlFor="password" className="block mb-1">
                 <strong>Password</strong>
               </label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full border border-gray-300 p-2 rounded"
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full border border-gray-300 p-2 rounded pr-10" // added padding for the button/icon
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute top-0 right-0 mt-3 mr-2 cursor-pointer bg-slate-50"
+                >
+                  {showPassword ? <FaEye /> : <FaEyeSlash />}
+                </button>
+              </div>
             </div>
             <button
               type="submit"

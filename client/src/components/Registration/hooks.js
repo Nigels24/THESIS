@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { decodeToken } from "../../utils/token";
 import api from "./../../configs/axios-base-url";
-// import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export const useHook = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [gender, setGender] = useState("Male");
@@ -42,6 +44,7 @@ export const useHook = () => {
   const [place_current_job, setplace_current_job] = useState("");
   const [year_current_job, setyear_current_job] = useState("");
   const [current_job, setcurrent_job] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [otp, setOtp] = useState("");
   // const navigate = useNavigate();
 
@@ -144,7 +147,12 @@ export const useHook = () => {
       localStorage.setItem("token", data.data.accessToken);
     }
 
-    // navigate("/login");
+    toast("Registration Complete");
+
+    setTimeout(() => {
+      navigate("/Login"); // Replace "/login" with the path of your login page
+    }, 5000);
+
     const token = localStorage.getItem("token");
 
     if (token) {
@@ -236,5 +244,9 @@ export const useHook = () => {
     handleOTP,
     otp,
     setOtp,
+    avatar,
+    setAvatar,
+    showPassword,
+    setShowPassword,
   };
 };

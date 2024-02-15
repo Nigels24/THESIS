@@ -30,8 +30,6 @@ const RegistrationService = {
       eligibility,
     } = payload;
 
-    console.log("payload", payload);
-
     const avatarPath = `http://localhost:3001/uploads/${avatar}`;
 
     const createdData = await prisma.registration.create({

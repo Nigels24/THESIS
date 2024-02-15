@@ -1,5 +1,6 @@
 const { hashPassword } = require("./../../utils/password");
 const { RegistrationService } = require("./registration.service");
+
 const { REGISTER, UPDATE } = RegistrationService;
 const {
   PASSWORD,
@@ -17,7 +18,7 @@ const Controller = {
     try {
       const { password, ...payload } = req.body;
       const avatar = req?.file?.filename;
-      console.log(avatar);
+
       if (!password) throw new Error("Password is required.");
 
       const hashedPassword = await hashPassword(password);
@@ -78,6 +79,7 @@ const Controller = {
       res.sendStatus(500);
     }
   },
+
   Otp: async (req, res) => {
     const { email } = req.body;
     console.log(req);
@@ -91,7 +93,13 @@ const Controller = {
       });
 
       const transporter = setTransporter(EMAIL, PASSWORD);
-      const mailOptions = setMailOptions("OTP", GENOTP, email, EMAIL, "OTP");
+      const mailOptions = setMailOptions(
+        "ALUMNI TRACKING SYSTEM",
+        GENOTP,
+        email,
+        EMAIL,
+        "no reply"
+      );
 
       const info = await transporter.sendMail(mailOptions);
 

@@ -16,14 +16,14 @@ const Sidebar = () => {
         </h1>
       </div>
       <Link to="/Adminpage">
-        <div className="flex items-center gap-2 lg:py-4 py-2">
+        <div className="flex items-center gap-2 lg:py-4 py-2 px-2">
           <FaTachometerAlt color="white" />
-          <p className="text-sm lg:text-base font-normal text-white cursor-pointer">
+          <p className="text-sm lg:text-base text-white cursor-pointer">
             Dashboard
           </p>
         </div>
       </Link>
-      <div className="flex items-center justify-between gap-[10px] py-[15px] cursor-pointer">
+      <div className="flex items-center justify-between gap-[10px] py-[15px] cursor-pointer px-2">
         <Link to="/alumni">
           <div className="flex items-center gap-[10px]">
             <FaUserGraduate color="white" />
@@ -34,7 +34,7 @@ const Sidebar = () => {
         </Link>
       </div>
 
-      <div className="flex items-center justify-between gap-[10px] py-[15px] cursor-pointer">
+      <div className="flex items-center justify-between gap-[10px] py-[15px] cursor-pointer px-2">
         <Link to="/event">
           <div className="flex items-center gap-[10px]">
             <BsCalendar4Event color="white" />
@@ -45,7 +45,7 @@ const Sidebar = () => {
         </Link>
       </div>
 
-      <div className="flex items-center justify-between gap-[10px] py-[15px] cursor-pointer">
+      <div className="flex items-center justify-between gap-[10px] py-[15px] cursor-pointer px-2">
         <Link to="/job">
           <div className="flex items-center gap-[10px]">
             <CgWorkAlt color="white" />
@@ -56,7 +56,7 @@ const Sidebar = () => {
         </Link>
       </div>
 
-      <div className="flex items-center justify-between gap-[10px] py-[15px] cursor-pointer">
+      <div className="flex items-center justify-between gap-[10px] py-[15px] cursor-pointer px-2">
         <Link to="/news">
           <div className="flex items-center gap-[10px]">
             <BsNewspaper color="white" />
@@ -67,7 +67,7 @@ const Sidebar = () => {
         </Link>
       </div>
       <Link to="/stories">
-        <div className="flex items-center gap-[10px] py-[15px]">
+        <div className="flex items-center gap-[10px] py-[15px] px-2">
           <MdAutoStories color="white" />
           <p className="text-[14px] leading-[20px] font-normal text-white ">
             Stories
@@ -75,7 +75,7 @@ const Sidebar = () => {
         </div>
       </Link>
       <Link to="/forum">
-        <div className="flex items-center gap-[10px] py-[15px]">
+        <div className="flex items-center gap-[10px] py-[15px] px-2">
           <AiOutlineWechat color="white" />
           <p className="text-[14px] leading-[20px] font-normal text-white ">
             Forums
@@ -83,7 +83,7 @@ const Sidebar = () => {
         </div>
       </Link>
       <Link to="/approval">
-        <div className="flex items-center gap-[10px] py-[15px]">
+        <div className="flex items-center gap-[10px] py-[15px] px-2">
           <MdOutlineApproval color="white" />
           <p className="text-[14px] leading-[20px] font-normal text-white ">
             Approvals
@@ -91,7 +91,7 @@ const Sidebar = () => {
         </div>
       </Link>
       <Link to="/logs">
-        <div className="flex items-center gap-[10px] py-[15px]">
+        <div className="flex items-center gap-[10px] py-[15px] px-2">
           <BiTimer color="white " />
           <p className="text-[14px] leading-[20px] font-normal text-white ">
             User Logs

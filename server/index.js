@@ -1,7 +1,7 @@
 const express = require("express");
 const { applyMiddlewares } = require("./middlewares");
 const { dbConnect } = require("./configs/db");
-// const { watch } = require("./configs/db-watcher");
+const { watch } = require("./configs/db-watcher");
 const { routerMiddleware } = require("./middlewares/router");
 
 const app = express();
@@ -16,5 +16,4 @@ app.listen(3001, () => {
     });
 });
 
-// watch().then(() => console.log("Watching events..."));
-  
+watch().then(() => console.log("Watching events..."));

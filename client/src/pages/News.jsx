@@ -192,7 +192,7 @@ const News = () => {
       </div>
       <div className="basis-[88%] border h-[100vh]">
         <Dashboardview />
-        <div className="flex-grow bg-gray-300 p-5 rounded-md container mx-auto  h-full">
+        <div className="flex-grow bg-gray-300 p-5 rounded-md container overflow-x-auto h-full">
           <h3 className="text-2xl font-bold mb-3">News</h3>
 
           {/* Search Bar */}
@@ -274,7 +274,7 @@ const News = () => {
                         <img
                           src={URL.createObjectURL(imageFile)}
                           alt="Validation"
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-contain"
                         />
                       </div>
                       <button
@@ -314,7 +314,7 @@ const News = () => {
             </div>
           )}
 
-          <div className="container mx-auto p-4 overflow-y-scroll h-full w-full md:overflow-x-auto overflow-x-auto">
+          <div className="container mx-auto p-4 h-full w-full md:overflow-x-auto ">
             <table className="min-w-full table-auto">
               <thead>
                 <tr>
@@ -337,11 +337,11 @@ const News = () => {
                   >
                     <td className="px-6 py-4">
                       {dnews.imagePath && (
-                        <div className="w-[50%] h-[50%] rounded border overflow-hidden">
+                        <div className="w-full h-28 rounded border overflow-hidden">
                           <img
                             src={dnews.imagePath}
                             alt="Validation"
-                            className="w-full h-full object-cover"
+                            className="w-full h-full object-contain"
                           />
                         </div>
                       )}
@@ -383,11 +383,11 @@ const News = () => {
                             </div>
                             <div className="mb-4">
                               {selectedNews.imagePath && (
-                                <div className="w-full h-full rounded border overflow-hidden">
+                                <div className="w-full h-48 rounded border overflow-hidden">
                                   <img
                                     src={selectedNews.imagePath}
                                     alt="Validation"
-                                    className="w-full h-full object-cover"
+                                    className="w-full h-full object-contain"
                                   />
                                 </div>
                               )}

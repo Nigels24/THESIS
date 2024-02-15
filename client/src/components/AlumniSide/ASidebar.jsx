@@ -15,14 +15,14 @@ const ASidebar = () => {
         </h1>
       </div>
       <Link to="/AProfile">
-        <div className="flex items-center gap-2 lg:py-4 py-2">
+        <div className="flex items-center gap-2 lg:py-4 py-2 px-2">
           <FaTachometerAlt color="white" />
           <p className="text-sm lg:text-base font-normal text-white cursor-pointer">
             Profile
           </p>
         </div>
       </Link>
-      <div className="flex items-center justify-between gap-[10px] py-[15px] cursor-pointer">
+      <div className="flex items-center justify-between gap-[10px] py-[15px] cursor-pointer px-2">
         <Link to="/AAlumni">
           <div className="flex items-center gap-[10px]">
             <FaUserGraduate color="white" />
@@ -33,7 +33,7 @@ const ASidebar = () => {
         </Link>
       </div>
 
-      <div className="flex items-center justify-between gap-[10px] py-[15px] cursor-pointer">
+      <div className="flex items-center justify-between gap-[10px] py-[15px] cursor-pointer px-2">
         <Link to="/AEvents">
           <div className="flex items-center gap-[10px]">
             <BsCalendar4Event color="white" />
@@ -44,7 +44,7 @@ const ASidebar = () => {
         </Link>
       </div>
 
-      <div className="flex items-center justify-between gap-[10px] py-[15px] cursor-pointer">
+      <div className="flex items-center justify-between gap-[10px] py-[15px] cursor-pointer px-2">
         <Link to="/AJobOpportunities">
           <div className="flex items-center gap-[10px]">
             <CgWorkAlt color="white" />
@@ -55,7 +55,7 @@ const ASidebar = () => {
         </Link>
       </div>
 
-      <div className="flex items-center justify-between gap-[10px] py-[15px] cursor-pointer">
+      <div className="flex items-center justify-between gap-[10px] py-[15px] cursor-pointer px-2">
         <Link to="/ANews">
           <div className="flex items-center gap-[10px]">
             <BsNewspaper color="white" />
@@ -66,7 +66,7 @@ const ASidebar = () => {
         </Link>
       </div>
       <Link to="/AStories">
-        <div className="flex items-center gap-[10px] py-[15px]">
+        <div className="flex items-center gap-[10px] py-[15px] px-2">
           <MdAutoStories color="white" />
           <p className="text-[14px] leading-[20px] font-normal text-white ">
             Stories
@@ -74,7 +74,7 @@ const ASidebar = () => {
         </div>
       </Link>
       <Link to="/AForums">
-        <div className="flex items-center gap-[10px] py-[15px]">
+        <div className="flex items-center gap-[10px] py-[15px] px-2">
           <AiOutlineWechat color="white" />
           <p className="text-[14px] leading-[20px] font-normal text-white ">
             Forums

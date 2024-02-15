@@ -1,6 +1,6 @@
-import React from 'react';
-import ASidebar from './ASidebar';
-import AAlumniboardView from './AAlumniboardView';
+import React from "react";
+import ASidebar from "./ASidebar";
+import AAlumniboardView from "./AAlumniboardView";
 import { Outlet } from "react-router-dom";
 
 const AAlumnipage = () => {
@@ -11,15 +11,13 @@ const AAlumnipage = () => {
       </div>
       <div className="basis-[88%] border h-[100vh] overflow-scroll">
         <AAlumniboardView />
-        
+
         <div>
-          <Outlet>
-            
-          </Outlet>
+          <Outlet></Outlet>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default AAlumnipage;

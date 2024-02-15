@@ -126,7 +126,7 @@ const ANews = () => {
       <div className="basis-[12%] h-[100vh] border">
         <ASidebar />
       </div>
-      <div className="basis-[88%] border h-[100vh] overflow-scroll">
+      <div className="basis-[88%] border h-[100vh]">
         <AAlumniboardView />
         <div className="flex-grow bg-gray-300 p-5 rounded-md container mx-auto overflow-x-auto h-full">
           <h3 className="text-2xl font-bold mb-3">News</h3>
@@ -192,7 +192,7 @@ const ANews = () => {
                           <img
                             src={dnews.imagePath}
                             alt="Validation"
-                            className="w-full h-full object-cover"
+                            className="w-full h-full object-contain"
                           />
                         </div>
                       )}
@@ -238,7 +238,7 @@ const ANews = () => {
                                   <img
                                     src={selectedNews.imagePath}
                                     alt="Validation"
-                                    className="w-full h-full object-cover"
+                                    className="w-full h-full object-contain"
                                   />
                                 </div>
                               )}

@@ -115,9 +115,9 @@ const Alumni = () => {
                             <h2 className="text-lg font-semibold mb-2 text-center">
                               Alumni Details
                             </h2>
-                            <div className="mb-4 flaot">
+                            {/* <div className="mb-4 flaot">
                               <strong>Picture</strong>Image
-                            </div>
+                            </div> */}
                             <div className="mb-4 ">
                               <strong>Name:</strong>
                               {selectedAlumni.lname} {selectedAlumni.fname}{" "}

@@ -10,7 +10,7 @@ const { StoriesModel } = require("./../api/stories/stories.model");
 const { upload } = require(".");
 const { AuthModel } = require("./../api/auth/auth.model");
 const { LogsModel } = require("../api/logs/logs.model");
-
+const { AlumniModel } = require("../api/alumni/alumni");
 const routerMiddleware = (app) => {
   app.use("/events", EventsModel);
   app.use("/news", NewsModel);
@@ -21,6 +21,7 @@ const routerMiddleware = (app) => {
   app.use("/update", upload.single("avatar"), RegistrationModel);
   app.use("/auth", AuthModel);
   app.use("/logs", LogsModel);
+  app.use("/alumni", AlumniModel);
 };
 
 module.exports = {

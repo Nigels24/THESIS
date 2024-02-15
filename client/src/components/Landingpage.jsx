@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import bscslogs from "../assets/bscslogs.png";
 import wmsulogs from "../assets/wmsulogs.png";
 import { BiSolidChevronLeft, BiSolidChevronRight } from "react-icons/bi";
+import { MdWorkOff, MdWork } from "react-icons/md";
+import { BsBuildingCheck } from "react-icons/bs";
 import pic1 from "../assets/pic1.jpg";
 import pic2 from "../assets/pic2.jpg";
 import pic3 from "../assets/pic3.jpg";
@@ -23,6 +25,21 @@ import pic16 from "../assets/pic16.jpeg";
 import pic17 from "../assets/pic17.jpeg";
 import backgroundImage from "../assets/bg2.png";
 import axios from "axios";
+import api from "../configs/axios-base-url";
+import { FaEllipsisV, FaUserGraduate, FaTimes } from "react-icons/fa";
+import Axios from "../configs/axios-base-url";
+import LineGraph from "../components/LineGraph";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  BarChart,
+  Bar,
+} from "recharts";
 
 const Landingpage = () => {
   const [selectedFilter, setSelectedFilter] = useState("all");
@@ -31,6 +48,46 @@ const Landingpage = () => {
   const [newsResponse, setNewsResponse] = useState([]); // Store news data
   const [eventsResponse, setEventsResponse] = useState([]); // Store events data
   const [jobOppResponse, setJobOppResponse] = useState([]); // Store job opportunities data
+  const [alumnidata, setAlumniData] = useState([]);
+  const [alumniDataLG, setAlumniDataLG] = useState([]);
+
+  const fetchAlumniDataLG = async () => {
+    try {
+      const res = await Axios.get("/alumni");
+      setAlumniDataLG(res.data);
+    } catch (err) {
+      console.error("Error fetching alumni data:", err);
+    }
+  };
+
+  useEffect(() => {
+    fetchAlumniDataLG();
+  }, []);
+
+  const [YearOptions, setYearOptions] = useState(["All"]);
+
+  const updateYearOptions = () => {
+    const uniqueYears = [
+      ...new Set(alumniDataLG.map((alumni) => alumni.yeargrad)),
+    ];
+    setYearOptions(["All", ...uniqueYears]);
+  };
+
+  useEffect(() => {
+    updateYearOptions();
+  }, [alumniDataLG]);
+
+  const Totalyeargrad = alumniDataLG?.length || 0;
+
+  const graduatesByYear = alumniDataLG.reduce((acc, item) => {
+    acc[item.yeargrad] = (acc[item.yeargrad] || 0) + 1;
+    return acc;
+  }, {});
+
+  const dataLG = Object.entries(graduatesByYear).map(([year, graduates]) => ({
+    name: year,
+    Graduates: graduates,
+  }));
 
   const slides = [
     {
@@ -89,6 +146,15 @@ const Landingpage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      try {
+        const res = await api.get("/register");
+        setAlumniData(res.data);
+      } catch (err) {
+        console.error("Error fetching alumni data:", err);
+      } finally {
+        setLoading(false);
+      }
+
       try {
         const eventsResponse = await axios.get("http://localhost:3001/events");
         const jobOppResponse = await axios.get("http://localhost:3001/jobopp");
@@ -164,6 +230,18 @@ const Landingpage = () => {
       prevSlide === 0 ? slides.length - 1 : prevSlide - 1
     );
   };
+  const AlumniEmployed = alumnidata.filter(
+    (item) => item.employment_status === "Employed"
+  ).length;
+
+  const AlumniUnemployed = alumnidata.filter(
+    (item) => item.employment_status === "Unemployed"
+  ).length;
+  const AlumniEligibility = alumnidata.filter(
+    (item) => item.eligibility
+  ).length;
+
+  const chartWidth2 = Math.max(1200, data.length * 10);
 
   return (
     <div className="flex justify-center items-center">
@@ -263,8 +341,103 @@ const Landingpage = () => {
             </table>
           </div>
         </div>
+
+        <div className="grid grid-cols-4 gap-[10px] mt-[25px] pb-[15px] h-24">
+          <Link to="/Login">
+            <div className="rounded-lg bg-[#00C49F] flex flex-col border border-[#b63d95c4] w-auto mt-2 cursor-pointer hover:shadow-lg transform hover:scale-103 transition duration-300 ease-out">
+              <div className="w-full items-center justify-between">
+                <h2 className="text-purple-700 text-xs sm:font-size-[5px] md:text-lg lg:text-xl xl:text-2xl leading-[17px] font-bold text-center">
+                  ALUMNI
+                </h2>
+                <h3 className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl leading-[24px] font-bold text-zinc-600 text-center mt-2 sm:mt-0">
+                  {alumnidata.length}
+                </h3>
+              </div>
+              <div className="self-end pr-2 sm:self-end sm:pb-2 w-auto">
+                <FaUserGraduate fontSize={25} color="#b63d95c4" />
+              </div>
+            </div>
+          </Link>
+          <Link to="/Login">
+            <div className="rounded-lg bg-[#0088FE] flex flex-col border border-[#b63d95c4] w-auto mt-2 cursor-pointer hover:shadow-lg transform hover:scale-103 transition duration-300 ease-out">
+              <div className="w-full items-center justify-between">
+                <h2 className="text-purple-700 text-xs sm:text-sm md:text-lg lg:text-xl xl:text-2xl leading-[17px] font-bold text-center">
+                  EMPLOYED
+                </h2>
+                <h3 className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl leading-[24px] font-bold text-zinc-600 text-center mt-2 sm:mt-0">
+                  {AlumniEmployed}
+                </h3>
+              </div>
+              <div className="self-end pr-2 sm:self-end sm:pb-2 w-auto">
+                <MdWork fontSize={28} color="#b63d95c4" />
+              </div>
+            </div>
+          </Link>
+          <Link to="/Login">
+            <div className="rounded-lg bg-[#FFBB28] flex flex-col border border-[#b63d95c4] w-auto mt-2 cursor-pointer hover:shadow-lg transform hover:scale-103 transition duration-300 ease-out">
+              <div className="w-full items-center justify-between">
+                <h2 className="text-purple-700 text-xs sm:text-sm md:text-lg lg:text-xl xl:text-2xl leading-[17px] font-bold text-center">
+                  UNEMPLOYED
+                </h2>
+                <h3 className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl leading-[24px] font-bold text-zinc-600 text-center mt-2 sm:mt-0">
+                  {AlumniUnemployed}
+                </h3>
+              </div>
+              <div className="self-end pr-2 sm:self-end sm:pb-2 w-auto">
+                <MdWorkOff fontSize={28} color="#b63d95c4" />
+              </div>
+            </div>
+          </Link>
+          <Link to="/Login">
+            <div className="rounded-lg bg-[#FF8042] flex flex-col border border-[#b63d95c4] w-auto mt-2 cursor-pointer hover:shadow-lg transform hover:scale-103 transition duration-300 ease-out">
+              <div className="w-full items-center justify-between">
+                <h2 className="text-purple-700 text-xs sm:text-sm md:text-lg lg:text-xl xl:text-2xl leading-[17px] font-bold text-center">
+                  ELIGIBILITY
+                </h2>
+                <h3 className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl leading-[24px] font-bold text-zinc-600 text-center mt-2 sm:mt-0">
+                  {AlumniEligibility}
+                </h3>
+              </div>
+              <div className="self-end pr-2 sm:self-end sm:pb-2 w-auto">
+                <BsBuildingCheck fontSize={28} color="#b63d95c4" />
+              </div>
+            </div>
+          </Link>
+        </div>
+        <Link to="/Login">
+          <div className="basis-[70%] border bg-white shadow-md cursor-pointer rounded-[4px] w-auto mt-10">
+            <div className="bg-zinc-100 flex items-center justify-between py-[15px] px-[20px] border-b-[1px] border-zinc-200 mb-[20px]">
+              <h2 className="text-green-700 text-[16px] leading-[19px] font-bold">
+                Total Graduates per Academic Year
+              </h2>
+            </div>
+            <div>
+              <LineChart
+                width={chartWidth2}
+                height={400}
+                data={dataLG}
+                zoom={{ type: "x", enabled: true }}
+                margin={{
+                  top: 10,
+                  right: 10,
+                  left: 5,
+                }}
+                style={{ cursor: "zoom-in" }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Line type="monotone" dataKey="Graduates" stroke="#82ca9d" />
+              </LineChart>
+              <p className="text-black/180 text-center text-sm justify-center m-4">
+                Total Graduates: {Totalyeargrad}
+              </p>
+            </div>
+          </div>
+        </Link>
       </div>
-      
     </div>
   );
 };

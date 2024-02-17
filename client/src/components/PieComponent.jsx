@@ -236,19 +236,14 @@ const PieComponent = () => {
               <b className=" font-medium">Employed</b>
               <span className=" float-right">{Employed2015}</span>
               <Progress
-                percent={(
-                  (Employed2015 / TotalEmployed2015 / totalAlumni) *
-                  100
-                ).toFixed(0)}
+                percent={((Employed2015 / totalAlumni) * 100).toFixed(0)}
                 status="active"
                 strokeColor="#00C49F"
               />
               <b className=" font-medium">Unemployed</b>
               <span className=" float-right">{UnEmployed2015}</span>
               <Progress
-                percent={((UnEmployed2015 / TotalEmployed2015) * 100).toFixed(
-                  0
-                )}
+                percent={((UnEmployed2015 / totalAlumni) * 100).toFixed(0)}
                 status="active"
                 strokeColor="#00C49F"
               />
@@ -265,16 +260,14 @@ const PieComponent = () => {
               <b className=" font-medium">Employed</b>
               <span className=" float-right">{Employed2016}</span>
               <Progress
-                percent={((Employed2016 / TotalEmployed2016) * 100).toFixed(0)}
+                percent={((Employed2016 / totalAlumni) * 100).toFixed(0)}
                 status="active"
                 strokeColor="#00C49F"
               />
               <b className=" font-medium">Unemployed</b>
               <span className=" float-right">{UnEmployed2016}</span>
               <Progress
-                percent={((UnEmployed2016 / TotalEmployed2016) * 100).toFixed(
-                  0
-                )}
+                percent={((UnEmployed2016 / totalAlumni) * 100).toFixed(0)}
                 status="active"
                 strokeColor="#00C49F"
               />
@@ -292,16 +285,14 @@ const PieComponent = () => {
               <b className=" font-medium">Employed</b>
               <span className=" float-right">{Employed2017}</span>
               <Progress
-                percent={((Employed2017 / TotalEmployed2017) * 100).toFixed(0)}
+                percent={((Employed2017 / totalAlumni) * 100).toFixed(0)}
                 status="active"
                 strokeColor="#00C49F"
               />
               <b className=" font-medium">Unemployed</b>
               <span className=" float-right">{UnEmployed2017}</span>
               <Progress
-                percent={((UnEmployed2017 / TotalEmployed2017) * 100).toFixed(
-                  0
-                )}
+                percent={((UnEmployed2017 / totalAlumni) * 100).toFixed(0)}
                 status="active"
                 strokeColor="#00C49F"
               />
@@ -318,16 +309,14 @@ const PieComponent = () => {
               <b className=" font-medium">Employed</b>
               <span className=" float-right">{Employed2018}</span>
               <Progress
-                percent={((Employed2018 / TotalEmployed2018) * 100).toFixed(0)}
+                percent={((Employed2018 / totalAlumni) * 100).toFixed(0)}
                 status="active"
                 strokeColor="#00C49F"
               />
               <b className=" font-medium">Unemployed</b>
               <span className=" float-right">{UnEmployed2018}</span>
               <Progress
-                percent={((UnEmployed2018 / TotalEmployed2018) * 100).toFixed(
-                  0
-                )}
+                percent={((UnEmployed2018 / totalAlumni) * 100).toFixed(0)}
                 status="active"
                 strokeColor="#00C49F"
               />
@@ -344,16 +333,14 @@ const PieComponent = () => {
               <b className=" font-medium">Employed</b>
               <span className=" float-right">{Employed2019}</span>
               <Progress
-                percent={((Employed2019 / TotalEmployed2019) * 100).toFixed(0)}
+                percent={((Employed2019 / totalAlumni) * 100).toFixed(0)}
                 status="active"
                 strokeColor="#00C49F"
               />
               <b className=" font-medium">Unemployed</b>
               <span className=" float-right">{UnEmployed2019}</span>
               <Progress
-                percent={((UnEmployed2019 / TotalEmployed2019) * 100).toFixed(
-                  0
-                )}
+                percent={((UnEmployed2019 / totalAlumni) * 100).toFixed(0)}
                 status="active"
                 strokeColor="#00C49F"
               />
@@ -370,16 +357,14 @@ const PieComponent = () => {
               <b className=" font-medium">Employed</b>
               <span className=" float-right">{Employed2020}</span>
               <Progress
-                percent={((Employed2020 / TotalEmployed2020) * 100).toFixed(0)}
+                percent={((Employed2020 / totalAlumni) * 100).toFixed(0)}
                 status="active"
                 strokeColor="#00C49F"
               />
               <b className=" font-medium">Unemployed</b>
               <span className=" float-right">{UnEmployed2020}</span>
               <Progress
-                percent={((UnEmployed2020 / TotalEmployed2020) * 100).toFixed(
-                  0
-                )}
+                percent={((UnEmployed2020 / totalAlumni) * 100).toFixed(0)}
                 status="active"
                 strokeColor="#00C49F"
               />
@@ -396,16 +381,14 @@ const PieComponent = () => {
               <b className=" font-medium">Employed</b>
               <span className=" float-right">{Employed2021}</span>
               <Progress
-                percent={((Employed2021 / TotalEmployed2021) * 100).toFixed(0)}
+                percent={((Employed2021 / totalAlumni) * 100).toFixed(0)}
                 status="active"
                 strokeColor="#00C49F"
               />
               <b className=" font-medium">Unemployed</b>
               <span className=" float-right">{UnEmployed2021}</span>
               <Progress
-                percent={((UnEmployed2021 / TotalEmployed2021) * 100).toFixed(
-                  0
-                )}
+                percent={((UnEmployed2021 / totalAlumni) * 100).toFixed(0)}
                 status="active"
                 strokeColor="#00C49F"
               />
@@ -422,16 +405,14 @@ const PieComponent = () => {
               <b className=" font-medium">Employed</b>
               <span className=" float-right">{Employed2022}</span>
               <Progress
-                percent={((Employed2022 / TotalEmployed2022) * 100).toFixed(0)}
+                percent={((Employed2022 / totalAlumni) * 100).toFixed(0)}
                 status="active"
                 strokeColor="#00C49F"
               />
               <b className=" font-medium">Unemployed</b>
               <span className=" float-right">{UnEmployed2022}</span>
               <Progress
-                percent={((UnEmployed2022 / TotalEmployed2022) * 100).toFixed(
-                  0
-                )}
+                percent={((UnEmployed2022 / totalAlumni) * 100).toFixed(0)}
                 status="active"
                 strokeColor="#00C49F"
               />
@@ -448,16 +429,14 @@ const PieComponent = () => {
               <b className=" font-medium">Employed</b>
               <span className=" float-right">{Employed2023}</span>
               <Progress
-                percent={((Employed2023 / TotalEmployed2023) * 100).toFixed(0)}
+                percent={((Employed2023 / totalAlumni) * 100).toFixed(0)}
                 status="active"
                 strokeColor="#00C49F"
               />
               <b className=" font-medium">Unemployed</b>
               <span className=" float-right">{UnEmployed2023}</span>
               <Progress
-                percent={((UnEmployed2023 / TotalEmployed2023) * 100).toFixed(
-                  0
-                )}
+                percent={((UnEmployed2023 / totalAlumni) * 100).toFixed(0)}
                 status="active"
                 strokeColor="#00C49F"
               />

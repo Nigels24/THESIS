@@ -342,12 +342,12 @@ const Events = () => {
                 </tr>
               </thead>
               <tbody className="bg-white">
-                {eventsToDisplay.map((event) => (
+                {eventsToDisplay.map((event, index) => (
                   <tr
-                    key={event.id}
+                    key={index}
                     className="border-b border-gray-200 hover:bg-gray-100"
                   >
-                    <td className="px-6 py-4">{event.id}</td>
+                    <td className="px-6 py-4">{index + 1}</td>
                     <td className="px-6 py-4">{event.title}</td>
                     <td className="px-6 py-4">
                       {event.stime} {event.sdate}

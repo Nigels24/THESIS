@@ -64,7 +64,7 @@ const Registration = () => {
     setOtp,
     handleOTP,
     showPassword,
-    setshowPassword,
+    setShowPassword,
   } = useHook();
 
   return (
@@ -253,7 +253,7 @@ const Registration = () => {
                         />
                         <span
                           className="absolute right-10 top-4 cursor-pointer"
-                          onClick={() => setshowPassword(!showPassword)}
+                          onClick={() => setShowPassword(!showPassword)}
                         >
                           {showPassword ? (
                             <FaEye size={20} />
@@ -369,45 +369,48 @@ const Registration = () => {
                           <option value="NO">NO</option>
                         </select>
                       </div>
-
-                      <div className="input-fields">
-                        <label>Enroll Further Studies?</label>
-                        <select
-                          value={enrollFurtherStudies}
-                          onChange={(e) => {
-                            setEnrollFurtherStudies(e.target.value);
-                            if (e.target.value !== "Other") {
-                              setOtherEnrollDescription(""); // Clear custom input if not "Other"
-                            }
-                          }}
-                          required
-                          // Add the disabled attribute based on the state
-                        >
-                          <option value="With Doctoral Units">
-                            With Doctoral Units
-                          </option>
-                          <option value="MA/MS Graduate">MA/MS Graduate</option>
-                          <option value="With MA/MS Units">
-                            With MA/MS Units
-                          </option>
-                          <option value="Other Baccalaureate Course">
-                            Other Baccalaureate Course
-                          </option>
-                          <option value="None">None</option>
-                          <option value="Other">Other</option>
-                        </select>
-                        {enrollFurtherStudies === "Other" && (
-                          <input
-                            type="text"
-                            placeholder="Please specify"
-                            value={otherEnrollDescription}
-                            onChange={(e) =>
-                              setOtherEnrollDescription(e.target.value)
-                            }
+                      {furtherStudies === "YES" && (
+                        <div className="input-fields">
+                          <label>Enroll Further Studies?</label>
+                          <select
+                            value={enrollFurtherStudies}
+                            onChange={(e) => {
+                              setEnrollFurtherStudies(e.target.value);
+                              if (e.target.value !== "Other") {
+                                setOtherEnrollDescription(""); // Clear custom input if not "Other"
+                              }
+                            }}
                             required
-                          />
-                        )}
-                      </div>
+                            // Add the disabled attribute based on the state
+                          >
+                            <option value="With Doctoral Units">
+                              With Doctoral Units
+                            </option>
+                            <option value="MA/MS Graduate">
+                              MA/MS Graduate
+                            </option>
+                            <option value="With MA/MS Units">
+                              With MA/MS Units
+                            </option>
+                            <option value="Other Baccalaureate Course">
+                              Other Baccalaureate Course
+                            </option>
+                            <option value="None">None</option>
+                            <option value="Other">Other</option>
+                          </select>
+                          {enrollFurtherStudies === "Other" && (
+                            <input
+                              type="text"
+                              placeholder="Please specify"
+                              value={otherEnrollDescription}
+                              onChange={(e) =>
+                                setOtherEnrollDescription(e.target.value)
+                              }
+                              required
+                            />
+                          )}
+                        </div>
+                      )}
 
                       <div className="input-fields">
                         <label>Eligibility Acquired (if any)</label>
@@ -491,43 +494,49 @@ const Registration = () => {
                           <option value="NO">NO</option>
                         </select>
                       </div>
-                      <div className="input-fields">
-                        <label>Enroll Further Studies?</label>
-                        <select
-                          value={enrollFurtherStudies}
-                          onChange={(e) => {
-                            setEnrollFurtherStudies(e.target.value);
-                            if (e.target.value !== "Other") {
-                              setOtherEnrollDescription(""); // Clear custom input if not "Other"
-                            }
-                          }}
-                          required
-                        >
-                          <option value="With Doctoral Units">
-                            With Doctoral Units
-                          </option>
-                          <option value="MA/MS Graduate">MA/MS Graduate</option>
-                          <option value="With MA/MS Units">
-                            With MA/MS Units
-                          </option>
-                          <option value="Other Baccalaureate Course">
-                            Other Baccalaureate Course
-                          </option>
-                          <option value="Not Applicable">Not Applicable</option>
-                          <option value="Other">Other</option>
-                        </select>
-                        {enrollFurtherStudies === "Other" && (
-                          <input
-                            type="text"
-                            placeholder="Please specify"
-                            value={otherEnrollDescription}
-                            onChange={(e) =>
-                              setOtherEnrollDescription(e.target.value)
-                            }
+                      {furtherStudies === "YES" && (
+                        <div className="input-fields">
+                          <label>Enroll Further Studies?</label>
+                          <select
+                            value={enrollFurtherStudies}
+                            onChange={(e) => {
+                              setEnrollFurtherStudies(e.target.value);
+                              if (e.target.value !== "Other") {
+                                setOtherEnrollDescription(""); // Clear custom input if not "Other"
+                              }
+                            }}
                             required
-                          />
-                        )}
-                      </div>
+                          >
+                            <option value="With Doctoral Units">
+                              With Doctoral Units
+                            </option>
+                            <option value="MA/MS Graduate">
+                              MA/MS Graduate
+                            </option>
+                            <option value="With MA/MS Units">
+                              With MA/MS Units
+                            </option>
+                            <option value="Other Baccalaureate Course">
+                              Other Baccalaureate Course
+                            </option>
+                            <option value="Not Applicable">
+                              Not Applicable
+                            </option>
+                            <option value="Other">Other</option>
+                          </select>
+                          {enrollFurtherStudies === "Other" && (
+                            <input
+                              type="text"
+                              placeholder="Please specify"
+                              value={otherEnrollDescription}
+                              onChange={(e) =>
+                                setOtherEnrollDescription(e.target.value)
+                              }
+                              required
+                            />
+                          )}
+                        </div>
+                      )}
                       <div className="input-fields">
                         <label>Eligibility Acquired (if any)</label>
                         <select

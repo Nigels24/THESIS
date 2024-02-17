@@ -148,7 +148,7 @@ const PieCompEduc = () => {
             <b className=" font-medium">Doctoral units</b>
             <span className=" float-right">{AlumniDoctoral}</span>
             <Progress
-              percent={((AlumniDoctoral / AlumniPursue) * 100).toFixed(0)}
+              percent={((AlumniDoctoral / totalAlumni) * 100).toFixed(0)}
               status="active"
               strokeColor="#00C49F"
             />
@@ -157,7 +157,7 @@ const PieCompEduc = () => {
             <b className=" font-medium">MA/MS Graduate</b>
             <span className=" float-right">{AlumniGraduate}</span>
             <Progress
-              percent={((AlumniGraduate / AlumniPursue) * 100).toFixed(0)}
+              percent={((AlumniGraduate / totalAlumni) * 100).toFixed(0)}
               status="active"
               strokeColor="#00C49F"
             />
@@ -166,7 +166,7 @@ const PieCompEduc = () => {
             <b className=" font-medium">With MA/MS Units</b>
             <span className=" float-right">{AlumniUnits}</span>
             <Progress
-              percent={((AlumniUnits / AlumniPursue) * 100).toFixed(0)}
+              percent={((AlumniUnits / totalAlumni) * 100).toFixed(0)}
               status="active"
               strokeColor="#00C49F"
             />
@@ -175,7 +175,7 @@ const PieCompEduc = () => {
             <b className=" font-medium">Other Baccalaureate Course</b>
             <span className=" float-right">{AlumniBaccalaureate}</span>
             <Progress
-              percent={((AlumniBaccalaureate / AlumniPursue) * 100).toFixed(0)}
+              percent={((AlumniBaccalaureate / totalAlumni) * 100).toFixed(0)}
               status="active"
               strokeColor="#00C49F"
             />
@@ -185,7 +185,7 @@ const PieCompEduc = () => {
             <span className=" float-right">{AlumniOthers}</span>
             <h2>Others</h2>
             <Progress
-              percent={((AlumniOthers / AlumniPursue) * 100).toFixed(0)}
+              percent={((AlumniOthers / totalAlumni) * 100).toFixed(0)}
               status="active"
               strokeColor="#00C49F"
             />

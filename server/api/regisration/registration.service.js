@@ -6,6 +6,8 @@ const {
 } = require("../../utils/promise-query");
 const { generateToken } = require("./../../utils/token");
 const { TABLES, ENDPOINT } = require("./../../constants");
+const { AuthService } = require("../auth/auth.service");
+const { ErrorException } = require("../../utils/catch-error");
 
 const RegistrationService = {
   REGISTER: async (payload) => {
@@ -91,6 +93,7 @@ const RegistrationService = {
 
         const { password: createdPassword, ...tokenPayload } = registration;
 
+        console.log(tokenPayload);
         const accessToken = generateToken({
           ...tokenPayload,
           avatar: avatarPath,
@@ -113,71 +116,90 @@ const RegistrationService = {
     }
   },
   UPDATE: async (payload) => {
-    const {
-      mobileNumber,
-      currentAddress,
-      avatar,
-      employment_status,
-      current_job,
-      year_current_job,
-      position_current_job,
-      employment_type,
-      place_current_job,
-      furtherStudies,
-      enrollFurtherStudies,
-      eligibility,
-      id: payloadId,
-    } = payload;
+    try {
+      const {
+        mobileNumber,
+        currentAddress,
+        avatar,
+        employment_status,
+        current_job,
+        year_current_job,
+        position_current_job,
+        employment_type,
+        place_current_job,
+        furtherStudies,
+        enrollFurtherStudies,
+        eligibility,
+        id,
+      } = payload;
 
-    const Image = avatar ? `${ENDPOINT}/uploads/${avatar}` : "";
+      if (isNaN(id)) {
+        throw new Error("Invalid id provided.");
+      }
 
-    beginTransactions();
+      const Image = avatar ? `${ENDPOINT}/uploads/${avatar}` : "";
 
-    const id =
-      payloadId && typeof payloadId === "string"
-        ? parseInt(payloadId)
-        : payloadId;
+      beginTransactions();
 
-    const data = [
-      mobileNumber,
-      currentAddress,
-      Image,
-      employment_status,
-      current_job,
-      year_current_job,
-      position_current_job,
-      employment_type,
-      place_current_job,
-      furtherStudies,
-      enrollFurtherStudies,
-      eligibility,
-      id,
-    ];
+      const data = [
+        mobileNumber,
+        currentAddress,
+        Image,
+        employment_status,
+        current_job,
+        year_current_job,
+        position_current_job,
+        employment_type,
+        place_current_job,
+        furtherStudies,
+        enrollFurtherStudies,
+        eligibility,
+        id,
+      ];
+      let queries = "";
+      if (Image) {
+        queries = `UPDATE ${TABLES.REGISTRATION} SET phoneno=?, address=?, Image=?, employment_status=?, current_job=?, year_current_job=?, position_current_job=?, employment_type=?, place_current_job=?, engage_studies=?, enroll_studies=?, eligibility=? WHERE id=?`;
+      } else {
+        queries = `UPDATE ${TABLES.REGISTRATION} SET phoneno=?, address=?, employment_status=?, current_job=?, year_current_job=?, position_current_job=?, employment_type=?, place_current_job=?, engage_studies=?, enroll_studies=?, eligibility=? WHERE id=?`;
+      }
+      const updateData = await PromiseQuery({
+        query: queries,
+        values: data,
+      });
 
-    const updateData = await PromiseQuery({
-      query: `UPDATE ${TABLES.REGISTRATION} SET phoneno=?, address=?, Image=?, employment_status=?, current_job=?, year_current_job=?, position_current_job=?, employment_type=?, place_current_job=?, engage_studies=?, enroll_studies=?, eligibility=? WHERE id=?`,
-      values: data,
-    });
+      if (!updateData) {
+        throw new Error("Failed to update user data.");
+      }
 
-    if (!updateData) {
-      throw new Error("Failed to update user data.");
+      console.log("user_id_ytest", id);
+      const registered = await AuthService.USER_ID({ id });
+      // console.log("Registered", registered);
+      if (!registered) {
+        throw new ErrorException("ID");
+      }
+      const { ...tokenPayload } = registered;
+
+      console.log("update_result", tokenPayload);
+
+      const accessToken = generateToken({
+        ...tokenPayload,
+        avatar: avatar && `${ENDPOINT}/uploads/${avatar}`,
+      });
+
+      await PromiseQuery({
+        query: `UPDATE ${TABLES.REGISTRATION} SET token=? WHERE id=?`,
+        values: [accessToken, id],
+      });
+
+      commitTransactions();
+
+      return {
+        accessToken,
+      };
+    } catch (err) {
+      rollBackTransactions();
+      throw err;
     }
-
-    const { ...tokenPayload } = updateData;
-
-    const accessToken = generateToken({
-      ...tokenPayload,
-      avatar: avatar && `${ENDPOINT}/uploads/${avatar}`,
-    });
-
-    await PromiseQuery({
-      query: `UPDATE ${TABLES.REGISTRATION} SET token=? WHERE id=?`,
-      values: [accessToken, id],
-    });
-
-    return {
-      accessToken,
-    };
   },
   getAllRegistrations: async () => {
     try {

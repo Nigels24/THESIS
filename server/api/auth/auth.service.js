@@ -16,6 +16,19 @@ const AuthService = {
       returnError(err);
     }
   },
+  USER_ID: async ({ id }) => {
+    console.log("user_hello", id);
+
+    try {
+      const [registered] = await PromiseQuery({
+        query: `SELECT * FROM ${TABLES.REGISTRATION} WHERE id= ?`,
+        values: [id],
+      });
+      return registered;
+    } catch (err) {
+      returnError(err);
+    }
+  },
 };
 
 module.exports = {

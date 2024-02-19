@@ -199,24 +199,7 @@ const Registration = () => {
                         </span>
                       )}
                     </div>
-                    {/* <div className="input-fields">
-                      <label>Password</label>
-                      <input
-                        type="password"
-                        placeholder="Enter your password"
-                        value={password}
-                        onChange={handlePasswordChange}
-                        className={isPasswordValid ? "" : "border-red-500"}
-                        required // Add border color based on password validation
-                      />
-                      {!isPasswordValid && (
-                        <span className="text-red-500">
-                          Password must contain at least one uppercase letter,
-                          one lowercase letter, one special character, and be at
-                          least 8 characters long.
-                        </span>
-                      )}
-                    </div> */}
+
                     <div className="input-fields">
                       <label>Password</label>
                       <div className="flex items-center w-full">

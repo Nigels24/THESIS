@@ -21,7 +21,6 @@ const AuthController = {
         throw new ErrorException("Password is incorrect!");
 
       const { password, token, ...payload } = registered;
-
       const generatedToken = generateToken(payload);
 
       res

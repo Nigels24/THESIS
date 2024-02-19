@@ -149,9 +149,9 @@ export const useHooks = () => {
       // Decode the token to get user information
       const token = localStorage.getItem("token");
       const userDetails = decodeToken(token);
-
       // Update the user details using the user's ID from the decoded token
       const userId = userDetails.id;
+      // console.log(userId);
       const data = await api.put(`/update/${userId}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",

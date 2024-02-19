@@ -9,7 +9,7 @@ import useAuthStore from "../store/auth.store";
 const ChatsPage = ({ username }) => {
   const { user } = useAuthStore();
   const chatProps = useMultiChatLogic(
-    "ebb3279b-3c34-490c-8e33-52bcba020511",
+    "47c3e510-2d02-4383-aec7-55a85b753d50",
     user.username, //. Use the passed username prop
     user.username // Use the passed username prop
   );

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { VscChevronDown } from "react-icons/vsc";
-import axios from "axios";
+import axios from "./../../configs/axios-base-url";
 import ASidebar from "../../components/AlumniSide/ASidebar";
 import AAlumniboardView from "../../components/AlumniSide/AAlumniboardView";
 
@@ -96,7 +96,7 @@ const AEvents = () => {
   };
   const fetchEventData = async () => {
     try {
-      const res = await axios.get("http://localhost:3001/events");
+      const res = await axios.get("/events");
       setEventData(res.data);
     } catch (err) {
       console.log(err);

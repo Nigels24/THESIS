@@ -1,10 +1,12 @@
-const { PrismaClient } = require("@prisma/client");
+const { TABLES } = require("../../constants");
+const { PromiseQuery } = require("../../utils/promise-query");
 
-const prisma = new PrismaClient();
 const LogService = {
   GET: async () => {
     try {
-      const logs = await prisma.activitylogs.findMany();
+      const logs = await PromiseQuery({
+        query: `SELECT * FROM ${TABLES.ACTIVITYLOGS}`,
+      });
       return logs;
     } catch (err) {
       throw err;

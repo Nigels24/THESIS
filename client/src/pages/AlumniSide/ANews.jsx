@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { VscChevronDown } from "react-icons/vsc";
-import axios from "axios";
+import axios from "./../../configs/axios-base-url";
 import ASidebar from "../../components/AlumniSide/ASidebar";
 import AAlumniboardView from "../../components/AlumniSide/AAlumniboardView";
 
@@ -109,7 +109,7 @@ const ANews = () => {
 
   const fetchNewsData = async () => {
     try {
-      const res = await axios.get("http://localhost:3001/news"); // Update the URL to the correct endpoint
+      const res = await axios.get("/news"); // Update the URL to the correct endpoint
       setNewsData(res.data); // Update the state with the fetched data
     } catch (err) {
       console.log(err);

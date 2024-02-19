@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { VscChevronDown } from "react-icons/vsc";
-import axios from "axios";
+import axios from "./../configs/axios-base-url";
 import Sidebar from "../components/Sidebar";
 import Dashboardview from "../components/Dashboardview";
 
@@ -117,10 +117,7 @@ const JobOpportunities = () => {
 
     try {
       // Use the PUT endpoint to update the status to false
-      await axios.put(
-        `http://localhost:3001/jobopp/${eventToModify}/jobstatus`,
-        newJobOpp
-      );
+      await axios.put(`/jobopp/${eventToModify}/jobstatus`, newJobOpp);
 
       // Assuming your API updates the job opportunity's status successfully, you can update the state accordingly
       fetchJobOppData();
@@ -142,7 +139,7 @@ const JobOpportunities = () => {
 
   //   try {
   //     await axios.put(
-  //       `http://localhost:3001/jobopp/${eventToModify.id}/jobdelete`,
+  //       `/jobopp/${eventToModify.id}/jobdelete`,
   //       newJobOpp
   //     );
   //     // Assuming your API deletes the event successfully, you can update the state accordingly.
@@ -175,7 +172,7 @@ const JobOpportunities = () => {
       formData.append("link", newJobData.link);
       formData.append("image", imageFile);
 
-      await axios.post("http://localhost:3001/jobopp/adminjob", formData, {
+      await axios.post("/jobopp/adminjob", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -200,7 +197,7 @@ const JobOpportunities = () => {
 
   const fetchJobOppData = async () => {
     try {
-      const res = await axios.get("http://localhost:3001/jobopp/alumnijob", {
+      const res = await axios.get("/jobopp/alumnijob", {
         params: { status: true }, // Add this query parameter to filter by status=true
       });
 

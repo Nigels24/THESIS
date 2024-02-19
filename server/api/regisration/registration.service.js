@@ -1,89 +1,116 @@
-const { PromiseQuery } = require("../../utils/promise-query");
-const { PrismaClient } = require("@prisma/client");
+const {
+  PromiseQuery,
+  beginTransactions,
+  commitTransactions,
+  rollBackTransactions,
+} = require("../../utils/promise-query");
 const { generateToken } = require("./../../utils/token");
-
-const prisma = new PrismaClient();
+const { TABLES, ENDPOINT } = require("./../../constants");
 
 const RegistrationService = {
   REGISTER: async (payload) => {
-    const {
-      firstName,
-      lastName,
-      middleName,
-      mobileNumber,
-      gender,
-      currentAddress,
-      dateOfBirth,
-      yearGraduated,
-      email,
-      role,
-      hashedPassword,
-      avatar,
-      employment_status,
-      current_job,
-      year_current_job,
-      jobDuration,
-      position_current_job,
-      employment_type,
-      place_current_job,
-      furtherStudies,
-      enrollFurtherStudies,
-      eligibility,
-    } = payload;
-
-    const avatarPath = `http://localhost:3001/uploads/${avatar}`;
-
-    const createdData = await prisma.registration.create({
-      data: {
-        fname: firstName,
-        lname: lastName,
-        mname: middleName,
-        phoneno: mobileNumber,
+    try {
+      const {
+        firstName,
+        lastName,
+        middleName,
+        mobileNumber,
         gender,
-        address: currentAddress,
-        bday: dateOfBirth,
-        yeargrad: yearGraduated,
+        currentAddress,
+        dateOfBirth,
+        yearGraduated,
         email,
-        role: "alumni",
-        password: hashedPassword,
-        Image: avatarPath,
-        employment_status: employment_status,
-        current_job: current_job,
-        year_current_job: year_current_job,
-        job_duration_after_grad: jobDuration,
-        position_current_job: position_current_job,
-        employment_type: employment_type,
-        place_current_job: place_current_job,
-        engage_studies: furtherStudies,
-        enroll_studies: enrollFurtherStudies,
-        eligibility: eligibility,
-      },
-    });
+        hashedPassword,
+        avatar,
+        employment_status,
+        current_job,
+        year_current_job,
+        jobDuration,
+        position_current_job,
+        employment_type,
+        place_current_job,
+        furtherStudies,
+        enrollFurtherStudies,
+        eligibility,
+      } = payload;
 
-    if (!createdData)
-      throw new Error(
-        "There was a problem during registration, something went wrong."
-      );
+      const avatarPath = `${ENDPOINT}/uploads/${avatar}`;
 
-    const { password: createdPassword, ...tokenPayload } = createdData;
+      const data = [
+        firstName,
+        lastName,
+        middleName,
+        mobileNumber,
+        gender,
+        currentAddress,
+        dateOfBirth,
+        yearGraduated,
+        email,
+        hashedPassword,
+        avatarPath,
+        employment_status,
+        current_job,
+        year_current_job,
+        jobDuration,
+        position_current_job,
+        employment_type,
+        place_current_job,
+        furtherStudies,
+        enrollFurtherStudies,
+        eligibility,
+      ];
 
-    const accessToken = generateToken({
-      ...tokenPayload,
-      avatar: avatarPath,
-    });
+      beginTransactions();
+      const createdData = await PromiseQuery({
+        query: `INSERT INTO ${TABLES.REGISTRATION} (fname, lname, mname, phoneno, gender, address, bday, yeargrad, email, password, Image, employment_status, current_job, year_current_job, job_duration_after_grad, position_current_job,  employment_type, place_current_job, engage_studies, enroll_studies,eligibility) 
+         VALUES (?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+        values: data,
+      });
 
-    await prisma.registration.update({
-      where: {
-        id: createdData.id,
-      },
-      data: {
-        token: accessToken,
-      },
-    });
+      if (!createdData) {
+        rollBackTransactions();
+        throw new Error(
+          "There was a problem during registration, something went wrong."
+        );
+      }
 
-    return {
-      accessToken,
-    };
+      if (createdData.affectedRows) {
+        const { insertId } = createdData;
+
+        const [registration] = await PromiseQuery({
+          query: `SELECT * FROM ${TABLES.REGISTRATION} WHERE id=?`,
+          values: [insertId],
+        });
+
+        if (!registration) {
+          rollBackTransactions();
+          throw new Error(
+            "There was a problem during registration, something went wrong."
+          );
+        }
+
+        const { password: createdPassword, ...tokenPayload } = registration;
+
+        const accessToken = generateToken({
+          ...tokenPayload,
+          avatar: avatarPath,
+        });
+
+        await PromiseQuery({
+          query: `UPDATE ${TABLES.REGISTRATION} SET token=? WHERE id=?`,
+          values: [accessToken, registration.id],
+        });
+
+        commitTransactions();
+
+        return {
+          accessToken,
+        };
+      }
+    } catch (err) {
+      rollBackTransactions();
+      throw err;
+    }
   },
   UPDATE: async (payload) => {
     const {
@@ -99,54 +126,37 @@ const RegistrationService = {
       furtherStudies,
       enrollFurtherStudies,
       eligibility,
-      id,
+      id: payloadId,
     } = payload;
 
-    console.log("payload", payload);
+    const Image = avatar ? `${ENDPOINT}/uploads/${avatar}` : "";
 
-    // const avatarPath = `http://localhost:3001/uploads/${avatar}`;
+    beginTransactions();
 
-    const updateData = await prisma.registration.update({
-      where: {
-        id: parseInt(id),
-      },
-      data: {
-        phoneno: mobileNumber,
-        address: currentAddress,
-        ...(avatar && { Image: `http://localhost:3001/uploads/${avatar}` }),
-        employment_status: employment_status,
-        current_job: current_job,
-        year_current_job: year_current_job,
-        position_current_job: position_current_job,
-        employment_type: employment_type,
-        place_current_job: place_current_job,
-        engage_studies: furtherStudies,
-        enroll_studies: enrollFurtherStudies,
-        eligibility: eligibility,
-      },
-      select: {
-        lname: true,
-        fname: true,
-        mname: true,
-        address: true,
-        bday: true,
-        current_job: true,
-        eligibility: true,
-        email: true,
-        role: true,
-        employment_status: true,
-        employment_type: true,
-        engage_studies: true,
-        enroll_studies: true,
-        gender: true,
-        id: true,
-        job_duration_after_grad: true,
-        phoneno: true,
-        place_current_job: true,
-        position_current_job: true,
-        year_current_job: true,
-        yeargrad: true,
-      },
+    const id =
+      payloadId && typeof payloadId === "string"
+        ? parseInt(payloadId)
+        : payloadId;
+
+    const data = [
+      mobileNumber,
+      currentAddress,
+      Image,
+      employment_status,
+      current_job,
+      year_current_job,
+      position_current_job,
+      employment_type,
+      place_current_job,
+      furtherStudies,
+      enrollFurtherStudies,
+      eligibility,
+      id,
+    ];
+
+    const updateData = await PromiseQuery({
+      query: `UPDATE ${TABLES.REGISTRATION} SET phoneno=?, address=?, Image=?, employment_status=?, current_job=?, year_current_job=?, position_current_job=?, employment_type=?, place_current_job=?, engage_studies=?, enroll_studies=?, eligibility=? WHERE id=?`,
+      values: data,
     });
 
     if (!updateData) {
@@ -154,15 +164,15 @@ const RegistrationService = {
     }
 
     const { ...tokenPayload } = updateData;
+
     const accessToken = generateToken({
       ...tokenPayload,
-      avatar: avatar && `http://localhost:3001/uploads/${avatar}`,
+      avatar: avatar && `${ENDPOINT}/uploads/${avatar}`,
     });
-    await prisma.registration.update({
-      where: { id },
-      data: {
-        token: accessToken,
-      },
+
+    await PromiseQuery({
+      query: `UPDATE ${TABLES.REGISTRATION} SET token=? WHERE id=?`,
+      values: [accessToken, id],
     });
 
     return {
@@ -171,7 +181,9 @@ const RegistrationService = {
   },
   getAllRegistrations: async () => {
     try {
-      const registrations = await prisma.registration.findMany();
+      const registrations = await PromiseQuery({
+        query: `SELECT * FROM ${TABLES.REGISTRATION}`,
+      });
       return registrations;
     } catch (error) {
       console.error("Error fetching registration data:", error);

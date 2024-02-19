@@ -1,6 +1,5 @@
-const { PrismaClient } = require("@prisma/client");
-
-const prisma = new PrismaClient();
+const { TABLES } = require("../constants");
+const { PromiseQuery } = require("../utils/promise-query");
 
 const createLog = async ({
   action,
@@ -10,15 +9,16 @@ const createLog = async ({
   after = {},
 }) => {
   try {
-    const log = await prisma.activitylogs.create({
-      data: {
-        after: JSON.stringify(after),
-        before: JSON.stringify(before),
+    const log = await PromiseQuery({
+      query: `INSERT INTO ${TABLES.ACTIVITYLOGS} (after, before, action, description, registration_id, date_created) VALUES (?,?,?,?,?,?)`,
+      values: [
+        JSON.stringify(after),
+        JSON.stringify(before),
         action,
         description,
         registration_id,
-        date_created: new Date(),
-      },
+        new Date(),
+      ],
     });
 
     return log;

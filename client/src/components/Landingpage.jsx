@@ -24,7 +24,7 @@ import pic15 from "../assets/pic15.jpeg";
 import pic16 from "../assets/pic16.jpeg";
 import pic17 from "../assets/pic17.jpeg";
 import backgroundImage from "../assets/bg2.png";
-import axios from "axios";
+import axios from "./../configs/axios-base-url";
 import api from "../configs/axios-base-url";
 import { FaEllipsisV, FaUserGraduate, FaTimes } from "react-icons/fa";
 import Axios from "../configs/axios-base-url";
@@ -156,9 +156,9 @@ const Landingpage = () => {
       }
 
       try {
-        const eventsResponse = await axios.get("http://localhost:3001/events");
-        const jobOppResponse = await axios.get("http://localhost:3001/jobopp");
-        const newsResponse = await axios.get("http://localhost:3001/news");
+        const eventsResponse = await axios.get("/events");
+        const jobOppResponse = await axios.get("/jobopp");
+        const newsResponse = await axios.get("/news");
 
         const mergedData = [
           ...eventsResponse.data,

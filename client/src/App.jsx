@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Main from "./components/Main";
@@ -59,7 +60,6 @@ function App() {
           <Route path="/PieEducation" element={<PieCompEduc />} />
           <Route path="/BarComponents" element={<BarComponent />} />
           <Route path="/LineGraph" element={<LineGraph />} />
-
         </Routes>
       </div>
     </BrowserRouter>

@@ -141,7 +141,7 @@ const RegistrationService = {
 
       beginTransactions();
 
-      const data = [
+      let data = [
         mobileNumber,
         currentAddress,
         Image,
@@ -156,12 +156,28 @@ const RegistrationService = {
         eligibility,
         id,
       ];
+
       let queries = "";
       if (Image) {
         queries = `UPDATE ${TABLES.REGISTRATION} SET phoneno=?, address=?, Image=?, employment_status=?, current_job=?, year_current_job=?, position_current_job=?, employment_type=?, place_current_job=?, engage_studies=?, enroll_studies=?, eligibility=? WHERE id=?`;
       } else {
+        data = [
+          mobileNumber,
+          currentAddress,
+          employment_status,
+          current_job,
+          year_current_job,
+          position_current_job,
+          employment_type,
+          place_current_job,
+          furtherStudies,
+          enrollFurtherStudies,
+          eligibility,
+          id,
+        ];
         queries = `UPDATE ${TABLES.REGISTRATION} SET phoneno=?, address=?, employment_status=?, current_job=?, year_current_job=?, position_current_job=?, employment_type=?, place_current_job=?, engage_studies=?, enroll_studies=?, eligibility=? WHERE id=?`;
       }
+
       const updateData = await PromiseQuery({
         query: queries,
         values: data,
@@ -171,15 +187,11 @@ const RegistrationService = {
         throw new Error("Failed to update user data.");
       }
 
-      console.log("user_id_ytest", id);
       const registered = await AuthService.USER_ID({ id });
-      // console.log("Registered", registered);
       if (!registered) {
         throw new ErrorException("ID");
       }
       const { ...tokenPayload } = registered;
-
-      console.log("update_result", tokenPayload);
 
       const accessToken = generateToken({
         ...tokenPayload,

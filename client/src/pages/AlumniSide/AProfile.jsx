@@ -120,15 +120,6 @@ const AProfile = () => {
                   }}
                 />
               )}
-
-              {/* <img
-                src={Image}
-                alt="profile picture"
-                className="w-40 h-40 rounded-full mx-auto "
-                style={{
-                  backgroundSize: "contain",
-                }}
-              /> */}
             </div>
             {/* /*Modal Update Section */}
             <form action="#" onSubmit={handleUpdateProfile}>
@@ -547,11 +538,6 @@ const AProfile = () => {
                       <label className="header">Year Current Job</label>
                       <label className="label">{year_current_job}</label>
                     </div>
-
-                    {/* <div className="input-fields">
-                      <label className="header">Job Duration</label>
-                      <label className="label">{jobDuration}</label>
-                    </div> */}
 
                     <div className="input-fields">
                       <label className="header">Position Current Job</label>

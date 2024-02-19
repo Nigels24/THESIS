@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { VscChevronDown } from "react-icons/vsc";
-import axios from "axios";
+import axios from "./../configs/axios-base-url";
 import Sidebar from "../components/Sidebar";
 import Dashboardview from "../components/Dashboardview";
 
@@ -137,7 +137,7 @@ const Events = () => {
     }
 
     try {
-      await axios.delete(`http://localhost:3001/events/${id}`);
+      await axios.delete(`/events/${id}`);
       // Assuming your API deletes the event successfully, you can update the state accordingly.
       fetchEventData();
     } catch (err) {
@@ -170,7 +170,7 @@ const Events = () => {
         stime: formattedSelectedTime, // Scheduled time (selected)
       };
 
-      await axios.post("http://localhost:3001/events", newEvent);
+      await axios.post("/events", newEvent);
 
       // Assuming your API returns the newly added event, you can update the state accordingly.
       fetchEventData();
@@ -190,7 +190,7 @@ const Events = () => {
 
   const fetchEventData = async () => {
     try {
-      const res = await axios.get("http://localhost:3001/events");
+      const res = await axios.get("/events");
       setEventData(res.data);
     } catch (err) {
       console.log(err);

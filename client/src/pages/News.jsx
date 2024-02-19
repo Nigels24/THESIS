@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { VscChevronDown } from "react-icons/vsc";
-import axios from "axios";
+import axios from "./../configs/axios-base-url";
 import Sidebar from "../components/Sidebar";
 import Dashboardview from "../components/Dashboardview";
 
@@ -118,7 +118,7 @@ const News = () => {
     }
 
     try {
-      await axios.delete(`http://localhost:3001/news/${id}`);
+      await axios.delete(`/news/${id}`);
       // Assuming your API deletes the News successfully, you can update the state accordingly.
       fetchNewsData();
     } catch (err) {
@@ -150,7 +150,7 @@ const News = () => {
       formData.append("image", imageFile);
 
       // Update the URL to the correct backend endpoint (likely /news)
-      await axios.post("http://localhost:3001/news", formData, {
+      await axios.post("/news", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -173,7 +173,7 @@ const News = () => {
 
   const fetchNewsData = async () => {
     try {
-      const res = await axios.get("http://localhost:3001/news"); // Update the URL to the correct endpoint
+      const res = await axios.get("/news"); // Update the URL to the correct endpoint
       setNewsData(res.data); // Update the state with the fetched data
     } catch (err) {
       console.log(err);

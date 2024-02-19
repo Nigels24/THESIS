@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import axios from "axios";
+import axios from "./../../configs/axios-base-url";
 
 export const useHook = () => {
   const [stories, setStories] = useState();
@@ -41,7 +41,7 @@ export const useHook = () => {
     formData.append("image", image);
 
     try {
-      await axios.post("http://localhost:3001/stories/test", formData, {
+      await axios.post("/stories/test", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -62,7 +62,7 @@ export const useHook = () => {
 
   const handleFetchStories = async () => {
     try {
-      const data = await axios.get("http://localhost:3001/stories/");
+      const data = await axios.get("/stories/");
 
       console.log(data.data);
 

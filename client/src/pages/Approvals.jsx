@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { VscChevronDown } from "react-icons/vsc";
-import axios from "axios";
+import axios from "./../configs/axios-base-url";
 import Sidebar from "../components/Sidebar";
 import Dashboardview from "../components/Dashboardview";
 
@@ -131,10 +131,7 @@ const Approvals = () => {
       };
 
       // Make an API request to add the job opportunity
-      await axios.put(
-        `http://localhost:3001/jobopp/${eventToApprove.id}/jobstatus`,
-        newJobOpp
-      );
+      await axios.put(`/jobopp/${eventToApprove.id}/jobstatus`, newJobOpp);
 
       // Assuming your API returns the newly added job opportunity, you can update the state accordingly.
       fetchJobOppData();
@@ -153,7 +150,7 @@ const Approvals = () => {
       }
 
       // Make an API request to delete the job opportunity
-      // await axios.delete(http://localhost:3001/approvals/${eventToDelete.id});
+      // await axios.delete(/approvals/${eventToDelete.id});
 
       // Assuming your API returns a success response, you can update the state accordingly.
       fetchJobOppData();
@@ -164,7 +161,7 @@ const Approvals = () => {
 
   const fetchJobOppData = async () => {
     try {
-      const res = await axios.get("http://localhost:3001/jobopp/falsejob");
+      const res = await axios.get("/jobopp/falsejob");
       setJobOppData(res.data);
     } catch (err) {
       console.log(err);

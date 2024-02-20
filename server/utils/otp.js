@@ -16,8 +16,8 @@ function generateOTP(length) {
 }
 
 const SECRET = process.env.OTP_SECRET;
-const PASSWORD = "vkmm pqmi rpuq yxgz";
-const EMAIL = "nigesipe@gmail.com";
+const PASSWORD = "unyu pykr eqki cvdc";
+const EMAIL = "bscsalumnitracking@gmail.com";
 
 function setTransporter(email, password) {
   const transporter = nodemailer.createTransport({

@@ -27,6 +27,8 @@ import Logs from "./pages/Logs";
 import PieCompEduc from "./components/PieCompEduc";
 import BarComponent from "./components/BarComponent";
 import LineGraph from "./components/LineGraph";
+import ProtectedRoutes from "./context/ProtectedRoutes";
+import PageNotFound from "./pages/PageNotFound";
 
 function App() {
   return (
@@ -42,7 +44,10 @@ function App() {
           <Route path="/forum" element={<Forums />} />
           <Route path="/approval" element={<Approvals />} />
           <Route path="/logs" element={<Logs />} />
-          <Route path="/Adminpage" element={<Adminpage />} />
+          <Route element={<ProtectedRoutes alloweRoles={["admin"]} />}>
+            <Route path="/Adminpage" element={<Adminpage />} />
+          </Route>
+
           <Route path="/Dashboardview" element={<Dashboardview />} />
           <Route path="/Main" element={<Main />} />
           <Route path="/AAlumnipage" element={<AAlumnipage />} />
@@ -60,6 +65,7 @@ function App() {
           <Route path="/PieEducation" element={<PieCompEduc />} />
           <Route path="/BarComponents" element={<BarComponent />} />
           <Route path="/LineGraph" element={<LineGraph />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </div>
     </BrowserRouter>

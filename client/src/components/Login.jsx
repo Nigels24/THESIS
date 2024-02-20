@@ -4,6 +4,7 @@ import bscslogs from "../assets/bscslogs.png";
 import api from "../configs/axios-base-url";
 import useAuthStore from "../store/auth.store";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { decodeToken } from "../utils/token";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -30,13 +31,21 @@ const Login = () => {
         setUser({ username: email });
 
         console.log(error);
-        navigate("/AProfile");
       }
 
       // Handle the response here, such as setting the token in local storage
       if (response.data) {
         localStorage.setItem("token", response.data.data);
-        navigate("/AProfile");
+
+        const details = decodeToken(localStorage.getItem("token"));
+        const role = details.role;
+
+        if (role === "admin") {
+          navigate("/Adminpage", { replace: true });
+        } else {
+          navigate("/AProfile", { replace: true });
+        }
+        // navigate("/AProfile");
       }
     } catch (error) {
       // Handle any errors here

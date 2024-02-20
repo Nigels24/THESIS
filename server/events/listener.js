@@ -9,8 +9,12 @@ const createLog = async ({
   after = {},
 }) => {
   try {
+    // console.log("i was here", JSON.stringify(after));
+    delete after.token;
+    delete before.token;
+
     const log = await PromiseQuery({
-      query: `INSERT INTO ${TABLES.ACTIVITYLOGS} (after, before, action, description, registration_id, date_created) VALUES (?,?,?,?,?,?)`,
+      query: `INSERT INTO ${TABLES.ACTIVITYLOGS} (\`after\`, \`before\`, action, description, registration_id, date_created) VALUES (?,?,?,?,?,?)`,
       values: [
         JSON.stringify(after),
         JSON.stringify(before),

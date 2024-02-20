@@ -24,9 +24,6 @@ const AAlumniboardView = () => {
       localStorage.removeItem("token");
     }
     navigate("/");
-
-    // Remove the token from local storage
-    // Add any additional logout actions here
   };
 
   return (

@@ -1,13 +1,22 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import image from "../assets/admin.png";
-import { Link } from "react-router-dom";
 
 const Dashboardview = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    if (localStorage.getItem("token")) {
+      localStorage.removeItem("token");
+    }
+    navigate("/");
   };
 
   return (
@@ -30,11 +39,13 @@ const Dashboardview = () => {
 
           {isDropdownOpen && (
             <div className="bg-white border z-20 flex flex-col mt-[80px] space-y-[10px] absolute right-0">
-              {/* <p className="cursor-pointer hover:text-blue-500 font-semibold">
-                Profile
-              </p> */}
               <p className="cursor-pointer hover:text-blue-500 font-semibold">
-                <Link to="/">Logout</Link>
+                <button
+                  className="cursor-pointer hover:text-blue-500 font-semibold"
+                  onClick={handleLogout} // Call the handleLogout function on click
+                >
+                  Logout
+                </button>
               </p>
             </div>
           )}

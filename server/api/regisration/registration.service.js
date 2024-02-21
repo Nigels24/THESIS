@@ -167,7 +167,7 @@ const RegistrationService = {
         values: data,
       });
 
-      console.log("check ang response init update", updateData);
+      console.log("check ang response init update", updateData, "data", data);
 
       if (!updateData) {
         throw new Error("Failed to update user data.");

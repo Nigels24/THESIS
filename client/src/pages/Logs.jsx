@@ -62,15 +62,22 @@ const Logs = () => {
   }, []);
 
   const handleSearch = (searchTerm) => {
-    if (!logs) return; // Add a check to handle undefined logs
+    if (!logs) return;
     if (searchTerm.trim() === "") {
       setFilteredLogs(logs);
     } else {
       const filtered = logs.filter((log) => {
+        // Add checks to ensure log.before exists
+        if (!log.before) return false;
+
         const fullName = `${log.before.lname} ${log.before.fname} ${log.before.mname}`;
-        const initials = `${log.before.fname.charAt(0)}${
-          log.before.mname ? log.before.mname.charAt(0) : ""
-        }${log.before.lname.charAt(0)}`;
+        const fnameInitial =
+          log.before && log.before.fname ? log.before.fname[0] : ""; // Extracts the first character of fname if it exists, otherwise assigns an empty string
+        const mnameInitial =
+          log.before && log.before.mname ? log.before.mname[0] : ""; // Extracts the first character of mname if it exists, otherwise assigns an empty string
+        const lnameInitial =
+          log.before && log.before.lname ? log.before.lname[0] : ""; // Extracts the first character of lname if it exists, otherwise assigns an empty string
+        const initials = `${fnameInitial}${mnameInitial}${lnameInitial}`;
         const year = log.date_created.split("-")[0];
         const time = log.date_modified.toLowerCase();
 
@@ -78,7 +85,7 @@ const Logs = () => {
           fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
           initials.toLowerCase().includes(searchTerm.toLowerCase()) ||
           year.includes(searchTerm) ||
-          time.includes(searchTerm.toLowerCase()) // Filter based on time
+          time.includes(searchTerm.toLowerCase())
         );
       });
 
@@ -190,12 +197,13 @@ const Modal = ({ objectLogs, closeAlumni }) => {
               BEFORE
             </div>
             <div>
-              {log.before.lname} {log.before.fname} {log.before.mname}
+              {log.before && log.before.lname} {log.before && log.before.fname}{" "}
+              {log.before && log.before.mname}
             </div>
-            <div>{log.before.phoneno}</div>
-            <div>{log.before.address}</div>
-            <div>{log.before.employment_status}</div>
-            {log.before.employment_status === "Employed" && (
+            <div>{log.before && log.before.phoneno}</div>
+            <div>{log.before && log.before.address}</div>
+            <div>{log.before && log.before.employment_status}</div>
+            {log.before && log.before.employment_status === "Employed" && (
               <>
                 <div>{log.before.current_job}</div>
                 <div>{log.before.year_current_job}</div>
@@ -204,21 +212,22 @@ const Modal = ({ objectLogs, closeAlumni }) => {
                 <div>{log.before.place_current_job}</div>
               </>
             )}
-            <div>{log.before.engage_studies}</div>
-            <div>{log.before.enroll_studies}</div>
-            <div>{log.before.eligibility}</div>
+            <div>{log.before && log.before.engage_studies}</div>
+            <div>{log.before && log.before.enroll_studies}</div>
+            <div>{log.before && log.before.eligibility}</div>
           </div>
           <div>
             <div className="flex justify-center mt-2 mb-2 text-green-900">
               AFTER
             </div>
             <div>
-              {log.after.lname} {log.after.fname} {log.after.mname}
+              {log.after && log.after.lname} {log.after && log.after.fname}{" "}
+              {log.after && log.after.mname}
             </div>
-            <div>{log.after.phoneno}</div>
-            <div>{log.after.address}</div>
-            <div>{log.after.employment_status}</div>
-            {log.after.employment_status === "Employed" && (
+            <div>{log.after && log.after.phoneno}</div>
+            <div>{log.after && log.after.address}</div>
+            <div>{log.after && log.after.employment_status}</div>
+            {log.after && log.after.employment_status === "Employed" && (
               <>
                 <div>{log.after.current_job}</div>
                 <div>{log.after.year_current_job}</div>
@@ -228,9 +237,9 @@ const Modal = ({ objectLogs, closeAlumni }) => {
               </>
             )}
 
-            <div>{log.after.engage_studies}</div>
-            <div>{log.after.enroll_studies}</div>
-            <div>{log.after.eligibility}</div>
+            <div>{log.after && log.after.engage_studies}</div>
+            <div>{log.after && log.after.enroll_studies}</div>
+            <div>{log.after && log.after.eligibility}</div>
           </div>
         </div>
         <div className="flex justify-center mt-2">

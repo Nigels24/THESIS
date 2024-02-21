@@ -9,6 +9,7 @@ const { TABLES, ENDPOINT } = require("./../../constants");
 const { AuthService } = require("../auth/auth.service");
 const { ErrorException } = require("../../utils/catch-error");
 const { createLog } = require("../../events/listener");
+const { ACTIONS } = require("./../../constants");
 
 const RegistrationService = {
   REGISTER: async (payload) => {
@@ -193,7 +194,6 @@ const RegistrationService = {
 
       const registered = await AuthService.USER_ID({ id });
 
-      console.log("registered", registered);
       if (!registered) {
         throw new ErrorException("ID");
       }

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
-// import tbg1 from "../assets/tbg.png";
 import bscslogs from "../assets/bscslogs.png";
 import wmsulogs from "../assets/wmsulogs.png";
 import { BiSolidChevronLeft, BiSolidChevronRight } from "react-icons/bi";

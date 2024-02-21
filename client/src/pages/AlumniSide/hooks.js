@@ -12,8 +12,7 @@ export const useHooks = () => {
   const MAX_MOBILE_DIGITS = 11;
   const [gender, setGender] = useState("");
 
-  // Inside your useHooks function
-  const [currentAddress, setCurrentAddress] = useState(""); // Ensure this line is present
+  const [currentAddress, setCurrentAddress] = useState("");
 
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [yearGraduated, setYearGraduated] = useState("");
@@ -87,9 +86,9 @@ export const useHooks = () => {
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      console.log("Token value", localStorage.getItem("token"));
+      // console.log("Token value", localStorage.getItem("token"));
       const details = decodeToken(localStorage.getItem("token"));
-      console.log("Decoded value", details);
+      // console.log("Decoded value", details);
 
       setFirstName(details.fname);
       setLastName(details.lname);
@@ -122,7 +121,7 @@ export const useHooks = () => {
     }
   };
 
-  const [updated, setUpdated] = useState(false);
+  const [setUpdated] = useState(false);
 
   const handleUpdateProfile = async (e) => {
     if (!e || !e.preventDefault) {
@@ -146,12 +145,11 @@ export const useHooks = () => {
     formData.append("eligibility", eligibility);
 
     try {
-      // Decode the token to get user information
       const token = localStorage.getItem("token");
       const userDetails = decodeToken(token);
-      // Update the user details using the user's ID from the decoded token
+
       const userId = userDetails.id;
-      // console.log(userId);
+
       const data = await api.put(`/update/${userId}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -184,9 +182,7 @@ export const useHooks = () => {
         }
       }
       setUpdated(true);
-      // window.location.reload();
     } catch (error) {
-      // Handle error appropriately (e.g., show an error message)
       console.error("Error updating profile:", error);
     }
   };

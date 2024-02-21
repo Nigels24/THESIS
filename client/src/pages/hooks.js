@@ -85,8 +85,6 @@ export const useHooks = () => {
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
-      // Define or remove the following line based on your implementation
-      // CreateAlumni(e);
     }
   };
 

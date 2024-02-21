@@ -18,7 +18,6 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", upload.single("image"), (req, res) => {
-  console.log("file", req.file);
   const title = req.body.title;
   const ptime = req.body.ptime;
   const pdate = req.body.pdate;
@@ -48,7 +47,6 @@ app.post("/", upload.single("image"), (req, res) => {
   );
 });
 app.post("/adminjob", upload.single("image"), (req, res) => {
-  console.log("file", req.file);
   const title = req.body.title;
   const ptime = req.body.ptime;
   const pdate = req.body.pdate;

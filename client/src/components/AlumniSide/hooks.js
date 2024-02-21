@@ -35,7 +35,7 @@ export const useHooks = () => {
     lname,
     mname,
     avatar,
-    isDropdownOpen, // Added isDropdownOpen to the return object
+    isDropdownOpen,
     toggleDropdown,
     imageStyles,
   };

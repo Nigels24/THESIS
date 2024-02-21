@@ -1,6 +1,6 @@
 import React from "react";
-import Dashboardview from "./Dashboardview"; // Update this import
-import Sidebar from "./Sidebar"; // Update this import
+import Dashboardview from "./Dashboardview";
+import Sidebar from "./Sidebar";
 import { Outlet } from "react-router-dom";
 import Main from "./Main";
 

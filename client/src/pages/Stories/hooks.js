@@ -64,8 +64,6 @@ export const useHook = () => {
     try {
       const data = await axios.get("/stories/");
 
-      console.log(data.data);
-
       setStories(data.data ?? []);
     } catch (e) {
       console.error(e);

@@ -30,10 +30,9 @@ const BarComponent = () => {
   }, []);
 
   if (loading) {
-    return <p>Loading...</p>; // or some loading indicator
+    return <p>Loading...</p>;
   }
 
-  // Calculate counts for each year
   const years = [
     "2014-2015",
     "2015-2016",

@@ -6,7 +6,7 @@ import Dashboardview from "../components/Dashboardview";
 
 const Approvals = () => {
   const [joboppdata, setJobOppData] = useState([]);
-  const [newJobData, setNewJobData] = useState({
+  const [setNewJobData] = useState({
     title: "",
     description: "",
     ptime: "",
@@ -19,7 +19,6 @@ const Approvals = () => {
   const [isDate, setIsDate] = useState(false);
   const [selectedDate, setSelectedDate] = useState("All");
   const [filteredJob, setFilteredJob] = useState([]);
-  const [imageFile, setImageFile] = useState(null);
 
   const DateOptions = [
     "All",
@@ -149,10 +148,6 @@ const Approvals = () => {
         return;
       }
 
-      // Make an API request to delete the job opportunity
-      // await axios.delete(/approvals/${eventToDelete.id});
-
-      // Assuming your API returns a success response, you can update the state accordingly.
       fetchJobOppData();
     } catch (err) {
       console.error(err);

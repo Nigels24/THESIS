@@ -82,7 +82,6 @@ const Controller = {
 
   Otp: async (req, res) => {
     const { email } = req.body;
-    console.log(req);
 
     try {
       const GENOTP = generateOTP(5);

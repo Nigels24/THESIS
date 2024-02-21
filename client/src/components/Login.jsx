@@ -27,13 +27,12 @@ const Login = () => {
           localStorage.removeItem("token");
         }
         localStorage.setItem("token", response.data);
-        // Update the user state with the email as the username
+
         setUser({ username: email });
 
         console.log(error);
       }
 
-      // Handle the response here, such as setting the token in local storage
       if (response.data) {
         localStorage.setItem("token", response.data.data);
 
@@ -45,10 +44,8 @@ const Login = () => {
         } else {
           navigate("/AProfile", { replace: true });
         }
-        // navigate("/AProfile");
       }
     } catch (error) {
-      // Handle any errors here
       if (error.response) {
         setError(error.response.data.message);
         console.error("An error occurred during login:", error.response.data);

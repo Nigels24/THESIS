@@ -6,29 +6,16 @@ import { useHooks } from "./hooks";
 
 const Alumni = () => {
   const {
-    alumnidata,
-    setAlumniData,
-    newAlumniData,
-    setNewAlumniData,
     isDate,
     setIsDate,
     selectedDate,
-    setSelectedAlumni,
-    filteredAlumni,
-    setFilteredAlumni,
     YearOptions,
-    filterAlumnibyYear,
     selectDate,
     searchTerm,
     setSearchTerm,
     selectedAlumni,
-    setSelectedDate,
     openDetailsModal,
     closeDetailsModal,
-    handleChange,
-    handleSearch,
-    handleKeyPress,
-    fetchAlumniData,
     alumnisToDisplay,
   } = useHooks();
   return (

@@ -19,8 +19,6 @@ const PieComponent = () => {
     if (response === "Employed") {
       openModal();
     } else if (response === "Unemployed") {
-      // Handle "NO" button click
-      // Add your logic here
     }
   };
 
@@ -43,7 +41,7 @@ const PieComponent = () => {
   }, []);
 
   if (loading) {
-    return <p>Loading...</p>; // or some loading indicator
+    return <p>Loading...</p>;
   }
   const totalAlumni = alumnidata.length;
   const AlumniEmployed = alumnidata.filter(

@@ -50,7 +50,7 @@ const AEvents = () => {
       });
 
       if (filtered.length === 0) {
-        return ["None"]; // Set a special value to indicate no events for the selected month
+        return ["None"];
       } else {
         return filtered;
       }
@@ -111,7 +111,6 @@ const AEvents = () => {
   };
   const handleSearch = (searchTerm) => {
     if (searchTerm.trim() === "") {
-      // If the search term is empty, display all events
       setFilteredEvents(eventdata);
     } else {
       const filtered = eventdata.filter((event) =>
@@ -119,7 +118,7 @@ const AEvents = () => {
       );
 
       if (filtered.length === 0) {
-        setFilteredEvents(["NONE"]); // Set a special value to indicate no matching events
+        setFilteredEvents(["NONE"]);
       } else {
         setFilteredEvents(filtered);
       }
@@ -196,7 +195,7 @@ const AEvents = () => {
                 </tr>
               </thead>
               <tbody className="bg-white">
-                {eventsToDisplay.map((event,index) => (
+                {eventsToDisplay.map((event, index) => (
                   <tr
                     key={index}
                     className="border-b border-gray-200 hover:bg-gray-100"

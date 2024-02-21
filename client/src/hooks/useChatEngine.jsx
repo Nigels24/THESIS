@@ -1,8 +1,8 @@
 import axios from "axios";
-import useAuthStore from "../store/auth.store"; // Import the useAuthStore hook
+import useAuthStore from "../store/auth.store";
 
 const useChatEngine = () => {
-  const { user } = useAuthStore(); // Get the user information from useAuthStore
+  const { user } = useAuthStore();
 
   const auth = async () => {
     if (user && user.username) {
@@ -15,7 +15,7 @@ const useChatEngine = () => {
       return await new Promise((resolve, reject) => {
         axios
           .put("https://api.chatengine.io/users/", userData, {
-            headers: { "Private-Key": "24fcfc3d-665a-49e5-99cf-8732842f4067" },
+            headers: { "Private-Key": "514e5567-88c7-434b-b7e3-a7f320ccd64e" },
           })
           .then((res) => {
             const data = res.data;
@@ -27,7 +27,6 @@ const useChatEngine = () => {
           });
       });
     } else {
-      // Handle the case where user information is not available
       return Promise.reject(new Error("User information not available"));
     }
   };

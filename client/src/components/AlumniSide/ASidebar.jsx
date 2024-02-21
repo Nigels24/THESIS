@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { FaTachometerAlt, FaUserGraduate } from "react-icons/fa";
 import { BsCalendar4Event, BsNewspaper } from "react-icons/bs";
 import { CgWorkAlt } from "react-icons/cg";
-import { MdAutoStories, MdOutlineApproval } from "react-icons/md";
+import { MdAutoStories } from "react-icons/md";
 import { AiOutlineWechat } from "react-icons/ai";
 
 const ASidebar = () => {
@@ -81,7 +81,6 @@ const ASidebar = () => {
           </p>
         </div>
       </Link>
-      {/* Other links with similar structure */}
     </div>
   );
 };

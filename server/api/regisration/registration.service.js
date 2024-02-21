@@ -8,6 +8,7 @@ const { generateToken } = require("./../../utils/token");
 const { TABLES, ENDPOINT } = require("./../../constants");
 const { AuthService } = require("../auth/auth.service");
 const { ErrorException } = require("../../utils/catch-error");
+const { createLog } = require("../../events/listener");
 
 const RegistrationService = {
   REGISTER: async (payload) => {
@@ -139,11 +140,15 @@ const RegistrationService = {
       const Image = avatar ? `${ENDPOINT}/uploads/${avatar}` : "";
 
       beginTransactions();
+      /**
+       * Get the before data first to as activity logs
+       */
+      const [beforeRegistered] = await AuthService.USER_ID({ id });
 
       let data = [
         mobileNumber,
         currentAddress,
-        Image,
+        Image ?? "",
         employment_status,
         current_job,
         year_current_job,
@@ -156,29 +161,29 @@ const RegistrationService = {
         id,
       ];
 
-      let queries = "";
-      if (Image) {
-        queries = `UPDATE ${TABLES.REGISTRATION} SET phoneno=?, address=?, Image=?, employment_status=?, current_job=?, year_current_job=?, position_current_job=?, employment_type=?, place_current_job=?, engage_studies=?, enroll_studies=?, eligibility=? WHERE id=?`;
-      } else {
-        data = [
-          mobileNumber,
-          currentAddress,
-          employment_status,
-          current_job,
-          year_current_job,
-          position_current_job,
-          employment_type,
-          place_current_job,
-          furtherStudies,
-          enrollFurtherStudies,
-          eligibility,
-          id,
-        ];
-        queries = `UPDATE ${TABLES.REGISTRATION} SET phoneno=?, address=?, employment_status=?, current_job=?, year_current_job=?, position_current_job=?, employment_type=?, place_current_job=?, engage_studies=?, enroll_studies=?, eligibility=? WHERE id=?`;
-      }
+      // let queries = "";
+      // if (Image) {
+      //   queries = `UPDATE ${TABLES.REGISTRATION} SET phoneno=?, address=?, Image=?, employment_status=?, current_job=?, year_current_job=?, position_current_job=?, employment_type=?, place_current_job=?, engage_studies=?, enroll_studies=?, eligibility=? WHERE id=?`;
+      // } else {
+      //   data = [
+      //     mobileNumber,
+      //     currentAddress,
+      //     employment_status,
+      //     current_job,
+      //     year_current_job,
+      //     position_current_job,
+      //     employment_type,
+      //     place_current_job,
+      //     furtherStudies,
+      //     enrollFurtherStudies,
+      //     eligibility,
+      //     id,
+      //   ];
+      //   queries =
+      // }
 
       const updateData = await PromiseQuery({
-        query: queries,
+        query: `UPDATE ${TABLES.REGISTRATION} SET phoneno=?, address=?, employment_status=?, current_job=?, year_current_job=?, position_current_job=?, employment_type=?, place_current_job=?, engage_studies=?, enroll_studies=?, eligibility=? WHERE id=?`,
         values: data,
       });
 
@@ -190,7 +195,7 @@ const RegistrationService = {
       if (!registered) {
         throw new ErrorException("ID");
       }
-      const { ...tokenPayload } = registered;
+      const [...tokenPayload] = registered;
 
       const accessToken = generateToken({
         ...tokenPayload,
@@ -200,6 +205,18 @@ const RegistrationService = {
       await PromiseQuery({
         query: `UPDATE ${TABLES.REGISTRATION} SET token=? WHERE id=?`,
         values: [accessToken, id],
+      });
+
+      /**
+       * Create activity logs here
+       */
+      const [after] = registered;
+      await createLog({
+        after,
+        before: beforeRegistered,
+        registration_id: id,
+        action: ACTIONS.UPDATE,
+        description: "A user updated his detail.",
       });
 
       commitTransactions();

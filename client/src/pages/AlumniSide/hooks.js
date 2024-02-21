@@ -121,7 +121,7 @@ export const useHooks = () => {
     }
   };
 
-  const [setUpdated] = useState(false);
+  const [updated, setUpdated] = useState(false);
 
   const handleUpdateProfile = async (e) => {
     if (!e || !e.preventDefault) {

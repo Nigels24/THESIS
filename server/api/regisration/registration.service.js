@@ -118,6 +118,7 @@ const RegistrationService = {
   },
   UPDATE: async (payload) => {
     try {
+      beginTransactions();
       const {
         mobileNumber,
         currentAddress,
@@ -140,7 +141,6 @@ const RegistrationService = {
 
       const Image = avatar ? `${ENDPOINT}/uploads/${avatar}` : "";
 
-      beginTransactions();
       /**
        * Get the before data first to as activity logs
        */
@@ -166,8 +166,6 @@ const RegistrationService = {
         query: `UPDATE ${TABLES.REGISTRATION} SET phoneno=?, address=?, employment_status=?, current_job=?, year_current_job=?, position_current_job=?, employment_type=?, place_current_job=?, engage_studies=?, enroll_studies=?, eligibility=? WHERE id=?`,
         values: data,
       });
-
-      console.log("check ang response init update", updateData, "data", data);
 
       if (!updateData) {
         throw new Error("Failed to update user data.");

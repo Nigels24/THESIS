@@ -143,7 +143,7 @@ const RegistrationService = {
       /**
        * Get the before data first to as activity logs
        */
-      const [beforeRegistered] = await AuthService.USER_ID({ id });
+      const beforeRegistered = await AuthService.USER_ID({ id });
 
       let data = [
         mobileNumber,
@@ -210,7 +210,7 @@ const RegistrationService = {
       /**
        * Create activity logs here
        */
-      const [after] = registered;
+      const after = registered;
       await createLog({
         after,
         before: beforeRegistered,

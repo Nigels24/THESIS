@@ -183,7 +183,7 @@ const RegistrationService = {
         avatar: avatar && `${ENDPOINT}/uploads/${avatar}`,
       });
 
-      await PromiseQuery({
+      const updateToken = await PromiseQuery({
         query: `UPDATE ${TABLES.REGISTRATION} SET token=? WHERE id=?`,
         values: [accessToken, id],
       });
@@ -192,13 +192,15 @@ const RegistrationService = {
        * Create activity logs here
        */
       const after = registered;
-      await createLog({
+      const createLogs = await createLog({
         after,
         before: beforeRegistered,
         registration_id: id,
         action: ACTIONS.UPDATE,
         description: "A user updated his detail.",
       });
+
+      await Promise.all([updateData, updateToken, createLogs]);
 
       commitTransactions();
 

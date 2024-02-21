@@ -192,10 +192,12 @@ const RegistrationService = {
       }
 
       const registered = await AuthService.USER_ID({ id });
+
+      console.log("registered", registered);
       if (!registered) {
         throw new ErrorException("ID");
       }
-      const [...tokenPayload] = registered;
+      const { ...tokenPayload } = registered;
 
       const accessToken = generateToken({
         ...tokenPayload,

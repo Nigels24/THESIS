@@ -118,6 +118,7 @@ const RegistrationService = {
   },
   UPDATE: async (payload) => {
     try {
+      beginTransactions();
       const {
         mobileNumber,
         currentAddress,
@@ -140,7 +141,6 @@ const RegistrationService = {
 
       const Image = avatar ? `${ENDPOINT}/uploads/${avatar}` : "";
 
-      beginTransactions();
       /**
        * Get the before data first to as activity logs
        */
@@ -167,8 +167,7 @@ const RegistrationService = {
         values: data,
       });
 
-      console.log("check ang response init update", updateData, "data", data);
-
+      console.log("data", data);
       if (!updateData) {
         throw new Error("Failed to update user data.");
       }
@@ -185,7 +184,7 @@ const RegistrationService = {
         avatar: avatar && `${ENDPOINT}/uploads/${avatar}`,
       });
 
-      await PromiseQuery({
+      const updateToken = await PromiseQuery({
         query: `UPDATE ${TABLES.REGISTRATION} SET token=? WHERE id=?`,
         values: [accessToken, id],
       });
@@ -194,13 +193,15 @@ const RegistrationService = {
        * Create activity logs here
        */
       const after = registered;
-      await createLog({
+      const createLogs = await createLog({
         after,
         before: beforeRegistered,
         registration_id: id,
         action: ACTIONS.UPDATE,
         description: "A user updated his detail.",
       });
+
+      await Promise.all([updateData, updateToken, createLogs]);
 
       commitTransactions();
 

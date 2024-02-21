@@ -162,31 +162,12 @@ const RegistrationService = {
         id,
       ];
 
-      // let queries = "";
-      // if (Image) {
-      //   queries = `UPDATE ${TABLES.REGISTRATION} SET phoneno=?, address=?, Image=?, employment_status=?, current_job=?, year_current_job=?, position_current_job=?, employment_type=?, place_current_job=?, engage_studies=?, enroll_studies=?, eligibility=? WHERE id=?`;
-      // } else {
-      //   data = [
-      //     mobileNumber,
-      //     currentAddress,
-      //     employment_status,
-      //     current_job,
-      //     year_current_job,
-      //     position_current_job,
-      //     employment_type,
-      //     place_current_job,
-      //     furtherStudies,
-      //     enrollFurtherStudies,
-      //     eligibility,
-      //     id,
-      //   ];
-      //   queries =
-      // }
-
       const updateData = await PromiseQuery({
         query: `UPDATE ${TABLES.REGISTRATION} SET phoneno=?, address=?, employment_status=?, current_job=?, year_current_job=?, position_current_job=?, employment_type=?, place_current_job=?, engage_studies=?, enroll_studies=?, eligibility=? WHERE id=?`,
         values: data,
       });
+
+      console.log("check ang response init update", updateData);
 
       if (!updateData) {
         throw new Error("Failed to update user data.");

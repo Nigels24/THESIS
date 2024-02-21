@@ -163,51 +163,49 @@ const RegistrationService = {
       ];
 
       const updateData = await PromiseQuery({
-        query: `UPDATE ${TABLES.REGISTRATION} SET phoneno=?, address=?, employment_status=?, current_job=?, year_current_job=?, position_current_job=?, employment_type=?, place_current_job=?, engage_studies=?, enroll_studies=?, eligibility=? WHERE id=?`,
+        query: `UPDATE ${TABLES.REGISTRATION} SET phoneno=?, address=?,Image=?, employment_status=?, current_job=?, year_current_job=?, position_current_job=?, employment_type=?, place_current_job=?, engage_studies=?, enroll_studies=?, eligibility=? WHERE id=?`,
         values: data,
       });
 
       console.log("data", data, "updateData", updateData);
-      // if (!updateData) {
-      //   throw new Error("Failed to update user data.");
-      // }
+      if (!updateData) {
+        throw new Error("Failed to update user data.");
+      }
 
-      // const registered = await AuthService.USER_ID({ id });
+      const registered = await AuthService.USER_ID({ id });
 
-      // if (!registered) {
-      //   throw new ErrorException("ID");
-      // }
-      // const { ...tokenPayload } = registered;
+      if (!registered) {
+        throw new ErrorException("ID");
+      }
+      const { ...tokenPayload } = registered;
 
-      // const accessToken = generateToken({
-      //   ...tokenPayload,
-      //   avatar: avatar && `${ENDPOINT}/uploads/${avatar}`,
-      // });
+      const accessToken = generateToken({
+        ...tokenPayload,
+        avatar: avatar && `${ENDPOINT}/uploads/${avatar}`,
+      });
 
-      // const updateToken = await PromiseQuery({
-      //   query: `UPDATE ${TABLES.REGISTRATION} SET token=? WHERE id=?`,
-      //   values: [accessToken, id],
-      // });
+      const updateToken = await PromiseQuery({
+        query: `UPDATE ${TABLES.REGISTRATION} SET token=? WHERE id=?`,
+        values: [accessToken, id],
+      });
 
-      // /**
-      //  * Create activity logs here
-      //  */
-      // const after = registered;
-      // const createLogs = await createLog({
-      //   after,
-      //   before: beforeRegistered,
-      //   registration_id: id,
-      //   action: ACTIONS.UPDATE,
-      //   description: "A user updated his detail.",
-      // });
+      /**
+       * Create activity logs here
+       */
+      const after = registered;
+      const createLogs = await createLog({
+        after,
+        before: beforeRegistered,
+        registration_id: id,
+        action: ACTIONS.UPDATE,
+        description: "A user updated his detail.",
+      });
 
-      // await Promise.all([updateData, updateToken, createLogs]);
+      commitTransactions();
 
-      // commitTransactions();
-
-      // return {
-      //   accessToken,
-      // };
+      return {
+        accessToken,
+      };
     } catch (err) {
       rollBackTransactions();
       throw err;

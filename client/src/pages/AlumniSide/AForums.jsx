@@ -11,11 +11,7 @@ const AForums = () => {
 
   const authenticateChatEngine = async () => {
     try {
-      // Authenticate with ChatEngine
       const chatEngineUser = await auth();
-
-      // Update the user state with ChatEngine information if needed
-      // setUser(chatEngineUser); // Uncomment if needed
 
       console.log("ChatEngine authenticated:", chatEngineUser);
     } catch (err) {
@@ -35,8 +31,6 @@ const AForums = () => {
       <div className="basis-[88%] border h-[100vh] overflow-scroll">
         <AAlumniboardView />
         <div>
-          {/* You can display the user information here if needed */}
-          {/* <h1>User: {user.username}</h1> */}
           <ChatsPage username={user.username} />
         </div>
       </div>

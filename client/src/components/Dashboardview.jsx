@@ -42,7 +42,7 @@ const Dashboardview = () => {
               <p className="cursor-pointer hover:text-blue-500 font-semibold">
                 <button
                   className="cursor-pointer hover:text-blue-500 font-semibold"
-                  onClick={handleLogout} // Call the handleLogout function on click
+                  onClick={handleLogout}
                 >
                   Logout
                 </button>

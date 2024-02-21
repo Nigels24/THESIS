@@ -150,7 +150,7 @@ export const useHook = () => {
     toast("Registration Complete");
 
     setTimeout(() => {
-      navigate("/Login"); // Replace "/login" with the path of your login page
+      navigate("/Login");
     }, 3000);
 
     const token = localStorage.getItem("token");

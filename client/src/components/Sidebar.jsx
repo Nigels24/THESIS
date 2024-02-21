@@ -98,7 +98,6 @@ const Sidebar = () => {
           </p>
         </div>
       </Link>
-      {/* Other links with similar structure */}
     </div>
   );
 };

@@ -40,7 +40,7 @@ const AJobOpportunities = () => {
     const selectedMonth = month.toLowerCase();
 
     if (selectedMonth === "all") {
-      return joboppdata; // Show all events
+      return joboppdata;
     } else {
       const filtered = joboppdata.filter((event) => {
         const eventDate = new Date(event.pdate);
@@ -51,7 +51,7 @@ const AJobOpportunities = () => {
       });
 
       if (filtered.length === 0) {
-        return ["None"]; // Set a special value to indicate no events for the selected month
+        return ["None"];
       } else {
         return filtered;
       }
@@ -85,7 +85,6 @@ const AJobOpportunities = () => {
   };
   const handleSearch = (searchTerm) => {
     if (searchTerm.trim() === "") {
-      // If the search term is empty, display all events
       setFilteredJob(joboppdata);
     } else {
       const filtered = joboppdata.filter((event) =>
@@ -93,7 +92,7 @@ const AJobOpportunities = () => {
       );
 
       if (filtered.length === 0) {
-        setFilteredJob(["NONE"]); // Set a special value to indicate no matching events
+        setFilteredJob(["NONE"]);
       } else {
         setFilteredJob(filtered);
       }
@@ -122,14 +121,14 @@ const AJobOpportunities = () => {
 
       const newJobOpp = {
         ...newJobData,
-        ptime: formattedTime, // Posted time (automated)
-        pdate: formattedDate, // Posted date (automated)
+        ptime: formattedTime,
+        pdate: formattedDate,
         img: imageFile,
       };
       const formData = new FormData();
       formData.append("title", newJobData.title);
-      formData.append("ptime", formattedTime); // Use the formatted selected time
-      formData.append("pdate", formattedDate); // Use the formatted current date
+      formData.append("ptime", formattedTime);
+      formData.append("pdate", formattedDate);
       formData.append("description", newJobData.description);
       formData.append("link", newJobData.link);
       formData.append("image", imageFile);
@@ -140,18 +139,18 @@ const AJobOpportunities = () => {
         },
       });
 
-      // Assuming your API returns the newly added event, you can update the state accordingly.
+      
       fetchJobOppData();
       setNewJobData({
         title: "",
-        ptime: "", // Posted time (automated)
-        pdate: "", // Posted date (automated)
-        description: "", // Event description (if needed)
+        ptime: "", 
+        pdate: "", 
+        description: "", 
         link: "",
         img: "",
       });
       setImageFile(null);
-      setIsOpen(false); // Reset form fields after creating an event
+      setIsOpen(false); 
     } catch (err) {
       console.log(err);
     }
@@ -159,7 +158,7 @@ const AJobOpportunities = () => {
   const fetchJobOppData = async () => {
     try {
       const res = await axios.get("/jobopp/alumnijob", {
-        params: { status: true }, // Add this query parameter to filter by status=true
+        params: { status: true }, 
       });
 
       setJobOppData(res.data);
@@ -216,7 +215,7 @@ const AJobOpportunities = () => {
               </div>
             </div>
 
-            {/* Create Job Button */}
+            
             <div className="inline-block">
               <button
                 className="bg-green-500 text-white px-4 py-2 rounded"
@@ -226,7 +225,7 @@ const AJobOpportunities = () => {
               </button>
             </div>
           </div>
-          {/* Create a new Job */}
+          
           {isOpen && (
             <div className="fixed inset-0 flex items-center justify-center z-10 overflow-x-auto m-10">
               <div className="absolute inset-0 bg-black opacity-30"></div>
@@ -260,7 +259,7 @@ const AJobOpportunities = () => {
                     <label className="block mb-1">Link</label>
                     <input
                       type="message"
-                      name="link" // Change "link" to "links"
+                      name="link" 
                       value={joboppdata.link}
                       onChange={handleChange}
                       className="w-full border rounded p-2"
@@ -348,7 +347,7 @@ const AJobOpportunities = () => {
                         View
                       </button>
 
-                      {/* Event Details Modal */}
+                      
                       {selectedJob && (
                         <div className="fixed inset-0 flex items-center justify-center z-10">
                           <div className="bg-white w-1/4 p-4 rounded shadow-lg z-20 ">

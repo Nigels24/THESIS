@@ -83,7 +83,6 @@ const Main = () => {
     fetchAlumniDataBG();
   }, []);
 
-  // Calculate counts for each year
   const years = [
     "2014-2015",
     "2015-2016",
@@ -187,7 +186,7 @@ const Main = () => {
     fetchAlumniData();
   }, []);
   if (loading) {
-    return <p>Loading...</p>; // or some loading indicator
+    return <p>Loading...</p>;
   }
 
   const AlumniEmployed = alumnidata.filter(
@@ -559,9 +558,6 @@ const Main = () => {
         <h1 className="text-zinc-300 text-[28px] leading-[34px] font-normal cursor-pointer w-auto">
           Dashboard
         </h1>
-        {/* <button className="bg-green-700 h-[32px] rounded-[3px] text-white flex items-center justify-center px-[15px] cursor-pointer">
-          Generate Report
-        </button> */}
       </div>
       <div className="grid grid-cols-4 gap-[10px] mt-[25px] pb-[15px] h-24">
         <div className="rounded-lg bg-[#00C49F] flex flex-col border border-[#b63d95c4] w-auto mt-2 cursor-pointer hover:shadow-lg transform hover:scale-103 transition duration-300 ease-out">

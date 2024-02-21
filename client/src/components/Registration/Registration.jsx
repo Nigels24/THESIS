@@ -13,8 +13,6 @@ const Registration = () => {
     showFormFirst,
     employment_status,
     setemploymentstatus,
-    // jobDuration,
-    // setJobDuration,
     employment_type,
     setemployment_type,
     furtherStudies,
@@ -89,8 +87,8 @@ const Registration = () => {
                       type="text"
                       placeholder="Enter your lastname"
                       required
-                      value={lastName} // Restore the value from state
-                      onChange={(e) => setLastName(e.target.value)} // Update the state when the input changes
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
                     />
                   </div>
                   <div className="input-fields">
@@ -99,8 +97,8 @@ const Registration = () => {
                       type="text"
                       placeholder="Enter your firstname"
                       required
-                      value={firstName} // Restore the value from state
-                      onChange={(e) => setFirstName(e.target.value)} // Update the state when the input changes
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
                     />
                   </div>
                   <div className="input-fields">
@@ -108,8 +106,8 @@ const Registration = () => {
                     <input
                       type="text"
                       placeholder="Enter your middlename"
-                      value={middleName} // Restore the value from state
-                      onChange={(e) => setMiddleName(e.target.value)} // Update the state when the input changes
+                      value={middleName}
+                      onChange={(e) => setMiddleName(e.target.value)}
                     />
                   </div>
 
@@ -140,8 +138,8 @@ const Registration = () => {
                       type="text"
                       placeholder="Brgy.; City/Municipality;Province"
                       required
-                      value={currentAddress} // Restore the value from state
-                      onChange={(e) => setCurrentAddress(e.target.value)} // Update the state when the input changes
+                      value={currentAddress}
+                      onChange={(e) => setCurrentAddress(e.target.value)}
                     />
                   </div>
                   <div className="input-fields">
@@ -149,8 +147,8 @@ const Registration = () => {
                     <input
                       type="date"
                       required
-                      value={dateOfBirth} // Restore the value from state
-                      onChange={(e) => setDateOfBirth(e.target.value)} // Update the state when the input changes
+                      value={dateOfBirth}
+                      onChange={(e) => setDateOfBirth(e.target.value)}
                     />
                   </div>
                   <div className="input-fields">
@@ -160,7 +158,6 @@ const Registration = () => {
                       onChange={(e) => setYearGraduated(e.target.value)}
                       required
                     >
-                      {/* ayaw sa hilabti */}
                       <option value="">Select Year</option>
                       <option value="2014-2015">2014-2015</option>
                       <option value="2015-2016">2015-2016</option>
@@ -190,7 +187,7 @@ const Registration = () => {
                         required
                         value={email}
                         onChange={handleEmailChange}
-                        className={isEmailValid ? "" : "border-red-500"} // Add border color based on email validation
+                        className={isEmailValid ? "" : "border-red-500"}
                       />
                       {!isEmailValid && (
                         <span className="text-red-500 ">
@@ -209,7 +206,7 @@ const Registration = () => {
                           value={password}
                           onChange={handlePasswordChange}
                           className={isPasswordValid ? "" : "border-red-500"}
-                          required // Add border color based on password validation
+                          required
                         />
                       </div>
                       {!isPasswordValid && (
@@ -232,7 +229,6 @@ const Registration = () => {
                           className={
                             password === confirmPassword ? "" : "border-red-500"
                           }
-                          // Add border color if passwords don't match
                         />
                         <span
                           className="absolute right-10 top-4 cursor-pointer"
@@ -402,7 +398,7 @@ const Registration = () => {
                           onChange={(e) => {
                             seteligibility(e.target.value);
                             if (e.target.value !== "Other") {
-                              setOtherEligibilityDescription(""); // Clear custom input if not "Other"
+                              setOtherEligibilityDescription("");
                             }
                           }}
                           required
@@ -527,7 +523,7 @@ const Registration = () => {
                           onChange={(e) => {
                             seteligibility(e.target.value);
                             if (e.target.value !== "Other") {
-                              setOtherEligibilityDescription(""); // Clear custom input if not "Other"
+                              setOtherEligibilityDescription("");
                             }
                           }}
                           required

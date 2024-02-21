@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "../../components/Registration/form.css";
 import ASidebar from "../../components/AlumniSide/ASidebar";
 import AAlumniboardView from "../../components/AlumniSide/AAlumniboardView";
@@ -52,7 +52,6 @@ const AProfile = () => {
 
   useEffect(() => {
     if (updated) {
-      // Fetch the updated user details
       mobileNumber("");
       setCurrentAddress("");
       setemploymentstatus("");
@@ -68,31 +67,6 @@ const AProfile = () => {
       handleUpdateProfile();
     }
   }, [updated, handleUpdateProfile]);
-
-  console.log(
-    "profilePic value",
-    firstName,
-    lastName,
-    middleName,
-    mobileNumber,
-    gender,
-    currentAddress,
-    dateOfBirth,
-    yearGraduated,
-    setemploymentstatus,
-    employment_status,
-    current_job,
-    year_current_job,
-    jobDuration,
-    position_current_job,
-    employment_type,
-    place_current_job,
-    furtherStudies,
-    enrollFurtherStudies,
-    Image
-  );
-
-  console.log("image", Image);
 
   return (
     <div className="flex">
@@ -297,7 +271,7 @@ const AProfile = () => {
                                 onChange={(e) => {
                                   seteligibility(e.target.value);
                                   if (e.target.value !== "Other") {
-                                    setOtherEligibilityDescription(""); // Clear custom input if not "Other"
+                                    setOtherEligibilityDescription("");
                                   }
                                 }}
                               >
@@ -419,7 +393,7 @@ const AProfile = () => {
                                 onChange={(e) => {
                                   setEligibilityAcquired(e.target.value);
                                   if (e.target.value !== "Other") {
-                                    setOtherEligibilityDescription(""); // Clear custom input if not "Other"
+                                    setOtherEligibilityDescription("");
                                   }
                                 }}
                               >

@@ -6,29 +6,16 @@ import { useHooks } from "../hooks";
 
 const AAlumni = () => {
   const {
-    alumnidata,
-    setAlumniData,
-    newAlumniData,
-    setNewAlumniData,
     isDate,
     setIsDate,
     selectedDate,
-    setSelectedAlumni,
-    filteredAlumni,
-    setFilteredAlumni,
     YearOptions,
-    filterAlumnibyYear,
     selectDate,
     searchTerm,
     setSearchTerm,
     selectedAlumni,
-    setSelectedDate,
     openDetailsModal,
     closeDetailsModal,
-    handleChange,
-    handleSearch,
-    handleKeyPress,
-    fetchAlumniData,
     alumnisToDisplay,
   } = useHooks();
   return (
@@ -91,9 +78,8 @@ const AAlumni = () => {
                     className="border-b border-gray-200 hover:bg-gray-100"
                   >
                     <td className="px-6 py-4">
-                      {/* Display the image using an img tag */}
                       <img
-                        src={alumni.Image} // Update with the actual property name in your data
+                        src={alumni.Image}
                         alt={`Image of ${alumni.fname} ${alumni.lname}`}
                         className="w-10 h-10 rounded-full"
                       />
@@ -115,9 +101,7 @@ const AAlumni = () => {
                             <h2 className="text-lg font-semibold mb-2 text-center">
                               Alumni Details
                             </h2>
-                            {/* <div className="mb-4 flaot">
-                              <strong>Picture</strong>Image
-                            </div> */}
+
                             <div className="mb-4 ">
                               <strong>Name:</strong>
                               {selectedAlumni.lname} {selectedAlumni.fname}{" "}

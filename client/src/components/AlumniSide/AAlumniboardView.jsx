@@ -3,8 +3,6 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useHooks } from "./hooks";
 
-// ... (other imports and code)
-
 const AAlumniboardView = () => {
   const {
     fname,
@@ -30,10 +28,7 @@ const AAlumniboardView = () => {
     <div className="flex items-center justify-between h-[70px] shadow-lg lg:px-[25px] px-[20px]">
       <div className="flex items-center rounded-[5px]"></div>
       <div className="flex items-center gap-[15px] relative">
-        <div className="flex items-center gap-[25px] border-r-[1px] pr-[25px]">
-          {/* <FaRegBell />
-          <FaEnvelope /> */}
-        </div>
+        <div className="flex items-center gap-[25px] border-r-[1px] pr-[25px]"></div>
         <div className="flex items-center gap-[15px] relative">
           <p>
             {fname} {mname} {lname}
@@ -61,7 +56,7 @@ const AAlumniboardView = () => {
               </Link>
               <button
                 className="cursor-pointer hover:text-blue-500 font-semibold"
-                onClick={handleLogout} // Call the handleLogout function on click
+                onClick={handleLogout}
               >
                 Logout
               </button>

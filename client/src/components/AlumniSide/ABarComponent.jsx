@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const ABarComponent = () => {
-  return (
-    <div>ABarComponent</div>
-  )
-}
+  return <div>ABarComponent</div>;
+};
 
-export default ABarComponent
+export default ABarComponent;

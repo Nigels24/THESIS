@@ -19,8 +19,6 @@ const PieCompEduc = () => {
     if (response === "YES") {
       openModal();
     } else if (response === "NO") {
-      // Handle "NO" button click
-      // Add your logic here
     }
   };
 
@@ -133,7 +131,6 @@ const PieCompEduc = () => {
       </div>
       {isModalOpen && (
         <div>
-          {/* Modal content */}
           <div>
             <b className=" font-medium">Total Alumni</b>
             <span className=" float-right">{totalAlumni}</span>{" "}

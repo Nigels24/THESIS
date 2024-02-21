@@ -6,7 +6,7 @@ import AAlumniboardView from "../../components/AlumniSide/AAlumniboardView";
 
 const ANews = () => {
   const [newsdata, setNewsData] = useState([]);
-  const [newsdatalist, setNewsDatalist] = useState({
+  const [setNewsDatalist] = useState({
     title: "",
     ptime: "",
     pdate: "",
@@ -37,7 +37,7 @@ const ANews = () => {
     const selectedMonth = month.toLowerCase();
 
     if (selectedMonth === "all") {
-      return newsdata; // Show all news
+      return newsdata;
     } else {
       const filtered = newsdata.filter((dnews) => {
         const newsDate = new Date(dnews.pdate);
@@ -48,7 +48,7 @@ const ANews = () => {
       });
 
       if (filtered.length === 0) {
-        return ["None"]; // Set a special value to indicate no news for the selected month
+        return ["None"];
       } else {
         return filtered;
       }
@@ -109,8 +109,8 @@ const ANews = () => {
 
   const fetchNewsData = async () => {
     try {
-      const res = await axios.get("/news"); // Update the URL to the correct endpoint
-      setNewsData(res.data); // Update the state with the fetched data
+      const res = await axios.get("/news");
+      setNewsData(res.data);
     } catch (err) {
       console.log(err);
     }

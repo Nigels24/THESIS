@@ -93,7 +93,6 @@ const RegistrationService = {
 
         const { password: createdPassword, ...tokenPayload } = registration;
 
-        console.log(tokenPayload);
         const accessToken = generateToken({
           ...tokenPayload,
           avatar: avatarPath,

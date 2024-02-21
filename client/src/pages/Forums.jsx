@@ -11,11 +11,7 @@ const Forums = () => {
 
   const authenticateChatEngine = async () => {
     try {
-      // Authenticate with ChatEngine
       const chatEngineUser = await auth();
-
-      // Update the user state with ChatEngine information if needed
-      // setUser(chatEngineUser); // Uncomment if needed
 
       console.log("ChatEngine authenticated:", chatEngineUser);
     } catch (err) {

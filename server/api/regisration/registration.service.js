@@ -167,7 +167,6 @@ const RegistrationService = {
         values: data,
       });
 
-      console.log("data", data, "updateData", updateData);
       if (!updateData) {
         throw new Error("Failed to update user data.");
       }

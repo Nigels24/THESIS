@@ -52,7 +52,9 @@ export const useHook = () => {
     const inputValue = e.target.value;
     setEmail(inputValue);
 
-    const isValid = inputValue.includes("@") && inputValue.includes(".com");
+    const isValid =
+      inputValue.includes("@") &&
+      (inputValue.includes(".com") || inputValue.includes(".edu.ph"));
     setIsEmailValid(isValid);
   };
 

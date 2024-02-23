@@ -623,7 +623,7 @@ const Main = () => {
         <div className="basis-[70%] border bg-white shadow-md cursor-pointer rounded-[4px] w-auto">
           <div className="bg-zinc-100 flex items-center justify-between py-[15px] px-[20px] border-b-[1px] border-zinc-200 mb-[20px]">
             <h2 className="text-green-700 text-[16px] leading-[19px] font-bold">
-              Total Graduates per Academic Year
+              Total Registered Alumni in the System
             </h2>
             <FaEllipsisV color="gray" className="cursor-pointer" />
           </div>

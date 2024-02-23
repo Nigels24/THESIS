@@ -149,7 +149,7 @@ const RegistrationService = {
       let data = [
         mobileNumber,
         currentAddress,
-        Image ?? "",
+        Image,
         employment_status,
         current_job,
         year_current_job,
@@ -161,9 +161,27 @@ const RegistrationService = {
         eligibility,
         id,
       ];
+      let query = `UPDATE ${TABLES.REGISTRATION} SET phoneno=?, address=?,Image=?, employment_status=?, current_job=?, year_current_job=?, position_current_job=?, employment_type=?, place_current_job=?, engage_studies=?, enroll_studies=?, eligibility=? WHERE id=?`;
 
+      if (Image.trim().length === 0) {
+        data = [
+          mobileNumber,
+          currentAddress,
+          employment_status,
+          current_job,
+          year_current_job,
+          position_current_job,
+          employment_type,
+          place_current_job,
+          furtherStudies,
+          enrollFurtherStudies,
+          eligibility,
+          id,
+        ];
+        query = `UPDATE ${TABLES.REGISTRATION} SET phoneno=?, address=?, employment_status=?, current_job=?, year_current_job=?, position_current_job=?, employment_type=?, place_current_job=?, engage_studies=?, enroll_studies=?, eligibility=? WHERE id=?`;
+      }
       const updateData = await PromiseQuery({
-        query: `UPDATE ${TABLES.REGISTRATION} SET phoneno=?, address=?,Image=?, employment_status=?, current_job=?, year_current_job=?, position_current_job=?, employment_type=?, place_current_job=?, engage_studies=?, enroll_studies=?, eligibility=? WHERE id=?`,
+        query: query,
         values: data,
       });
 

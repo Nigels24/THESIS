@@ -147,6 +147,7 @@ export const useHooks = () => {
     try {
       const token = localStorage.getItem("token");
       const userDetails = decodeToken(token);
+      console.log(userDetails);
 
       const userId = userDetails.id;
 

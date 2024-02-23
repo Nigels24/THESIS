@@ -39,7 +39,13 @@ function setMailOptions(title, generatedOTP, to_email, from_email, subject) {
     },
     to: to_email,
     subject: subject,
-    text: `Please don't share your OTP${generatedOTP}`,
+    html: `
+      <p>Dear User,</p>
+      <p>Please find below your One-Time Password (OTP) for BSCS ALUMNI TRACKING SYSTEM:</p>
+      <p><strong>OTP:</strong> ${generatedOTP}</p>
+      <p>This OTP will expire in 5 minutes. Please do not share it with anyone.</p>
+      <p>Best regards,<br>${title}</p>
+    `,
   };
   return mailOptions;
 }

@@ -15,23 +15,43 @@ function generateOTP(length) {
   return otp;
 }
 
-const SECRET = process.env.OTP_SECRET;
-const PASSWORD = "unyu pykr eqki cvdc";
-const EMAIL = "bscsalumnitracking@gmail.com";
+const SECRET = "butterlfy";
 
-function setTransporter(email, password) {
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: email,
-      pass: password,
-    },
-  });
+let transporter = nodemailer.createTransport({
+  service: "gmail",
+  port: 465,
+  secure: true,
+  auth: {
+    user: "bscsalumnitracking@gmail.com",
+    pass: "gtznnwnvmeyuedoo",
+  },
+});
 
-  return transporter;
-}
+// test transporter b4 nimu e start ilisi ang baseurl sa localhost
+transporter.verify((error, success) => {
+  if (error) {
+    console.log("Email:",error);
+  } else {
+    console.log("Server is ready to take messages");
+    console.log(success);
+  }
+});
 
-function setMailOptions(title, generatedOTP, to_email, from_email, subject) {
+const sendEmail = async (mailOptions) => {
+  try {
+    await transporter.sendMail(mailOptions);
+  } catch (error) {
+    throw error;
+  }
+};
+
+function setMailOptions(
+  title,
+  generatedOTP,
+  to_email,
+  subject,
+  from_email = process.env.AUTH_EMAIL
+) {
   const mailOptions = {
     from: {
       name: title,
@@ -51,10 +71,8 @@ function setMailOptions(title, generatedOTP, to_email, from_email, subject) {
 }
 
 module.exports = {
-  EMAIL,
   SECRET,
   generateOTP,
-  PASSWORD,
-  setTransporter,
   setMailOptions,
+  sendEmail,
 };

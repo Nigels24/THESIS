@@ -73,6 +73,9 @@ const PieCompEduc = () => {
   const AlumniOthers = alumnidata.filter(
     (item) => item.enroll_studies === "Other"
   ).length;
+  const NotApplicable = alumnidata.filter(
+    (item) => item.enroll_studies === "Not Applicable"
+  ).length;
 
   const COLORS = ["LightGreen", "Red"];
 
@@ -180,13 +183,22 @@ const PieCompEduc = () => {
           <div>
             <b className=" font-medium">Others</b>
             <span className=" float-right">{AlumniOthers}</span>
-            <h2>Others</h2>
             <Progress
               percent={((AlumniOthers / totalAlumni) * 100).toFixed(0)}
               status="active"
               strokeColor="#00C49F"
             />
           </div>
+          <div>
+            <b className=" font-medium">Not Applicable</b>
+            <span className=" float-right">{NotApplicable}</span>
+            <Progress
+              percent={((NotApplicable / totalAlumni) * 100).toFixed(0)}
+              status="active"
+              strokeColor="#00C49F"
+            />
+          </div>
+
           <button onClick={closeModal}>
             <FaTimes />
           </button>

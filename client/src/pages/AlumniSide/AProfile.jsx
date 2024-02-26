@@ -227,9 +227,6 @@ const AProfile = () => {
                                   value={enrollFurtherStudies}
                                   onChange={(e) => {
                                     setEnrollFurtherStudies(e.target.value);
-                                    if (e.target.value !== "Other") {
-                                      setOtherEnrollDescription(""); // Clear custom input if not "Other"
-                                    }
                                   }}
 
                                   // Add the disabled attribute based on the state
@@ -262,6 +259,21 @@ const AProfile = () => {
                                   />
                                 )}
                               </div>
+                            )}
+
+                            {furtherStudies === "NO" && (
+                                <select
+                                  value={enrollFurtherStudies}
+                                  onChange={(e) => {
+                                    setEnrollFurtherStudies(e.target.value);
+                                  }}
+
+                                  // Add the disabled attribute based on the state
+                                >
+                                  <option value="Not Applicable">
+                                    Not Applicable
+                                  </option>
+                                </select>
                             )}
 
                             <div className="input-fields">
@@ -386,6 +398,20 @@ const AProfile = () => {
                                 )}
                               </div>
                             )}
+                            {furtherStudies === "NO" && (
+                              <select
+                                value={enrollFurtherStudies}
+                                onChange={(e) =>
+                                  setEnrollFurtherStudies(e.target.value)
+                                }
+                                disabled
+                              >
+                                <option value="Not Applicable">
+                                  Not Applicable
+                                </option>
+                              </select>
+                            )}
+
                             <div className="input-fields">
                               <label>Eligibility Acquired (if any)</label>
                               <select

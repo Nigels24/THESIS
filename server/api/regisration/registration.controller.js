@@ -3,12 +3,10 @@ const { RegistrationService } = require("./registration.service");
 
 const { REGISTER, UPDATE } = RegistrationService;
 const {
-  PASSWORD,
   SECRET,
   generateOTP,
   setMailOptions,
-  setTransporter,
-  EMAIL,
+  sendEmail,
 } = require("../../utils/otp.js");
 
 const jwt = require("jsonwebtoken");
@@ -87,29 +85,23 @@ const Controller = {
       const GENOTP = generateOTP(5);
       console.log(GENOTP);
       console.log(email);
-      const OTP_KEY = jwt.sign({ email: email, otp: GENOTP }, SECRET, {
+      const butterfly = jwt.sign({ email: email, otp: GENOTP }, SECRET, {
         expiresIn: "5m",
       });
 
-      const transporter = setTransporter(EMAIL, PASSWORD);
       const mailOptions = setMailOptions(
         "ALUMNI TRACKING SYSTEM",
         GENOTP,
         email,
-        EMAIL,
         "no reply"
       );
 
-      const info = await transporter.sendMail(mailOptions);
+      await sendEmail(mailOptions);
 
-      if (info.messageId) {
-        res.json({
-          message: "Please check email LOL!",
-          key: OTP_KEY,
-        });
-      } else {
-        res.sendStatus(422);
-      }
+      res.json({
+        message: "Please check email LOL!",
+        key: butterfly,
+      });
     } catch (e) {
       res.json({
         message: `Ops error: ${e}`,

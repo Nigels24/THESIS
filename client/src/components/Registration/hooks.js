@@ -179,6 +179,7 @@ export const useHook = () => {
         "Content-Type": "multipart/form-data",
       },
     });
+    console.log(data);
 
     sessionStorage.setItem("key", data.data.key);
     const key = sessionStorage.getItem("key");

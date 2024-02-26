@@ -4,7 +4,7 @@ const { db } = require("../../configs/db");
 const app = Router();
 
 app.get("/", (req, res) => {
-  const q = "SELECT * FROM registration";
+  const q = "SELECT * FROM alumnidata";
   db.query(q, (err, data) => {
     if (err) {
       console.error("Error fetching events:", err);
@@ -19,7 +19,7 @@ app.put("/:id", (req, res) => {
   const { lname, fname, mname, yeargrad } = req.body;
 
   const q =
-    "UPDATE registration SET lname = ?, fname = ?, mname = ?, yeargrad = ? WHERE id = ?";
+    "UPDATE alumnidata SET lname = ?, fname = ?, mname = ?, yeargrad = ? WHERE id = ?";
   const values = [lname, fname, mname, yeargrad, id];
 
   db.query(q, values, (err, data) => {
@@ -34,7 +34,7 @@ app.put("/:id", (req, res) => {
 app.post("/", (req, res) => {
   const { lname, fname, mname, yeargrad } = req.body;
   const q =
-    "INSERT INTO registration (lname, fname, mname, yeargrad) VALUES (?, ?, ?, ?)";
+    "INSERT INTO alumnidata (lname, fname, mname, yeargrad) VALUES (?, ?, ?, ?)";
   const values = [lname, fname, mname, yeargrad];
 
   db.query(q, values, (err, data) => {
@@ -48,7 +48,7 @@ app.post("/", (req, res) => {
 
 app.delete("/:id", (req, res) => {
   const id = req.params.id;
-  const q = "DELETE FROM registration WHERE id = ?";
+  const q = "DELETE FROM alumnidata WHERE id = ?";
 
   db.query(q, [id], (err, data) => {
     if (err) {

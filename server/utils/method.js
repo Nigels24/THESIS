@@ -20,6 +20,7 @@ const Method = {
           description: "A user updated his detail.",
         });
       }
+      
     } catch (err) {
       throw err;
     }

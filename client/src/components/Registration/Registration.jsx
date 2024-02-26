@@ -390,6 +390,17 @@ const Registration = () => {
                           )}
                         </div>
                       )}
+                      {furtherStudies === "NO" && (
+                        <select
+                          value="Not Applicable"
+                          onChange={(e) =>
+                            setEnrollFurtherStudies("Not Applicable")
+                          }
+                          disabled
+                        >
+                          <option value="Not Applicable">Not Applicable</option>
+                        </select>
+                      )}
 
                       <div className="input-fields">
                         <label>Eligibility Acquired (if any)</label>
@@ -515,6 +526,17 @@ const Registration = () => {
                             />
                           )}
                         </div>
+                      )}
+                      {furtherStudies === "NO" && (
+                        <select
+                          value="Not Applicable"
+                          onChange={(e) =>
+                            setEnrollFurtherStudies("Not Applicable")
+                          }
+                          disabled
+                        >
+                          <option value="Not Applicable">Not Applicable</option>
+                        </select>
                       )}
                       <div className="input-fields">
                         <label>Eligibility Acquired (if any)</label>

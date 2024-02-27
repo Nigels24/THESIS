@@ -30,7 +30,7 @@ let transporter = nodemailer.createTransport({
 // test transporter b4 nimu e start ilisi ang baseurl sa localhost
 transporter.verify((error, success) => {
   if (error) {
-    console.log("Email:",error);
+    console.log("Email:", error);
   } else {
     console.log("Server is ready to take messages");
     console.log(success);

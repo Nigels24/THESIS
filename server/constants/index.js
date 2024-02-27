@@ -12,7 +12,6 @@ module.exports = {
     NEWSDATA: "newsdata",
     REGISTRATION: "registration",
     STORIES: "stories",
-    ALUMNIDATA: "alumnidata",
   },
 
   ENDPOINT: "http://localhost:3001",

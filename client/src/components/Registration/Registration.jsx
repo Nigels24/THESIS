@@ -352,15 +352,16 @@ const Registration = () => {
                         <div className="input-fields">
                           <label>Enroll Further Studies?</label>
                           <select
-                            value={enrollFurtherStudies}
+                            value={furtherStudies}
                             onChange={(e) => {
-                              setEnrollFurtherStudies(e.target.value);
-                              if (e.target.value !== "Other") {
-                                setOtherEnrollDescription(""); // Clear custom input if not "Other"
+                              const value = e.target.value;
+                              setFurtherStudies(value); // Set furtherStudies value
+                              if (value === "NO") {
+                                setEnrollFurtherStudies("Not Applicable"); // Set enrollFurtherStudies to "Not Applicable" when "NO" is selected
+                                // Send "Not Applicable" to the database or any function to update the database
+                                // Example: updateDatabase("Not Applicable");
                               }
                             }}
-                            required
-                            // Add the disabled attribute based on the state
                           >
                             <option value="With Doctoral Units">
                               With Doctoral Units
@@ -475,10 +476,16 @@ const Registration = () => {
                       <div className="input-fields">
                         <label>Engage in further Studies?</label>
                         <select
+                          value={furtherStudies}
                           onChange={(e) => {
-                            setFurtherStudies(e.target.value);
+                            const value = e.target.value;
+                            setFurtherStudies(value); // Set furtherStudies value
+                            if (value === "NO") {
+                              setEnrollFurtherStudies("Not Applicable"); // Set enrollFurtherStudies to "Not Applicable" when "NO" is selected
+                              // Send "Not Applicable" to the database or any function to update the database
+                              // Example: updateDatabase("Not Applicable");
+                            }
                           }}
-                          required
                         >
                           <option value="YES">YES</option>
                           <option value="NO">NO</option>

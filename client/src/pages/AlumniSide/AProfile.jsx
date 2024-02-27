@@ -210,10 +210,17 @@ const AProfile = () => {
                             </div>
                             <div className="input-fields">
                               <label>Engage in further Studies?</label>
+
                               <select
                                 value={furtherStudies}
                                 onChange={(e) => {
-                                  setFurtherStudies(e.target.value);
+                                  const value = e.target.value;
+                                  setFurtherStudies(value); // Set furtherStudies value
+                                  if (value === "NO") {
+                                    setEnrollFurtherStudies("Not Applicable"); // Set enrollFurtherStudies to "Not Applicable" when "NO" is selected
+                                    // Send "Not Applicable" to the database or any function to update the database
+                                    // Example: updateDatabase("Not Applicable");
+                                  }
                                 }}
                               >
                                 <option value="YES">YES</option>
@@ -260,20 +267,18 @@ const AProfile = () => {
                                 )}
                               </div>
                             )}
-
                             {furtherStudies === "NO" && (
-                                <select
-                                  value={enrollFurtherStudies}
+                              <div className="input-fields">
+                                <label>Enroll Further Studies?</label>
+                                <label
+                                  value={"Not Applicable"} // Bind value to enrollFurtherStudies
                                   onChange={(e) => {
-                                    setEnrollFurtherStudies(e.target.value);
-                                  }}
-
-                                  // Add the disabled attribute based on the state
+                                    setEnrollFurtherStudies("Not Applicable");
+                                  }} // Disable the select element
                                 >
-                                  <option value="Not Applicable">
-                                    Not Applicable
-                                  </option>
-                                </select>
+                                  Not Applicable
+                                </label>
+                              </div>
                             )}
 
                             <div className="input-fields">
@@ -348,10 +353,16 @@ const AProfile = () => {
                             <div className="input-fields">
                               <label>Engage in further Studies?</label>
                               <select
+                                value={furtherStudies}
                                 onChange={(e) => {
-                                  setFurtherStudies(e.target.value);
+                                  const value = e.target.value;
+                                  setFurtherStudies(value); // Set furtherStudies value
+                                  if (value === "NO") {
+                                    setEnrollFurtherStudies("Not Applicable"); // Set enrollFurtherStudies to "Not Applicable" when "NO" is selected
+                                    // Send "Not Applicable" to the database or any function to update the database
+                                    // Example: updateDatabase("Not Applicable");
+                                  }
                                 }}
-                                required
                               >
                                 <option value="YES">YES</option>
                                 <option value="NO">NO</option>
@@ -399,17 +410,17 @@ const AProfile = () => {
                               </div>
                             )}
                             {furtherStudies === "NO" && (
-                              <select
-                                value={enrollFurtherStudies}
-                                onChange={(e) =>
-                                  setEnrollFurtherStudies(e.target.value)
-                                }
-                                disabled
-                              >
-                                <option value="Not Applicable">
+                              <div className="input-fields">
+                                <label>Enroll Further Studies?</label>
+                                <label
+                                  value={"Not Applicable"} // Bind value to enrollFurtherStudies
+                                  onChange={(e) => {
+                                    setEnrollFurtherStudies("Not Applicable");
+                                  }} // Disable the select element
+                                >
                                   Not Applicable
-                                </option>
-                              </select>
+                                </label>
+                              </div>
                             )}
 
                             <div className="input-fields">

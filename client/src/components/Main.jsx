@@ -17,7 +17,6 @@ import PieComponent from "./PieComponent";
 import { Progress } from "antd";
 import LineGraph from "./LineGraph";
 import api from "../configs/axios-base-url";
-import Axios from "../configs/axios-base-url";
 import BarComponent from "./BarComponent";
 import PieCompEduc from "./PieCompEduc";
 
@@ -563,7 +562,7 @@ const Main = () => {
         <div className="rounded-lg bg-[#00C49F] flex flex-col border border-[#b63d95c4] w-auto mt-2 cursor-pointer hover:shadow-lg transform hover:scale-103 transition duration-300 ease-out">
           <div className="w-full items-center justify-between">
             <h2 className="text-purple-700 text-xs sm:font-size-[5px] md:text-lg lg:text-xl xl:text-2xl leading-[17px] font-bold text-center">
-              ALUMNI
+              REGISTERED ALUMNI
             </h2>
             <h3 className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl leading-[24px] font-bold text-zinc-600 text-center mt-2 sm:mt-0">
               {alumnidata.length}
@@ -623,9 +622,8 @@ const Main = () => {
         <div className="basis-[70%] border bg-white shadow-md cursor-pointer rounded-[4px] w-auto">
           <div className="bg-zinc-100 flex items-center justify-between py-[15px] px-[20px] border-b-[1px] border-zinc-200 mb-[20px]">
             <h2 className="text-green-700 text-[16px] leading-[19px] font-bold">
-              Total Registered Alumni in the System
+              Total Graduate per School Year
             </h2>
-            <FaEllipsisV color="gray" className="cursor-pointer" />
           </div>
           <div>
             <div onClick={() => openModal(LineChart2)}>
@@ -636,9 +634,8 @@ const Main = () => {
         <div className="basis-[30%] border bg-white shadow-md cursor-pointer rounded-[4px] w-auto">
           <div className="bg-zinc-100 flex items-center justify-between py-[15px] px-[20px] border-b-[1px] border-zinc-200 mb-[20px]">
             <h2 className="text-green-700 text-[16px] leading-[19px] font-bold">
-              Total Graduates per Academic Year
+              Employment Rate
             </h2>
-            <FaEllipsisV color="gray" className="cursor-pointer" />
           </div>
           <div>
             <div>
@@ -651,9 +648,8 @@ const Main = () => {
         <div className="basis-[70%] border bg-white shadow-md cursor-pointer rounded-[4px] w-auto">
           <div className="bg-zinc-100 flex items-center justify-between py-[15px] px-[20px] border-b-[1px] border-zinc-200 mb-[20px]">
             <h2 className="text-green-700 text-[16px] leading-[19px] font-bold">
-              Job Status
+              Job Alignment Status
             </h2>
-            <FaEllipsisV color="gray" className="cursor-pointer" />
           </div>
           <div>
             <div onClick={() => openModal(BarChart2)}>
@@ -664,9 +660,8 @@ const Main = () => {
         <div className="basis-[30%] border bg-white shadow-md cursor-pointer rounded-[4px] w-auto">
           <div className="bg-zinc-100 flex items-center justify-between py-[15px] px-[20px] border-b-[1px] border-zinc-200 mb-[20px]">
             <h2 className="text-green-700 text-[16px] leading-[19px] font-bold">
-              Employment Rate
+              Continuos Education
             </h2>
-            <FaEllipsisV color="gray" className="cursor-pointer" />
           </div>
           <div>
             <PieCompEduc />

@@ -147,14 +147,14 @@ const PieCompEduc = () => {
       {isModalOpen && (
         <div>
           <div>
-            <b className=" font-medium">Total Alumni</b>
+            <b className=" font-medium">Total Registered Alumni</b>
             <span className=" float-right">{totalAlumni}</span>{" "}
           </div>
           <div>
-            <b className=" font-medium">Alumni "YES"</b>
+            <b className=" font-medium">Continuos</b>
             <span className=" float-right">{AlumniPursue}</span>{" "}
           </div>
-          <b className=" font-medium">Alumni "NO"</b>
+          <b className=" font-medium">Not Pursue</b>
           <span className=" float-right">{AlumniUnPursue}</span>
           <div className=" mt-5">
             <b className=" font-medium">Doctoral units</b>

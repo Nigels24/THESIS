@@ -16,7 +16,7 @@ app.get("/", (req, res) => {
   });
 });
 
-app.post("/", upload.single("image"), (req, res) => {
+app.post("/add", upload.single("image"), (req, res) => {
   const title = req.body.title;
   const ptime = req.body.ptime;
   const pdate = req.body.pdate;
@@ -89,6 +89,18 @@ app.get("/alumnijob", (req, res) => {
         imagePath: `/uploads/${value.img}`,
       }))
     );
+  });
+});
+app.delete("/:id", (req, res) => {
+  const jobId = req.params.id;
+  const q = "DELETE FROM joboppdata WHERE id = ?";
+
+  db.query(q, [jobId], (err, data) => {
+    if (err) {
+      console.error("Error deleting event:", err);
+      return res.status(500).json(err);
+    }
+    return res.json("Event has been deleted successfully");
   });
 });
 

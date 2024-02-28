@@ -235,7 +235,7 @@ const RegistrationService = {
   getAllRegistrations: async () => {
     try {
       const registrations = await PromiseQuery({
-        query: `SELECT * FROM ${TABLES.REGISTRATION}`,
+        query: `SELECT * FROM ${TABLES.REGISTRATION} WHERE status = 'verified'`,
       });
       return registrations;
     } catch (error) {
@@ -246,7 +246,7 @@ const RegistrationService = {
   getUserEmail: async (email) => {
     try {
       const getUser = await PromiseQuery({
-        query: `SELECT * FROM registration WHERE email = ?`,
+        query: `SELECT * FROM registration WHERE email=? AND status='verified'`,
         values: [email],
       });
       return getUser;

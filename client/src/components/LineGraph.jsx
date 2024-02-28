@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Axios from "../configs/axios-base-url";
+
 import {
   LineChart,
   Line,
@@ -9,7 +9,7 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-// ... (imports)
+import api from "../configs/axios-base-url";
 
 const MyLineChart = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,7 +18,7 @@ const MyLineChart = () => {
 
   const fetchAlumniDataLG = async () => {
     try {
-      const res = await Axios.get("/alumni");
+      const res = await api.get("/alumni");
       setAlumniDataLG(res.data);
     } catch (err) {
       console.error("Error fetching alumni data:", err);

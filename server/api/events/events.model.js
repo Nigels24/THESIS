@@ -14,7 +14,7 @@ app.get("/", (req, res) => {
   });
 });
 
-app.post("/", (req, res) => {
+app.post("/add", (req, res) => {
   const { title, stime, sdate, ptime, pdate, description } = req.body;
   const q =
     "INSERT INTO eventdata (`title`, `stime`, `sdate`, `ptime`, `pdate`, `description`) VALUES (?, ?, ?, ?, ?, ?)";

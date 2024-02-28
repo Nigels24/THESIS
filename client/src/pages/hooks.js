@@ -5,6 +5,7 @@ import api from "../configs/axios-base-url";
 export const useHooks = () => {
   const token = localStorage.getItem("token");
   const [alumnidata, setAlumniData] = useState([]);
+  const [register, setRegister] = useState([]);
   const [newAlumniData, setNewAlumniData] = useState({
     lname: "",
     fname: "",
@@ -19,6 +20,7 @@ export const useHooks = () => {
 
   const YearOptions = [
     "All",
+    "Registered",
     "2014-2015",
     "2015-2016",
     "2016-2017",
@@ -28,17 +30,20 @@ export const useHooks = () => {
     "2020-2021",
     "2021-2022",
     "2022-2023",
-    "2023-2024",
+    
   ];
 
   const filterAlumnibyYear = (year) => {
     if (year === "All") {
       return alumnidata;
+    } else if (year === "Registered") {
+      return register;
     } else {
       const filtered = alumnidata.filter((alumni) => alumni.yeargrad === year);
       return filtered;
     }
   };
+ 
 
   const selectDate = (stat) => {
     setSelectedDate(stat);
@@ -90,8 +95,17 @@ export const useHooks = () => {
 
   const fetchAlumniData = async () => {
     try {
-      const res = await api.get("/register");
-      setAlumniData(res.data);
+      const res = await api.get("/alumni");
+      const registered = await api.get("/register");
+      setRegister(registered.data);
+      const alumniData = res.data;
+      const registeredData = registered.data;
+
+      // Combine the data arrays from both responses
+      const combinedData = alumniData.concat(registeredData);
+
+      // Now you can use combinedData for further processing or set it to state
+      setAlumniData(combinedData);
     } catch (err) {
       console.error("Error fetching alumni data:", err);
     }

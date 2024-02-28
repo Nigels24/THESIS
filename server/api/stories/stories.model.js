@@ -5,7 +5,7 @@ const { Prisma } = require("@prisma/client");
 
 const app = Router();
 
-app.post("/test", upload.single("image"), (req, res) => {
+app.post("/add", upload.single("image"), (req, res) => {
   const title = req.body.title;
   const img = req.file ? req.file.filename : null; // Change 'image' to 'img'
   const desc = req.body.desc;

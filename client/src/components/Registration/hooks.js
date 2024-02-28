@@ -144,18 +144,6 @@ export const useHook = () => {
       },
     });
     console.log(data);
-
-    // if (data.data.accessToken) {
-    //   localStorage.setItem("token", data.data.accessToken);
-    //
-
-    // const token = localStorage.getItem("token");
-
-    // if (token) {
-    //   const details = decodeToken(token);
-
-    //   console.log("USER DETAILS", details);
-    // }
   };
 
   const handleRegister = async (e) => {

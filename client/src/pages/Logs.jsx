@@ -3,7 +3,6 @@ import Sidebar from "../components/Sidebar";
 import Dashboardview from "../components/Dashboardview";
 import api from "../configs/axios-base-url";
 import moment from "moment";
-import { VscChevronDown } from "react-icons/vsc";
 
 const Logs = () => {
   const [logs, setLogs] = useState([]);

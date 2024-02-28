@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { VscChevronDown } from "react-icons/vsc";
-import axios from "./../../configs/axios-base-url";
 import ASidebar from "../../components/AlumniSide/ASidebar";
 import AAlumniboardView from "../../components/AlumniSide/AAlumniboardView";
 import api from "./../../configs/axios-base-url";
@@ -134,7 +133,7 @@ const AJobOpportunities = () => {
       formData.append("link", newJobData.link);
       formData.append("image", imageFile);
 
-      await axios.post("/jobopp", formData, {
+      await api.post("/jobopp/add", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -157,7 +156,7 @@ const AJobOpportunities = () => {
   };
   const fetchJobOppData = async () => {
     try {
-      const res = await axios.get("/jobopp/alumnijob", {
+      const res = await api.get("/jobopp/alumnijob", {
         params: { status: true },
       });
 

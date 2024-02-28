@@ -109,7 +109,7 @@ const Controller = {
     // Add res as a parameter
     try {
       const GENOTP = generateOTP(5);
-
+      console.log(GENOTP);
       console.log(email);
       await deleteOtp(email);
       const hashedOTP = await hashPassword(GENOTP);

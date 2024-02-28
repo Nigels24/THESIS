@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { VscChevronDown } from "react-icons/vsc";
-import axios from "./../../configs/axios-base-url";
 import ASidebar from "../../components/AlumniSide/ASidebar";
 import AAlumniboardView from "../../components/AlumniSide/AAlumniboardView";
 import api from "./../../configs/axios-base-url";
@@ -110,7 +109,7 @@ const ANews = () => {
 
   const fetchNewsData = async () => {
     try {
-      const res = await axios.get("/news");
+      const res = await api.get("/news");
       setNewsData(res.data);
     } catch (err) {
       console.log(err);

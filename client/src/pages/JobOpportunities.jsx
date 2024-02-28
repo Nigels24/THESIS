@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { VscChevronDown } from "react-icons/vsc";
-import axios from "./../configs/axios-base-url";
 import Sidebar from "../components/Sidebar";
 import Dashboardview from "../components/Dashboardview";
 import api from "./../configs/axios-base-url";
@@ -110,45 +109,23 @@ const JobOpportunities = () => {
       CreateJob(e);
     }
   };
-  const handleStatusUpdate = async (eventToModify) => {
-    const newJobOpp = {
-      ...eventToModify, // Copy all properties from the event to update
-      status: false, // Set status to false to update
-    };
 
+  const handleDelete = async (eventToModify) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this event?"
+    );
+    if (!confirmDelete) {
+      return; // User canceled the delete operation
+    }
     try {
-      // Use the PUT endpoint to update the status to false
-      await axios.put(`/jobopp/${eventToModify}/jobstatus`, newJobOpp);
-
-      // Assuming your API updates the job opportunity's status successfully, you can update the state accordingly
-      fetchJobOppData();
+      await api.delete(`/jobopp/${eventToModify.id}`); // Corrected the endpoint here
+      // Assuming your API deletes the event successfully, you can update the state accordingly.
+      fetchJobOppData(); // Uncomment this line
     } catch (err) {
-      console.error(err);
+      console.log(err);
     }
   };
-  // const handleDelete = async (eventToModify) => {
-  //   const newJobOpp = {
-  //     ...eventToModify, // Copy all properties from the event to update
-  //     status: false, // Set status to false to update
-  //   };
-  //   const confirmDelete = window.confirm(
-  //     "Are you sure you want to delete this event?"
-  //   );
-  //   if (!confirmDelete) {
-  //     return; // User canceled the delete operation
-  //   }
 
-  //   try {
-  //     await axios.put(
-  //       `/jobopp/${eventToModify.id}/jobdelete`,
-  //       newJobOpp
-  //     );
-  //     // Assuming your API deletes the event successfully, you can update the state accordingly.
-  //     fetchJobOppData();
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
   const CreateJob = async () => {
     try {
       const now = new Date();
@@ -173,7 +150,7 @@ const JobOpportunities = () => {
       formData.append("link", newJobData.link);
       formData.append("image", imageFile);
 
-      await axios.post("/jobopp/adminjob", formData, {
+      await api.post("/jobopp/adminjob", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -198,7 +175,7 @@ const JobOpportunities = () => {
 
   const fetchJobOppData = async () => {
     try {
-      const res = await axios.get("/jobopp/alumnijob", {
+      const res = await api.get("/jobopp/alumnijob", {
         params: { status: true }, // Add this query parameter to filter by status=true
       });
 
@@ -314,24 +291,7 @@ const JobOpportunities = () => {
                       className="w-full border rounded p-2"
                     />
                   </div>
-                  {imageFile && (
-                    <div className="mb-4">
-                      <label className="block mb-1">Validation Image</label>
-                      <div className="w-full h-48 rounded border overflow-hidden">
-                        <img
-                          src={`${api.defaults.baseURL}${imageFile}`}
-                          alt="Validation"
-                          className="w-full h-full object-contain"
-                        />
-                      </div>
-                      <button
-                        className="bg-red-500 text-white px-2 py-1 rounded mt-2"
-                        onClick={() => setImageFile(null)}
-                      >
-                        Remove Image
-                      </button>
-                    </div>
-                  )}
+
                   <button
                     type="button"
                     onClick={CreateJob}
@@ -446,7 +406,7 @@ const JobOpportunities = () => {
                       )}
                       <button
                         className="text-red-500 hover:underline ml-2"
-                        onClick={() => handleStatusUpdate(eventToModify)}
+                        onClick={() => handleDelete(event)}
                       >
                         Delete
                       </button>

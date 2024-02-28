@@ -2,6 +2,7 @@ import React from "react";
 
 import { Link, useNavigate } from "react-router-dom";
 import { useHooks } from "./hooks";
+import api from "../../configs/axios-base-url";
 
 const AAlumniboardView = () => {
   const {
@@ -39,7 +40,7 @@ const AAlumniboardView = () => {
           >
             {avatar && (
               <img
-                src={avatar}
+                src={`${api.defaults.baseURL}${avatar}`}
                 alt="profile picture"
                 className="rounded-full mx-auto"
                 style={imageStyles}

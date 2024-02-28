@@ -5,6 +5,7 @@ import AAlumniboardView from "../../components/AlumniSide/AAlumniboardView";
 import { useHooks } from "./hooks";
 import { AiFillCloseCircle, AiFillEdit } from "react-icons/ai";
 import { ToastContainer, toast } from "react-toastify";
+import api from "../../configs/axios-base-url";
 
 const AProfile = () => {
   const {
@@ -86,7 +87,7 @@ const AProfile = () => {
             <div className="profile-picture">
               {Image && (
                 <img
-                  src={Image}
+                  src={`${api.defaults.baseURL}${Image}`}
                   alt="profile picture"
                   className="w-40 h-40 rounded-full mx-auto "
                   style={{

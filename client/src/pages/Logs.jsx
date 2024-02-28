@@ -121,20 +121,20 @@ const Logs = () => {
               </div>
             </div>
 
-            <div className="container mx-auto p-4 overflow-y-scroll h-full w-full md:overflow-x-auto overflow-x-auto">
+            <div className="container mx-auto p-2 overflow-y-scroll h-full w-full md:overflow-x-auto overflow-x-auto sm:w-auto">
               <table className="min-w-full table-auto">
                 <thead>
                   <tr>
-                    <th className="px-6 py-3 text-left font-medium">ID</th>
-                    <th className="px-6 py-3 text-left font-medium">Image </th>
-                    <th className="px-6 py-3 text-left font-medium">Alumni </th>
-                    <th className="px-6 py-3 text-left font-medium">
+                    <th className="px-2 py-2 text-left font-medium">ID</th>
+                    <th className="px-2 py-2 text-left font-medium">Image </th>
+                    <th className="px-2 py-2 text-left font-medium">Alumni </th>
+                    <th className="px-2 py-2 text-left font-medium">
                       Date Created
                     </th>
-                    <th className="px-6 py-3 text-left font-medium">
+                    <th className="px-2 py-2 text-left font-medium">
                       Date Modified
                     </th>
-                    <th className="px-6 py-3 text-left font-medium">Action</th>
+                    <th className="px-2 py-2 text-left font-medium">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -143,23 +143,23 @@ const Logs = () => {
                       key={index}
                       className="border-b border-gray-200 hover:bg-gray-100"
                     >
-                      <td className="px-6 py-4">{index}</td>
-                      <td className="px-6 py-4">
+                      <td className="px-2 py-2">{index}</td>
+                      <td className="px-2 py-2">
                         {log.before && log.before.Image && (
                           <img
-                            src={log.before.Image}
+                            src={`${api.defaults.baseURL}${log.before.Image}`}
                             alt={`Image of ${log.before.fname} ${log.before.lname}`}
                             className="w-10 h-10 rounded-full"
                           />
                         )}
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="px-2 py-2">
                         {log.before &&
                           `${log.before.lname} ${log.before.fname} ${log.before.mname}`}
                       </td>
-                      <td className="px-6 py-4">{log.date_created}</td>
-                      <td className="px-6 py-4">{log.date_modified}</td>
-                      <td className="px-6 py-4 cursor-pointer">
+                      <td className="px-2 py-2">{log.date_created}</td>
+                      <td className="px-2 py-2">{log.date_modified}</td>
+                      <td className="px-2 py-2 cursor-pointer">
                         <button
                           className="text-blue-500 hover:underline"
                           onClick={() => viewAlumni(log)}

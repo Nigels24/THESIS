@@ -63,8 +63,8 @@ const Login = () => {
 
   return (
     <div className="bg-emerald-400 flex justify-center items-center min-h-screen">
-      <div className="bg-green-300 px-8 rounded-lg shadow-md sm:w-auto w-1/3 mx-auto py-8 mt-5">
-        <div className="relative inline-block w-28 mt-5 mx-5 text-center sm:inline-block sm:w-28 md:w-40 sm:mx-auto">
+      <div className="bg-green-300 rounded-lg shadow-md sm:w-auto w-1/3 mx-auto py-8 mt-5">
+        <div className="relative inline-block w-28 mt-2 mx-2 text-center sm:inline-block sm:w-28 md:w-40 sm:mx-auto">
           <img src={bscslogs} className="sm:w-auto lg:w-auto" alt="WMSU Logs" />
           <Link to="/Registration">
             <button className=" mt-2 p-1 w-full">
@@ -73,7 +73,7 @@ const Login = () => {
             </button>
           </Link>
         </div>
-        <div className="relative inline-block float-right m-5 sm:w-auto ">
+        <div className="relative inline-block float-right m-2 sm:w-auto ">
           <form onSubmit={handleLOGIN}>
             <div className="mb-2">
               <label htmlFor="email" className="block mb-1 ">

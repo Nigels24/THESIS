@@ -82,7 +82,7 @@ const Registration = () => {
                 <span className="title">Personal Details</span>
                 <div className="fields">
                   <div className="input-fields">
-                    <label>LastName</label>
+                    <label>Last Name</label>
                     <input
                       type="text"
                       placeholder="Enter your lastname"
@@ -92,7 +92,7 @@ const Registration = () => {
                     />
                   </div>
                   <div className="input-fields">
-                    <label>FirstName</label>
+                    <label>First Name</label>
                     <input
                       type="text"
                       placeholder="Enter your firstname"
@@ -102,7 +102,7 @@ const Registration = () => {
                     />
                   </div>
                   <div className="input-fields">
-                    <label>MiddleName</label>
+                    <label>Middle Name</label>
                     <input
                       type="text"
                       placeholder="Enter your middlename"
@@ -626,8 +626,9 @@ const Registration = () => {
                       handleOTP(e);
                       toast("Please Check Your Email for OTP");
                     }}
+                    type="button"
                   >
-                    <span className="btnText">Proceed</span>
+                    <span className="btnText">Send OTP</span>
                   </button>
                 </div>
               </div>
@@ -653,8 +654,8 @@ const Registration = () => {
                 </div>
 
                 <div className="buttons">
-                  <button className="nextBtn" onClick={handleRegister}>
-                    <span className="btnText">Register</span>
+                  <button className="nextBtn" type="submit">
+                    <span className="btnText">Verify OTP</span>
                   </button>
                 </div>
               </div>

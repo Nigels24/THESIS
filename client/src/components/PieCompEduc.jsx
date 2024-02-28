@@ -6,6 +6,7 @@ import { Progress } from "antd";
 
 const PieCompEduc = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [chartWidth, setChartWidth] = useState(400);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -38,6 +39,17 @@ const PieCompEduc = () => {
 
   useEffect(() => {
     fetchAlumniData();
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setChartWidth(window.innerWidth >= 768 ? 400 : window.innerWidth - 20);
+    };
+    handleResize(); // Initial call to set chart width
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   if (loading) {
@@ -108,7 +120,7 @@ const PieCompEduc = () => {
 
   return (
     <div className=" m-5">
-      <PieChart width={400} height={400}>
+      <PieChart width={chartWidth} height={400}>
         <Pie
           data={data}
           cx="50%"

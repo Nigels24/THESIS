@@ -3,6 +3,7 @@ import { VscChevronDown } from "react-icons/vsc";
 import axios from "./../configs/axios-base-url";
 import Sidebar from "../components/Sidebar";
 import Dashboardview from "../components/Dashboardview";
+import api from "./../configs/axios-base-url";
 
 const JobOpportunities = () => {
   const [joboppdata, setJobOppData] = useState([]);
@@ -266,8 +267,8 @@ const JobOpportunities = () => {
           </div>
           {/* Create a new Job */}
           {isOpen && (
-            <div className="fixed inset-0 flex items-center justify-center z-10 overflow-x-auto m-10">
-              <div className="bg-white p-4 rounded w-2/3 shadow-lg z-20">
+            <div className="fixed inset-0 flex items-center justify-center z-10 overflow-x-auto m-10 sm:w-auto">
+              <div className="bg-white p-2 rounded w-2/3 shadow-lg z-20">
                 <h2 className="text-lg font-semibold mb-2 text-center">
                   Create New Job
                 </h2>
@@ -318,7 +319,7 @@ const JobOpportunities = () => {
                       <label className="block mb-1">Validation Image</label>
                       <div className="w-full h-48 rounded border overflow-hidden">
                         <img
-                          src={URL.createObjectURL(imageFile)}
+                          src={`${api.defaults.baseURL}${imageFile}`}
                           alt="Validation"
                           className="w-full h-full object-contain"
                         />
@@ -350,19 +351,19 @@ const JobOpportunities = () => {
             </div>
           )}
 
-          <div className="container mx-auto p-4 overflow-y-scroll h-full w-full  ">
+          <div className="container mx-auto p-2 overflow-y-scroll h-full w-full  sm:w-auto">
             <table className="min-w-full table-auto">
               <thead>
                 <tr>
-                  <th className="px-6 py-3 text-left font-medium">Event No</th>
-                  <th className="px-6 py-3 text-left font-medium">Name</th>
-                  <th className="px-6 py-3 text-left font-medium">
+                  <th className="px-2 py-2 text-left font-medium">Event No</th>
+                  <th className="px-2 py-2 text-left font-medium">Name</th>
+                  <th className="px-2 py-2 text-left font-medium">
                     Description
                   </th>
-                  <th className="px-6 py-3 text-left font-medium">
+                  <th className="px-2 py-2 text-left font-medium">
                     Posted Time
                   </th>
-                  <th className="px-6 py-3 text-left font-medium">Action</th>
+                  <th className="px-2 py-2 text-left font-medium">Action</th>
                 </tr>
               </thead>
               <tbody className="bg-white">
@@ -371,13 +372,13 @@ const JobOpportunities = () => {
                     key={index}
                     className="border-b border-gray-200 hover:bg-gray-100"
                   >
-                    <td className="px-6 py-4">{index + 1}</td>
-                    <td className="px-6 py-4">{event.title}</td>
-                    <td className="px-6 py-4">{event.description}</td>
-                    <td className="px-6 py-4">
+                    <td className="px-2 py-2">{index + 1}</td>
+                    <td className="px-2 py-2">{event.title}</td>
+                    <td className="px-2 py-2">{event.description}</td>
+                    <td className="px-2 py-2">
                       {event.ptime} {event.pdate}
                     </td>
-                    <td className="px-6 py-4 cursor-pointer">
+                    <td className="px-2 py-2 cursor-pointer">
                       <button
                         className="text-blue-500 hover:underline"
                         onClick={() => openDetailsModal(event)}
@@ -387,7 +388,7 @@ const JobOpportunities = () => {
 
                       {/* Event Details Modal */}
                       {selectedJob && (
-                        <div className="fixed inset-0 flex items-center justify-center z-10">
+                        <div className="fixed inset-0 flex items-center justify-center z-10 sm:w-auto">
                           <div className="bg-white w-[50%] p-4 rounded shadow-lg z-20 ">
                             <h2 className="text-lg font-semibold mb-2 text-center">
                               Job Details
@@ -418,7 +419,7 @@ const JobOpportunities = () => {
                               {selectedJob.imagePath && (
                                 <div className="w-full h-48 rounded border overflow-hidden">
                                   <img
-                                    src={selectedJob.imagePath}
+                                    src={`${api.defaults.baseURL}${selectedJob.imagePath}`}
                                     alt="Validation"
                                     className="w-full h-full object-contain"
                                   />

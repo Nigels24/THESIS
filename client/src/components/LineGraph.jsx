@@ -54,7 +54,7 @@ const MyLineChart = () => {
     Graduates: graduates,
   }));
 
-  const chartWidth = Math.max(600, data.length * 10);
+  const chartWidth = Math.min(window.innerWidth - 20, 500);
 
   const openModal = (content) => {
     setModalContent(content);

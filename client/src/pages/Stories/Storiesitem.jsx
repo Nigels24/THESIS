@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Close from "../../assets/close.svg";
+import api from "../../configs/axios-base-url";
 
 const Storiesitem = ({ title, desc, imagePath }) => {
   const [modal, setModal] = useState(false);
@@ -10,7 +11,11 @@ const Storiesitem = ({ title, desc, imagePath }) => {
 
   return (
     <div className="portfolio__item">
-      <img src={imagePath} alt="" className="portfolio__img" />
+      <img
+        src={`${api.defaults.baseURL}${imagePath}`}
+        alt=""
+        className="portfolio__img"
+      />
 
       <div className="portfolio__hover" onClick={toggleModal}>
         <h3 className="portfolio__title">{title}</h3>

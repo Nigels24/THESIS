@@ -3,6 +3,7 @@ import { VscChevronDown } from "react-icons/vsc";
 import axios from "./../configs/axios-base-url";
 import Sidebar from "../components/Sidebar";
 import Dashboardview from "../components/Dashboardview";
+import api from "./../configs/axios-base-url";
 
 const Approvals = () => {
   const [joboppdata, setJobOppData] = useState([]);
@@ -175,7 +176,7 @@ const Approvals = () => {
       </div>
       <div className="basis-[90%] border h-[90vh]">
         <Dashboardview />
-        <div className="flex-grow bg-gray-300 p-5 rounded-md container mx-auto overflow-x-auto h-full">
+        <div className="flex-grow bg-gray-300 p-5 rounded-md container mx-auto overflow-x-auto h-full sm:w-auto">
           <h3 className="text-2xl font-bold mb-3">Approvals</h3>
 
           {/* Search Bar */}
@@ -212,19 +213,19 @@ const Approvals = () => {
             </div>
           </div>
 
-          <div className="container mx-auto p-4 max-h-64 w-full overflow-x-auto ">
+          <div className="container mx-auto p-2 max-h-64 w-full overflow-x-auto sm:w-auto">
             <table className="min-w-full table-auto">
               <thead>
                 <tr>
-                  <th className="px-6 py-3 text-left font-medium">Event No</th>
-                  <th className="px-6 py-3 text-left font-medium">Name</th>
-                  <th className="px-6 py-3 text-left font-medium">
+                  <th className="px-2 py-2 text-left font-medium">Event No</th>
+                  <th className="px-2 py-2 text-left font-medium">Name</th>
+                  <th className="px-2 py-2 text-left font-medium">
                     Description
                   </th>
-                  <th className="px-6 py-3 text-left font-medium">
+                  <th className="px-2 py-2 text-left font-medium">
                     Posted Time
                   </th>
-                  <th className="px-6 py-3 text-left font-medium">Action</th>
+                  <th className="px-2 py-2 text-left font-medium">Action</th>
                 </tr>
               </thead>
               <tbody className="bg-white">
@@ -233,15 +234,15 @@ const Approvals = () => {
                     key={index}
                     className="border-b border-gray-200 hover:bg-gray-100"
                   >
-                    <td className="px-6 py-4">{index + 1}</td>
-                    <td className="px-6 py-4">{event.title}</td>
-                    <td className="px-6 py-4">{event.description}</td>
-                    <td className="px-6 py-4">
+                    <td className="px-2 py-2">{index + 1}</td>
+                    <td className="px-2 py-2">{event.title}</td>
+                    <td className="px-2 py-2">{event.description}</td>
+                    <td className="px-2 py-2">
                       {event.ptime} {event.pdate}
                     </td>
-                    <td className="px-6 py-4 cursor-pointer">
+                    <td className="px-2 py-2 cursor-pointer">
                       <button
-                        className="bg-blue-500 text-white px-4 py-2 rounded mr-2"
+                        className="bg-blue-500 text-white px-2 py-2 rounded mr-2"
                         onClick={() => openDetailsModal(event)}
                       >
                         View
@@ -296,7 +297,7 @@ const Approvals = () => {
                               {selectedJob.imagePath && (
                                 <div className="w-full h-48 rounded border overflow-hidden">
                                   <img
-                                    src={selectedJob.imagePath}
+                                    src={`${api.defaults.baseURL}${selectedJob.imagePath}`}
                                     alt="Validation"
                                     className="w-full h-full object-cover"
                                   />

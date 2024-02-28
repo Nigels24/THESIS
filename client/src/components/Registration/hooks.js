@@ -109,7 +109,7 @@ export const useHook = () => {
     }
   };
 
-  const handleRegister = async (e) => {
+  const handleOTP = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
@@ -134,56 +134,52 @@ export const useHook = () => {
     formData.append("furtherStudies", furtherStudies);
     formData.append("enrollFurtherStudies", enrollFurtherStudies);
     formData.append("eligibility", eligibility);
-    formData.append("otp", otp);
+    // formData.append("otp", otp);
 
     const key = sessionStorage.getItem("key");
 
-    const data = await api.post("/register", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        authorization: `bearer ${key}`,
-      },
-    });
-
-    if (data.data.accessToken) {
-      localStorage.setItem("token", data.data.accessToken);
-    }
-
-    toast("Registration Complete");
-
-    setTimeout(() => {
-      navigate("/Login");
-    }, 3000);
-
-    const token = localStorage.getItem("token");
-
-    if (token) {
-      const details = decodeToken(token);
-
-      console.log("USER DETAILS", details);
-    }
-  };
-
-  const handleOTP = async (e) => {
-    e.preventDefault();
-
-    const formData = new FormData();
-    formData.append("email", email);
-
-    for (const value of formData.values()) {
-      console.log(value);
-    }
-
-    const data = await api.post("/register/OTP", formData, {
+    const data = await api.post("/register/add", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     });
     console.log(data);
 
-    sessionStorage.setItem("key", data.data.key);
-    const key = sessionStorage.getItem("key");
-    console.log(key);
+    // if (data.data.accessToken) {
+    //   localStorage.setItem("token", data.data.accessToken);
+    //
+
+    // const token = localStorage.getItem("token");
+
+    // if (token) {
+    //   const details = decodeToken(token);
+
+    //   console.log("USER DETAILS", details);
+    // }
+  };
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("email", email);
+    formData.append("otp", otp);
+
+    for (const value of formData.values()) {
+      console.log(value);
+    }
+
+    const data = await api.post("/register/verify", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    toast("Registration Complete");
+
+    setTimeout(() => {
+      navigate("/Login");
+    }, 3000);
   };
 
   return {

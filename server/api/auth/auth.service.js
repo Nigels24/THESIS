@@ -1,13 +1,13 @@
 const { returnError } = require("../../utils/catch-error");
-
 const { PromiseQuery } = require("./../../utils/promise-query");
 const { TABLES } = require("./../../constants");
 
 const AuthService = {
   LOGIN: async ({ email }) => {
     try {
+      // Fetch user with the provided email and verified status
       const [registered] = await PromiseQuery({
-        query: `SELECT * FROM ${TABLES.REGISTRATION} WHERE email=?`,
+        query: `SELECT * FROM ${TABLES.REGISTRATION} WHERE email=? AND status='verified'`,
         values: [email],
       });
 

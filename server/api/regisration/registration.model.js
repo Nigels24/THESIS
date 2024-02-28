@@ -3,7 +3,6 @@ const cors = require("cors");
 
 const { Controller } = require("./registration.controller");
 const { RegistrationService } = require("./registration.service");
-const verifyOTP = require("../../utils/verifyOTP");
 
 const app = Router();
 
@@ -18,7 +17,8 @@ app.put(
   },
   Controller.Update
 );
-app.post("/", verifyOTP, Controller.Register);
+app.post("/add", Controller.Register);
+app.post("/verify", Controller.verifyOtp);
 app.get("/", async (_, res) => {
   try {
     const registrations = await RegistrationService.getAllRegistrations();

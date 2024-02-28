@@ -239,8 +239,7 @@ const Landingpage = () => {
   const AlumniEligibility = alumnidata.filter(
     (item) => item.eligibility
   ).length;
-
-  const chartWidth2 = Math.max(1200, data.length * 10);
+  const chartWidth2 = Math.min(window.innerWidth - 20, 1000);
 
   return (
     <div className="flex justify-center items-center">
@@ -316,7 +315,7 @@ const Landingpage = () => {
             ))}
           </div>
           {/* List of Contents */}
-          <div className="container mx-auto overflow-y-scroll max-h-64  bg-gray-300 p-5 rounded-md">
+          <div className="container mx-auto overflow-y-scroll max-h-64  bg-gray-300 p-2 rounded-md">
             <table className="min-w-full">
               <thead>
                 <tr>

@@ -3,6 +3,7 @@ import { VscChevronDown } from "react-icons/vsc";
 import axios from "./../../configs/axios-base-url";
 import ASidebar from "../../components/AlumniSide/ASidebar";
 import AAlumniboardView from "../../components/AlumniSide/AAlumniboardView";
+import api from "./../../configs/axios-base-url";
 
 const AJobOpportunities = () => {
   const [joboppdata, setJobOppData] = useState([]);
@@ -139,18 +140,17 @@ const AJobOpportunities = () => {
         },
       });
 
-      
       fetchJobOppData();
       setNewJobData({
         title: "",
-        ptime: "", 
-        pdate: "", 
-        description: "", 
+        ptime: "",
+        pdate: "",
+        description: "",
         link: "",
         img: "",
       });
       setImageFile(null);
-      setIsOpen(false); 
+      setIsOpen(false);
     } catch (err) {
       console.log(err);
     }
@@ -158,7 +158,7 @@ const AJobOpportunities = () => {
   const fetchJobOppData = async () => {
     try {
       const res = await axios.get("/jobopp/alumnijob", {
-        params: { status: true }, 
+        params: { status: true },
       });
 
       setJobOppData(res.data);
@@ -215,7 +215,6 @@ const AJobOpportunities = () => {
               </div>
             </div>
 
-            
             <div className="inline-block">
               <button
                 className="bg-green-500 text-white px-4 py-2 rounded"
@@ -225,7 +224,7 @@ const AJobOpportunities = () => {
               </button>
             </div>
           </div>
-          
+
           {isOpen && (
             <div className="fixed inset-0 flex items-center justify-center z-10 overflow-x-auto m-10">
               <div className="absolute inset-0 bg-black opacity-30"></div>
@@ -259,7 +258,7 @@ const AJobOpportunities = () => {
                     <label className="block mb-1">Link</label>
                     <input
                       type="message"
-                      name="link" 
+                      name="link"
                       value={joboppdata.link}
                       onChange={handleChange}
                       className="w-full border rounded p-2"
@@ -347,7 +346,6 @@ const AJobOpportunities = () => {
                         View
                       </button>
 
-                      
                       {selectedJob && (
                         <div className="fixed inset-0 flex items-center justify-center z-10">
                           <div className="bg-white w-1/4 p-4 rounded shadow-lg z-20 ">
@@ -380,7 +378,7 @@ const AJobOpportunities = () => {
                               {selectedJob.imagePath && (
                                 <div className="w-full h-48 rounded border overflow-hidden">
                                   <img
-                                    src={selectedJob.imagePath}
+                                    src={`${api.defaults.baseURL}${selectedJob.imagePath}`}
                                     alt="Validation"
                                     className="w-full h-full object-cover"
                                   />

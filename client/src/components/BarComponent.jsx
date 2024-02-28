@@ -45,7 +45,7 @@ const BarComponent = () => {
     "2022-2023",
   ];
 
-  const barWidth = Math.max(700);
+  const barWidth = Math.min(window.innerWidth - 20, 500);
   const alignmentData = years.map((year) => {
     const jobAlignCount = alumnidataBG.filter(
       (item) =>

@@ -3,6 +3,7 @@ import { VscChevronDown } from "react-icons/vsc";
 import axios from "./../../configs/axios-base-url";
 import ASidebar from "../../components/AlumniSide/ASidebar";
 import AAlumniboardView from "../../components/AlumniSide/AAlumniboardView";
+import api from "./../../configs/axios-base-url";
 
 const ANews = () => {
   const [newsdata, setNewsData] = useState([]);
@@ -165,19 +166,19 @@ const ANews = () => {
             </div>
           </div>
 
-          <div className="container mx-auto p-4 overflow-y-scroll h-full   w-full md:overflow-x-auto overflow-x-auto">
+          <div className="container mx-auto p-2 overflow-y-scroll h-full   w-full md:overflow-x-auto overflow-x-auto sm:w-auto">
             <table className="min-w-full table-auto">
               <thead>
                 <tr>
-                  <th className="px-6 py-3 text-left font-medium">Image</th>
-                  <th className="px-6 py-3 text-left font-medium">Name</th>
-                  <th className="px-6 py-3 text-left font-medium">
+                  <th className="px-2 py-2 text-left font-medium">Image</th>
+                  <th className="px-2 py-2 text-left font-medium">Name</th>
+                  <th className="px-2 py-2 text-left font-medium">
                     Description
                   </th>
-                  <th className="px-6 py-3 text-left font-medium">
+                  <th className="px-2 py-2 text-left font-medium">
                     Posted Time
                   </th>
-                  <th className="px-6 py-3 text-left font-medium">Action</th>
+                  <th className="px-2 py-2 text-left font-medium">Action</th>
                 </tr>
               </thead>
               <tbody className="bg-white">
@@ -186,23 +187,23 @@ const ANews = () => {
                     key={index}
                     className="border-b border-gray-200 hover:bg-gray-100"
                   >
-                    <td className="px-6 py-4">
+                    <td className="px-2 py-2">
                       {dnews.imagePath && (
                         <div className="w-full h-48 rounded border overflow-hidden">
                           <img
-                            src={dnews.imagePath}
+                            src={`${api.defaults.baseURL}${dnews.imagePath}`}
                             alt="Validation"
                             className="w-full h-full object-contain"
                           />
                         </div>
                       )}
                     </td>
-                    <td className="px-6 py-4">{dnews.title}</td>
-                    <td className="px-6 py-4">{dnews.description}</td>
-                    <td className="px-6 py-4">
+                    <td className="px-2 py-2">{dnews.title}</td>
+                    <td className="px-2 py-2">{dnews.description}</td>
+                    <td className="px-2 py-2">
                       {dnews.ptime} {dnews.pdate}
                     </td>
-                    <td className="px-6 py-4 cursor-pointer">
+                    <td className="px-2 py-2 cursor-pointer">
                       <button
                         className="text-blue-500 hover:underline"
                         onClick={() => openDetailsModal(dnews)}
@@ -211,8 +212,8 @@ const ANews = () => {
                       </button>
                       {/* News Details Modal */}
                       {selectedNews && (
-                        <div className="fixed inset-0 flex items-center justify-center z-10">
-                          <div className="bg-white w-1/4 p-4 rounded shadow-lg z-20">
+                        <div className="fixed inset-0 flex items-center justify-center z-10 sm:w-auto">
+                          <div className="bg-white w-1/4 p-2 rounded shadow-lg z-20">
                             <h2 className="text-lg font-semibold mb-2 text-center">
                               News Details
                             </h2>
@@ -236,7 +237,7 @@ const ANews = () => {
                               {selectedNews.imagePath && (
                                 <div className="w-full h-48 rounded border overflow-hidden">
                                   <img
-                                    src={selectedNews.imagePath}
+                                    src={`${api.defaults.baseURL}${selectedNews.imagePath}`}
                                     alt="Validation"
                                     className="w-full h-full object-contain"
                                   />

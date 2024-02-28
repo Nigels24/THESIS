@@ -95,7 +95,7 @@ const Main = () => {
     "2022-2023",
   ];
 
-  const barWidth = 1200;
+  const barWidth = Math.min(window.innerWidth - 20, 1000);
   const alignmentData = years.map((year) => {
     const jobAlignCount = alumnidataBG.filter(
       (item) =>
@@ -493,7 +493,7 @@ const Main = () => {
     </div>
   );
 
-  const chartWidth2 = Math.max(1200, data.length * 10);
+  const chartWidth2 = Math.min(window.innerWidth - 20, 1000);
   const LineChart2 = (
     <div>
       <button className="close-button" onClick={closeModal}>

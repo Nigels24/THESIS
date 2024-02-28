@@ -142,7 +142,7 @@ const AEvents = () => {
       </div>
       <div className="basis-[88%] border h-[100vh] overflow-scroll">
         <AAlumniboardView />
-        <div className="flex-grow bg-gray-300 p-5 rounded-md container mx-auto overflow-x-auto h-full">
+        <div className="flex-grow bg-gray-300 p-2 rounded-md container mx-auto overflow-x-auto h-full sm:w-auto">
           <h3 className="text-2xl font-bold mb-3">Events</h3>
 
           {/* Search Bar */}
@@ -179,19 +179,19 @@ const AEvents = () => {
             </div>
           </div>
 
-          <div className="container mx-auto p-4 overflow-y-scroll h-full w-full md:overflow-x-auto overflow-x-auto">
+          <div className="container mx-auto p-2 overflow-y-scroll h-full w-full md:overflow-x-auto overflow-x-auto sm:w-auto">
             <table className="min-w-full table-auto">
               <thead>
                 <tr>
-                  <th className="px-6 py-3 text-left font-medium">Event No</th>
-                  <th className="px-6 py-3 text-left font-medium">Name</th>
-                  <th className="px-6 py-3 text-left font-medium">
+                  <th className="px-2 py-2 text-left font-medium">Event No</th>
+                  <th className="px-2 py-2 text-left font-medium">Name</th>
+                  <th className="px-2 py-2 text-left font-medium">
                     Scheduled Time
                   </th>
-                  <th className="px-6 py-3 text-left font-medium">
+                  <th className="px-2 py-2 text-left font-medium">
                     Posted Time
                   </th>
-                  <th className="px-6 py-3 text-left font-medium">Action</th>
+                  <th className="px-2 py-2 text-left font-medium">Action</th>
                 </tr>
               </thead>
               <tbody className="bg-white">
@@ -200,15 +200,15 @@ const AEvents = () => {
                     key={index}
                     className="border-b border-gray-200 hover:bg-gray-100"
                   >
-                    <td className="px-6 py-4">{index + 1}</td>
-                    <td className="px-6 py-4">{event.title}</td>
-                    <td className="px-6 py-4">
+                    <td className="px-2 py-2">{index + 1}</td>
+                    <td className="px-2 py-2">{event.title}</td>
+                    <td className="px-2 py-2">
                       {event.stime} {event.sdate}
                     </td>
-                    <td className="px-6 py-4">
+                    <td className="px-2 py-2">
                       {event.ptime} {event.pdate}
                     </td>
-                    <td className="px-6 py-4 cursor-pointer">
+                    <td className="px-2 py-2 cursor-pointer">
                       <button
                         className="text-blue-500 hover:underline"
                         onClick={() => openDetailsModal(event)}
@@ -219,7 +219,7 @@ const AEvents = () => {
                       {/* Event Details Modal */}
                       {selectedEvent && (
                         <div className="fixed inset-0 flex items-center justify-center z-10">
-                          <div className="bg-white w-1/4 p-4 rounded shadow-lg z-20 ">
+                          <div className="bg-white w-1/4 p-2 rounded shadow-lg z-20 ">
                             <h2 className="text-lg font-semibold mb-2 text-center">
                               Event Details
                             </h2>

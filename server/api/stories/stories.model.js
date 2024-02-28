@@ -2,7 +2,6 @@ const { Router } = require("express");
 const { db } = require("./../../configs/db");
 const { upload } = require("./../../middlewares");
 const { Prisma } = require("@prisma/client");
-const { ENDPOINT } = require("../../constants");
 
 const app = Router();
 
@@ -20,7 +19,7 @@ app.post("/test", upload.single("image"), (req, res) => {
         .status(500)
         .send("Request failed, error inserting data into the database.");
     } else {
-      const imageUrl = `${ENDPOINT}/uploads/${img}`; // Create the image URL
+      const imageUrl = `/uploads/${img}`; // Create the image URL
       res.status(200).json({ imageUrl }); // Send the URL back to the frontend
     }
   });
@@ -37,7 +36,7 @@ app.get("/", (req, res) => {
     return res.json(
       data.map((value) => ({
         ...value,
-        imagePath: `${ENDPOINT}/uploads/${value.img}`,
+        imagePath: `/uploads/${value.img}`,
       }))
     );
   });

@@ -326,19 +326,19 @@ const Events = () => {
             </div>
           )}
 
-          <div className="container mx-auto p-4 overflow-y-scroll h-full w-full md:overflow-x-auto">
+          <div className="container mx-auto p-2 overflow-y-scroll h-full w-full md:overflow-x-auto sm:w-auto">
             <table className="min-w-full table-auto">
               <thead>
                 <tr>
-                  <th className="px-6 py-3 text-left font-medium">Event No</th>
-                  <th className="px-6 py-3 text-left font-medium">Name</th>
-                  <th className="px-6 py-3 text-left font-medium">
+                  <th className="px-2 py-2 text-left font-medium">Event No</th>
+                  <th className="px-2 py-2 text-left font-medium">Name</th>
+                  <th className="px-2 py-2 text-left font-medium">
                     Scheduled Time
                   </th>
-                  <th className="px-6 py-3 text-left font-medium">
+                  <th className="px-2 py-2 text-left font-medium">
                     Posted Time
                   </th>
-                  <th className="px-6 py-3 text-left font-medium">Action</th>
+                  <th className="px-2 py-2 text-left font-medium">Action</th>
                 </tr>
               </thead>
               <tbody className="bg-white">
@@ -347,15 +347,15 @@ const Events = () => {
                     key={index}
                     className="border-b border-gray-200 hover:bg-gray-100"
                   >
-                    <td className="px-6 py-4">{index + 1}</td>
-                    <td className="px-6 py-4">{event.title}</td>
-                    <td className="px-6 py-4">
+                    <td className="px-2 py-2">{index + 1}</td>
+                    <td className="px-2 py-2">{event.title}</td>
+                    <td className="px-2 py-2">
                       {event.stime} {event.sdate}
                     </td>
-                    <td className="px-6 py-4">
+                    <td className="px-2 py-2">
                       {event.ptime} {event.pdate}
                     </td>
-                    <td className="px-6 py-4 cursor-pointer">
+                    <td className="px-2 py-2 cursor-pointer">
                       <button
                         className="text-blue-500 hover:underline"
                         onClick={() => openDetailsModal(event)}
